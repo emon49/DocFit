@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DocFit — Documents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>tailwind.config={theme:{extend:{colors:{teal:{200:'#99F6E4',300:'#5EEAD4',700:'#0F766E',800:'#115E59'}}}}}</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>body{font-family:'Inter',sans-serif;}</style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+
+<div class="bg-teal-800 px-6 py-3 flex items-center justify-between">
+  <div class="flex items-center gap-3">
+    <span class="text-white font-semibold text-lg tracking-tight">DocFit</span>
+    <span class="text-slate-400 text-sm">Doctor Registration</span>
+  </div>
+  <a href="#" class="text-sm text-slate-300 hover:text-white transition-colors">Save &amp; exit</a>
+</div>
+
+<div class="max-w-2xl mx-auto mt-8 px-4">
+  <div class="flex items-start justify-center gap-0 mb-8">
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-teal-700 flex items-center justify-center text-white text-sm font-semibold">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+        </svg>
+      </div>
+      <span class="text-xs font-medium text-teal-700 mt-1 text-center w-20">Personal details</span>
+    </div>
+    <div class="flex-1 h-px bg-teal-700 mt-4 mx-1"></div>
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-teal-700 flex items-center justify-center text-white text-sm font-semibold">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+        </svg>
+      </div>
+      <span class="text-xs font-medium text-teal-700 mt-1 text-center w-16">Licensure</span>
+    </div>
+    <div class="flex-1 h-px bg-teal-700 mt-4 mx-1"></div>
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-teal-700 flex items-center justify-center text-white text-sm font-semibold">3</div>
+      <span class="text-xs font-medium text-teal-700 mt-1 text-center w-16">Documents</span>
+    </div>
+    <div class="flex-1 h-px bg-slate-200 mt-4 mx-1"></div>
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-400 text-sm font-semibold">4</div>
+      <span class="text-xs text-slate-400 mt-1 text-center w-16">Specialties</span>
+    </div>
+    <div class="flex-1 h-px bg-slate-200 mt-4 mx-1"></div>
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-400 text-sm font-semibold">5</div>
+      <span class="text-xs text-slate-400 mt-1 text-center w-20">Fees &amp; Submit</span>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg border border-slate-200 p-8">
+    <div class="mb-6">
+      <span class="text-xs text-teal-700 font-semibold uppercase tracking-wider">Step 3 of 5</span>
+      <h1 class="text-xl font-semibold text-slate-800 tracking-tight mt-1">Documents</h1>
+      <p class="text-sm text-slate-500 mt-1">Upload your license document and identification. Files are reviewed by our credentialing team.</p>
+    </div>
+
+    <div class="space-y-6">
+      <div>
+        <h2 class="text-sm font-semibold text-slate-800 mb-1">Upload your license document</h2>
+        <p class="text-xs text-slate-500 mb-4">We accept PDF files only. Max file size: 10 MB. The document must show your name, license number and expiry date.</p>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-2">Primary license document <span class="text-red-500">*</span></label>
+            <div class="relative border border-slate-200 rounded-lg p-4 flex items-center gap-3 bg-white">
+              <div class="absolute top-3 right-3">
+                <div class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
+                  <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="w-9 h-9 rounded bg-slate-100 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0 pr-6">
+                <p class="text-sm font-medium text-slate-800 truncate">GMC_Certificate_Osei-Bonsu.pdf</p>
+                <p class="text-xs text-slate-500 mt-0.5">2.3 MB · Uploaded</p>
+              </div>
+              <a href="#" class="text-xs text-red-600 hover:text-red-700 flex-shrink-0 font-medium">Remove</a>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-2">Passport or government-issued ID <span class="text-red-500">*</span></label>
+            <div class="border-2 border-dashed border-slate-300 bg-slate-50 rounded-lg p-8 text-center">
+              <div class="flex justify-center mb-3">
+                <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <p class="text-sm text-slate-500 mb-1">Drag and drop your ID document here</p>
+              <p class="text-xs text-slate-400 mb-3">or</p>
+              <button class="px-3 py-1.5 rounded-md border border-slate-300 text-xs font-medium text-slate-700 hover:bg-white transition-colors bg-white">Browse files</button>
+              <p class="text-xs text-slate-400 mt-3">PDF, JPG or PNG · max 10 MB</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-200 rounded-md p-3 flex items-start gap-2.5">
+        <svg class="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+        </svg>
+        <p class="text-xs text-amber-800">Documents are stored securely and used only for verification. They are not visible to patients.</p>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-slate-100">
+      <button class="px-4 py-2 rounded-md border border-slate-300 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors bg-white">← Back</button>
+      <button class="px-5 py-2 rounded-md bg-teal-700 text-white text-sm font-medium hover:bg-teal-800 transition-colors">Continue →</button>
+    </div>
+  </div>
+
+  <p class="text-center text-xs text-slate-400 mt-6 mb-10">Your data is encrypted and stored in compliance with GDPR and NHS data standards.</p>
+</div>
+
+</body>
+</html>
