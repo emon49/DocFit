@@ -1,0 +1,29 @@
+{
+  "name": "docfit",
+  "version": "1.0.0",
+  "description": "DocFit - Telehealth Accounts, Roles and Authentication",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch server/server.ts",
+    "build": "tsc",
+    "lint": "tsc --noEmit",
+    "start": "tsx server/server.ts",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^22.7.5",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
+  }
+}
