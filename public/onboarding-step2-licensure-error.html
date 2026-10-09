@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DocFit — Licensure (Error)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>tailwind.config={theme:{extend:{colors:{teal:{200:'#99F6E4',300:'#5EEAD4',700:'#0F766E',800:'#115E59'}}}}}</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>body{font-family:'Inter',sans-serif;}</style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+
+<div class="bg-teal-800 px-6 py-3 flex items-center justify-between">
+  <div class="flex items-center gap-3">
+    <a href="/" class="text-white font-semibold text-lg tracking-tight hover:opacity-90">DocFit</a>
+    <span class="text-slate-400 text-sm">Doctor Registration</span>
+  </div>
+  <a href="/" class="text-sm text-slate-300 hover:text-white transition-colors">Save &amp; exit</a>
+</div>
+
+<div class="max-w-2xl mx-auto mt-8 px-4">
+  <div class="flex items-start justify-center gap-0 mb-8">
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-teal-700 flex items-center justify-center text-white text-sm font-semibold">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+        </svg>
+      </div>
+      <span class="text-xs font-medium text-teal-700 mt-1 text-center w-20">Personal details</span>
+    </div>
+    <div class="flex-1 h-px bg-teal-700 mt-4 mx-1"></div>
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-teal-700 flex items-center justify-center text-white text-sm font-semibold">2</div>
+      <span class="text-xs font-medium text-teal-700 mt-1 text-center w-16">Licensure</span>
+    </div>
+    <div class="flex-1 h-px bg-slate-200 mt-4 mx-1"></div>
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-400 text-sm font-semibold">3</div>
+      <span class="text-xs text-slate-400 mt-1 text-center w-16">Documents</span>
+    </div>
+    <div class="flex-1 h-px bg-slate-200 mt-4 mx-1"></div>
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-400 text-sm font-semibold">4</div>
+      <span class="text-xs text-slate-400 mt-1 text-center w-16">Specialties</span>
+    </div>
+    <div class="flex-1 h-px bg-slate-200 mt-4 mx-1"></div>
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-400 text-sm font-semibold">5</div>
+      <span class="text-xs text-slate-400 mt-1 text-center w-20">Fees &amp; Submit</span>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg border border-slate-200 p-8">
+    <div class="mb-6">
+      <span class="text-xs text-teal-700 font-semibold uppercase tracking-wider">Step 2 of 5</span>
+      <h1 class="text-xl font-semibold text-slate-800 tracking-tight mt-1">Licensure</h1>
+      <p class="text-sm text-slate-500 mt-1">Enter your medical license details. All information must match your official license certificate.</p>
+    </div>
+
+    <div class="space-y-5">
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Medical license number <span class="text-red-500">*</span></label>
+        <input type="text" value="GMC-7842913" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Issuing authority / medical council <span class="text-red-500">*</span></label>
+        <input type="text" value="General Medical Council (GMC)" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Country of licensure <span class="text-red-500">*</span></label>
+        <select class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent bg-white">
+          <option value="">Select country</option>
+          <option value="gb" selected>United Kingdom</option>
+          <option value="us">United States</option>
+          <option value="ca">Canada</option>
+          <option value="gh">Ghana</option>
+          <option value="au">Australia</option>
+        </select>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">License issue date <span class="text-red-500">*</span></label>
+          <input type="date" value="2012-09-01" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">License expiry date <span class="text-red-500">*</span></label>
+          <input type="date" id="expiry-date-input" value="2023-06-30" class="w-full border border-red-400 rounded-md px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+          <div class="mt-2 bg-red-50 border border-red-300 rounded-md p-3 flex items-start gap-2">
+            <svg class="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            <p id="error-msg-banner" class="text-sm text-red-700">License expired on 30 Jun 2023. An active, unexpired license is required to register.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">License type <span class="text-red-500">*</span></label>
+        <select class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent bg-white">
+          <option value="">Select license type</option>
+          <option value="full" selected>Full registration</option>
+          <option value="provisional">Provisional registration</option>
+          <option value="specialist">Specialist registration</option>
+          <option value="temporary">Temporary registration</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Primary specialty stated on license <span class="text-red-500">*</span></label>
+        <input type="text" value="Cardiology" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent">
+      </div>
+
+      <div class="bg-teal-50 border border-teal-200 rounded-md p-4">
+        <div class="flex items-start gap-3">
+          <svg class="w-4 h-4 text-teal-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <p class="text-sm text-teal-800">Your license details will be verified against the GMC online register during review. Ensure the number and expiry date match exactly.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-slate-100">
+      <a href="/onboarding-step1-personal.html" class="px-4 py-2 rounded-md border border-slate-300 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors bg-white">← Back</a>
+      <button disabled id="continue-btn" class="px-5 py-2 rounded-md bg-teal-700 text-white text-sm font-medium opacity-50 cursor-not-allowed">Continue →</button>
+    </div>
+  </div>
+
+  <p class="text-center text-xs text-slate-400 mt-6 mb-10">Your data is encrypted and stored in compliance with GDPR and NHS data standards.</p>
+</div>
+
+</body>
+</html>

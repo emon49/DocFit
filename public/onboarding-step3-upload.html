@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DocFit — Documents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>tailwind.config={theme:{extend:{colors:{teal:{200:'#99F6E4',300:'#5EEAD4',700:'#0F766E',800:'#115E59'}}}}}</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>body{font-family:'Inter',sans-serif;}</style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+
+<div class="bg-teal-800 px-6 py-3 flex items-center justify-between">
+  <div class="flex items-center gap-3">
+    <a href="/" class="text-white font-semibold text-lg tracking-tight hover:opacity-90">DocFit</a>
+    <span class="text-slate-400 text-sm">Doctor Registration</span>
+  </div>
+  <a href="/" class="text-sm text-slate-300 hover:text-white transition-colors">Save &amp; exit</a>
+</div>
+
+<div class="max-w-2xl mx-auto mt-8 px-4">
+  <div class="flex items-start justify-center gap-0 mb-8">
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-teal-700 flex items-center justify-center text-white text-sm font-semibold">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+        </svg>
+      </div>
+      <span class="text-xs font-medium text-teal-700 mt-1 text-center w-20">Personal details</span>
+    </div>
+    <div class="flex-1 h-px bg-teal-700 mt-4 mx-1"></div>
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-teal-700 flex items-center justify-center text-white text-sm font-semibold">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+        </svg>
+      </div>
+      <span class="text-xs font-medium text-teal-700 mt-1 text-center w-16">Licensure</span>
+    </div>
+    <div class="flex-1 h-px bg-teal-700 mt-4 mx-1"></div>
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-teal-700 flex items-center justify-center text-white text-sm font-semibold">3</div>
+      <span class="text-xs font-medium text-teal-700 mt-1 text-center w-16">Documents</span>
+    </div>
+    <div class="flex-1 h-px bg-slate-200 mt-4 mx-1"></div>
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-400 text-sm font-semibold">4</div>
+      <span class="text-xs text-slate-400 mt-1 text-center w-16">Specialties</span>
+    </div>
+    <div class="flex-1 h-px bg-slate-200 mt-4 mx-1"></div>
+    <div class="flex flex-col items-center">
+      <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-400 text-sm font-semibold">5</div>
+      <span class="text-xs text-slate-400 mt-1 text-center w-20">Fees &amp; Submit</span>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg border border-slate-200 p-8">
+    <div class="mb-6">
+      <span class="text-xs text-teal-700 font-semibold uppercase tracking-wider">Step 3 of 5</span>
+      <h1 class="text-xl font-semibold text-slate-800 tracking-tight mt-1">Documents</h1>
+      <p class="text-sm text-slate-500 mt-1">Upload your license document and identification. Files are reviewed by our credentialing team.</p>
+    </div>
+
+    <div class="space-y-6">
+      <div>
+        <h2 class="text-sm font-semibold text-slate-800 mb-1">Upload your license document</h2>
+        <p class="text-xs text-slate-500 mb-4">We accept PDF files only. Max file size: 10 MB. The document must show your name, license number and expiry date.</p>
+
+        <div class="space-y-4">
+          <!-- Primary license document -->
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-2">Primary license document <span class="text-red-500">*</span></label>
+            <div id="license-card" class="relative border border-slate-200 rounded-lg p-4 flex items-center gap-3 bg-white">
+              <div class="absolute top-3 right-3">
+                <div class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
+                  <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="w-9 h-9 rounded bg-slate-100 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0 pr-6">
+                <p id="license-doc-name" class="text-sm font-medium text-slate-800 truncate">GMC_Certificate_Osei-Bonsu.pdf</p>
+                <p id="license-doc-size" class="text-xs text-slate-500 mt-0.5">2.3 MB · Uploaded</p>
+              </div>
+              <button type="button" onclick="triggerLicenseUpload()" class="text-xs text-red-600 hover:text-red-700 flex-shrink-0 font-medium">Remove</button>
+            </div>
+            <input type="file" id="license-file-input" class="hidden" accept=".pdf" onchange="uploadLicenseFile(event)">
+          </div>
+
+          <!-- ID document upload or card -->
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-2">Passport or government-issued ID <span class="text-red-500">*</span></label>
+            
+            <!-- Upload Box (Default empty or secondary state) -->
+            <div id="id-dropzone" class="border-2 border-dashed border-slate-300 bg-slate-50 rounded-lg p-8 text-center cursor-pointer hover:border-teal-500 transition-colors" onclick="triggerIdUpload()">
+              <div class="flex justify-center mb-3">
+                <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                </svg>
+              </div>
+              <p class="text-sm font-medium text-slate-700 mb-1">Click to upload or drag and drop</p>
+              <p class="text-xs text-slate-400">PDF, JPG or PNG up to 10 MB</p>
+            </div>
+
+            <!-- Uploaded ID state card (hidden initially, shown once uploaded or if seeded) -->
+            <div id="id-success-card" class="hidden relative border border-slate-200 rounded-lg p-4 flex items-center gap-3 bg-white mt-2">
+              <div class="absolute top-3 right-3">
+                <div class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
+                  <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="w-9 h-9 rounded bg-slate-100 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0 pr-6">
+                <p id="id-doc-name" class="text-sm font-medium text-slate-800 truncate">Passport_Osei-Bonsu.pdf</p>
+                <p id="id-doc-size" class="text-xs text-slate-500 mt-0.5">1.8 MB · Uploaded</p>
+              </div>
+              <button type="button" onclick="triggerIdUpload()" class="text-xs text-red-600 hover:text-red-700 flex-shrink-0 font-medium">Remove</button>
+            </div>
+
+            <!-- Error State Card (matching onboarding-step3-upload-error.html) -->
+            <div id="id-error-card" class="hidden relative bg-red-50 border border-red-300 rounded-lg p-4 flex items-start gap-3 mt-2">
+              <div class="absolute top-3 right-3">
+                <button type="button" onclick="dismissIdError()" class="text-red-400 hover:text-red-600">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="w-9 h-9 rounded bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0 pr-5">
+                <p id="error-file-name" class="text-sm font-medium text-red-700 truncate">setup_wizard.pdf</p>
+                <p id="error-file-msg" class="text-xs text-red-600 mt-1 leading-relaxed">File rejected — the content does not match a supported format. Please upload a genuine PDF or image file.</p>
+                <button type="button" onclick="triggerIdUpload()" class="text-xs text-teal-700 hover:text-teal-800 font-medium mt-2 inline-block">Try again</button>
+              </div>
+            </div>
+
+            <input type="file" id="id-file-input" class="hidden" accept=".pdf,image/jpeg,image/png" onchange="uploadIdFile(event)">
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-200 rounded-md p-3 flex items-start gap-2.5">
+        <svg class="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+        </svg>
+        <p class="text-xs text-amber-800">Documents are stored securely and used only for verification. They are not visible to patients.</p>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-slate-100">
+      <a href="/onboarding-step2-licensure.html" class="px-4 py-2 rounded-md border border-slate-300 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors bg-white">← Back</a>
+      <button type="button" id="continue-btn" onclick="submitStep3()" class="px-5 py-2 rounded-md bg-teal-700 text-white text-sm font-medium hover:bg-teal-800 transition-colors">Continue →</button>
+    </div>
+  </div>
+
+  <p class="text-center text-xs text-slate-400 mt-6 mb-10">Your data is encrypted and stored in compliance with GDPR and NHS data standards.</p>
+</div>
+
+<script>
+  let licenseDoc = { name: 'GMC_Certificate_Osei-Bonsu.pdf', size: '2.3 MB' };
+  let idDoc = { name: 'Passport_Osei-Bonsu.pdf', size: '1.8 MB' };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const saved = JSON.parse(sessionStorage.getItem('docfit_onboarding_data') || '{}');
+    if (saved.document_url) {
+      licenseDoc.name = saved.document_url;
+      licenseDoc.size = saved.document_size || '2.3 MB';
+      document.getElementById('license-doc-name').textContent = licenseDoc.name;
+      document.getElementById('license-doc-size').textContent = licenseDoc.size + ' · Uploaded';
+    }
+    if (saved.id_document_url) {
+      idDoc.name = saved.id_document_url;
+      idDoc.size = saved.id_document_size || '1.8 MB';
+      showIdSuccess(idDoc.name, idDoc.size);
+    } else {
+      // Show default success card matching design or dropzone
+      showIdSuccess(idDoc.name, idDoc.size);
+    }
+  });
+
+  function triggerLicenseUpload() {
+    document.getElementById('license-file-input').click();
+  }
+
+  function triggerIdUpload() {
+    document.getElementById('id-file-input').click();
+  }
+
+  async function uploadLicenseFile(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (!file.name.toLowerCase().endsWith('.pdf')) {
+      alert('We accept PDF files only for license documents.');
+      return;
+    }
+
+    const token = localStorage.getItem('docfit_token');
+    const res = await fetch('/api/doctor/onboarding/upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token || ''}`
+      },
+      body: JSON.stringify({
+        filename: file.name,
+        category: 'license',
+        size_bytes: file.size
+      })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      licenseDoc = { name: data.filename, size: data.size };
+      document.getElementById('license-doc-name').textContent = licenseDoc.name;
+      document.getElementById('license-doc-size').textContent = licenseDoc.size + ' · Uploaded';
+    } else {
+      alert(data.message || 'File upload failed');
+    }
+  }
+
+  async function uploadIdFile(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const token = localStorage.getItem('docfit_token');
+    const res = await fetch('/api/doctor/onboarding/upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token || ''}`
+      },
+      body: JSON.stringify({
+        filename: file.name,
+        category: 'id',
+        size_bytes: file.size
+      })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      idDoc = { name: data.filename, size: data.size };
+      showIdSuccess(data.filename, data.size);
+      dismissIdError();
+    } else {
+      // Show rejected error state matching design onboarding-step3-upload-error.html
+      showIdError(file.name, data.message);
+    }
+  }
+
+  function showIdSuccess(name, size) {
+    document.getElementById('id-dropzone').classList.add('hidden');
+    document.getElementById('id-error-card').classList.add('hidden');
+    const successCard = document.getElementById('id-success-card');
+    successCard.classList.remove('hidden');
+    document.getElementById('id-doc-name').textContent = name;
+    document.getElementById('id-doc-size').textContent = size + ' · Uploaded';
+  }
+
+  function showIdError(filename, message) {
+    document.getElementById('id-dropzone').classList.add('hidden');
+    document.getElementById('id-success-card').classList.add('hidden');
+    const errCard = document.getElementById('id-error-card');
+    errCard.classList.remove('hidden');
+    document.getElementById('error-file-name').textContent = filename;
+    if (message) document.getElementById('error-file-msg').textContent = message;
+  }
+
+  function dismissIdError() {
+    document.getElementById('id-error-card').classList.add('hidden');
+    document.getElementById('id-dropzone').classList.remove('hidden');
+  }
+
+  function submitStep3() {
+    const data = JSON.parse(sessionStorage.getItem('docfit_onboarding_data') || '{}');
+    data.document_url = licenseDoc.name;
+    data.document_size = licenseDoc.size;
+    data.id_document_url = idDoc.name;
+    data.id_document_size = idDoc.size;
+
+    sessionStorage.setItem('docfit_onboarding_data', JSON.stringify(data));
+    window.location.href = '/onboarding-step4-specialty.html';
+  }
+</script>
+
+</body>
+</html>

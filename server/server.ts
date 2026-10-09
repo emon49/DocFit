@@ -25,6 +25,8 @@ app.use(express.static(publicPath));
 // Also serve the raw designs if requested directly
 const designPath = path.join(__dirname, '..', 'design', 'docfit-f1-screens');
 app.use('/design-preview', express.static(designPath));
+const designF2Path = path.join(__dirname, '..', 'design', 'docfit-f2-screens');
+app.use('/design-f2-preview', express.static(designF2Path));
 
 // Default route to landing page index.html
 app.get('/', (req, res) => {
@@ -44,7 +46,24 @@ const pages = [
   'patient-dashboard.html',
   'auth-forbidden.html',
   'screens.html',
-  'index.html'
+  'index.html',
+  // Feature 2: Doctor Onboarding & License Verification
+  'onboarding-step1-personal.html',
+  'onboarding-step2-licensure.html',
+  'onboarding-step2-licensure-error.html',
+  'onboarding-step3-upload.html',
+  'onboarding-step3-upload-error.html',
+  'onboarding-step4-specialty.html',
+  'onboarding-step5-fees.html',
+  'onboarding-status-pending.html',
+  'onboarding-status-approved.html',
+  'onboarding-status-action-required.html',
+  'onboarding-status-suspended.html',
+  'admin-queue.html',
+  'admin-review-detail.html',
+  'admin-approve-confirm.html',
+  'admin-reject.html',
+  'admin-request-info.html'
 ];
 
 for (const page of pages) {
