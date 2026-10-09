@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocFit · Feature 1 Screen Index</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>* { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-white max-w-3xl mx-auto px-8 py-12">
+
+  <h1 class="text-xl font-bold text-slate-900">DocFit · Feature 1 Screen Index</h1>
+  <p class="mt-1 text-sm text-slate-500">Accounts, Roles and Authentication · Handoff contact sheet</p>
+  <p class="mt-1 text-xs text-slate-400">Open any file in a browser to view the screen. These links work when all files are in the same folder.</p>
+
+  <hr class="my-6 border-slate-200" />
+
+  <!-- Registration flows -->
+  <section class="mb-8">
+    <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3">Registration</h2>
+    <table class="w-full text-sm border-collapse">
+      <thead>
+        <tr class="border-b border-slate-200">
+          <th class="text-left text-xs font-semibold text-slate-500 py-2 pr-4 w-48">File</th>
+          <th class="text-left text-xs font-semibold text-slate-500 py-2 pr-4">Screen / state</th>
+          <th class="text-left text-xs font-semibold text-slate-500 py-2 pr-4">Archetype</th>
+          <th class="text-left text-xs font-semibold text-slate-500 py-2">Test cases</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        <tr>
+          <td class="py-2.5 pr-4"><a href="auth-signup.html" class="text-teal-700 font-mono text-xs hover:underline">auth-signup.html</a></td>
+          <td class="py-2.5 pr-4 text-slate-700">Sign up · Patient role selected · empty form</td>
+          <td class="py-2.5 pr-4 text-slate-400 text-xs">SETTINGS_FORM</td>
+          <td class="py-2.5 text-slate-400 text-xs">TC-01</td>
+        </tr>
+        <tr>
+          <td class="py-2.5 pr-4"><a href="auth-signup-doctor.html" class="text-teal-700 font-mono text-xs hover:underline">auth-signup-doctor.html</a></td>
+          <td class="py-2.5 pr-4 text-slate-700">Sign up · Doctor role selected · verification notice shown</td>
+          <td class="py-2.5 pr-4 text-slate-400 text-xs">SETTINGS_FORM</td>
+          <td class="py-2.5 text-slate-400 text-xs">TC-04</td>
+        </tr>
+        <tr>
+          <td class="py-2.5 pr-4"><a href="auth-signup-existing-email.html" class="text-teal-700 font-mono text-xs hover:underline">auth-signup-existing-email.html</a></td>
+          <td class="py-2.5 pr-4 text-slate-700">Sign up · Already-registered email · neutral post-submit notice</td>
+          <td class="py-2.5 pr-4 text-slate-400 text-xs">SETTINGS_FORM</td>
+          <td class="py-2.5 text-slate-400 text-xs">TC-02</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Email verification -->
+  <section class="mb-8">
+    <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3">Email Verification</h2>
+    <table class="w-full text-sm border-collapse">
+      <thead>
+        <tr class="border-b border-slate-200">
+          <th class="text-left text-xs font-semibold text-slate-500 py-2 pr-4 w-48">File</th>
+          <th class="text-left text-xs font-semibold text-slate-500 py-2 pr-4">Screen / state</th>
+          <th class="text-left text-xs font-semibold text-slate-500 py-2 pr-4">Archetype</th>
+          <th class="text-left text-xs font-semibold text-slate-500 py-2">Test cases</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        <tr>
+          <td class="py-2.5 pr-4"><a href="auth-verify-pending.html" class="text-teal-700 font-mono text-xs hover:underline">auth-verify-pending.html</a></td>
+          <td class="py-2.5 pr-4 text-slate-700">Email verification · pending · resend available</td>
+          <td class="py-2.5 pr-4 text-slate-400 text-xs">SETTINGS_FORM</td>
+          <td class="py-2.5 text-slate-400 text-xs">TC-01</td>
+        </tr>
+        <tr>
+          <td class="py-2.5 pr-4"><a href="auth-verify-expired.html" class="text-teal-700 font-mono text-xs hover:underline">auth-verify-expired.html</a></td>
+          <td class="py-2.5 pr-4 text-slate-700">Email verification · link expired · request new link</td>
+          <td class="py-2.5 pr-4 text-slate-400 text-xs">SETTINGS_FORM</td>
+          <td class="py-2.5 text-slate-400 text-xs">TC-01</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Sign in -->
+  <section class="mb-8">
+    <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3">Sign In &amp; Two-Factor Authentication</h2>
+    <table class="w-full text-sm border-collapse">
+      <thead>
+        <tr class="border-b border-slate-200">
+          <th class="text-left text-xs font-semibold text-slate-500 py-2 pr-4 w-48">File</th>
+          <th class="text-left text-xs font-semibold text-slate-500 py-2 pr-4">Screen / state</th>
+          <th class="text-left text-xs font-semibold text-slate-500 py-2 pr-4">Archetype</th>
+          <th class="text-left text-xs font-semibold text-slate-500 py-2">Test cases</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        <tr>
+          <td class="py-2.5 pr-4"><a href="auth-signin.html" class="text-teal-700 font-mono text-xs hover:underline">auth-signin.html</a></td>
+          <td class="py-2.5 pr-4 text-slate-700">Sign in · email and password · returning patient</td>
+          <td class="py-2.5 pr-4 text-slate-400 text-xs">SETTINGS_FORM</td>
+          <td class="py-2.5 text-slate-400 text-xs">TC-01, TC-03</td>
+        </tr>
+        <tr>
+          <td class="py-2.5 pr-4"><a href="auth-signin-mfa.html" class="text-teal-700 font-mono text-xs hover:underline">auth-signin-mfa.html</a></td>
+          <td class="py-2.5 pr-4 text-slate-700">Sign in · 2FA code entry step · enrolled account</td>
+          <td class="py-2.5 pr-4 text-slate-400 text-xs">SETTINGS_FORM</td>
+          <td class="py-2.5 text-slate-400 text-xs">TC-01, TC-04</td>
+        </tr>
+        <tr>
+          <td class="py-2.5 pr-4"><a href="auth-mfa-enroll.html" class="text-teal-700 font-mono text-xs hover:underline">auth-mfa-enroll.html</a></td>
+          <td class="py-2.5 pr-4 text-slate-700">2FA enrollment · forced for doctor · blocked until complete</td>
+          <td class="py-2.5 pr-4 text-slate-400 text-xs">SETTINGS_FORM</td>
+          <td class="py-2.5 text-slate-400 text-xs">TC-04</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Authenticated screens -->
+  <section class="mb-8">
+    <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3">Authenticated Screens</h2>
+    <table class="w-full text-sm border-collapse">
+      <thead>
+        <tr class="border-b border-slate-200">
+          <th class="text-left text-xs font-semibold text-slate-500 py-2 pr-4 w-48">File</th>
+          <th class="text-left text-xs font-semibold text-slate-500 py-2 pr-4">Screen / state</th>
+          <th class="text-left text-xs font-semibold text-slate-500 py-2 pr-4">Archetype</th>
+          <th class="text-left text-xs font-semibold text-slate-500 py-2">Test cases</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        <tr>
+          <td class="py-2.5 pr-4"><a href="patient-dashboard.html" class="text-teal-700 font-mono text-xs hover:underline">patient-dashboard.html</a></td>
+          <td class="py-2.5 pr-4 text-slate-700">Patient dashboard · post-login · new account empty state</td>
+          <td class="py-2.5 pr-4 text-slate-400 text-xs">MASTER-DETAIL</td>
+          <td class="py-2.5 text-slate-400 text-xs">TC-01</td>
+        </tr>
+        <tr>
+          <td class="py-2.5 pr-4"><a href="auth-forbidden.html" class="text-teal-700 font-mono text-xs hover:underline">auth-forbidden.html</a></td>
+          <td class="py-2.5 pr-4 text-slate-700">403 Access Denied · patient accessing doctor-only area</td>
+          <td class="py-2.5 pr-4 text-slate-400 text-xs">MASTER-DETAIL</td>
+          <td class="py-2.5 text-slate-400 text-xs">TC-03</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr class="my-6 border-slate-200" />
+  <p class="text-xs text-slate-400"><span class="font-medium text-slate-500">Coverage note:</span> All 4 blueprint test cases (TC-01 through TC-04) are demonstrated. The admin role screens (role permission matrix, admin dashboard) are not built here — they belong to the admin-specific surface introduced in Feature 2 (Doctor Onboarding) and Feature 10 (Audit &amp; Compliance). The session management and inactivity timeout are backend/identity-provider behaviors with no dedicated screen.</p>
+
+</body>
+</html>

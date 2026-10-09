@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create account · DocFit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>* { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="min-h-screen flex bg-white">
+
+  <!-- Left brand panel -->
+  <div class="hidden lg:flex lg:w-5/12 bg-teal-800 flex-col justify-between p-10 flex-shrink-0">
+    <a href="#" class="flex items-center gap-2.5">
+      <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center flex-shrink-0">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+      </div>
+      <span class="text-white font-semibold text-xl tracking-tight">DocFit</span>
+    </a>
+
+    <div class="flex-1 flex flex-col justify-center py-12">
+      <h2 class="text-3xl font-bold text-white leading-snug tracking-tight">Expert care,<br>anywhere, anytime.</h2>
+      <p class="mt-4 text-teal-200 text-sm leading-relaxed max-w-xs">Connect with licensed, verified doctors for consultations, diagnoses, and digital prescriptions — in minutes.</p>
+      <ul class="mt-8 space-y-5">
+        <li class="flex items-start gap-3">
+          <div class="w-5 h-5 rounded-full bg-teal-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 12 12"><path stroke-linecap="round" stroke-linejoin="round" d="M2 6l3 3 5-5"/></svg>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-white">Video &amp; chat consultations</p>
+            <p class="text-xs text-teal-300 mt-0.5">HD video with automatic text fallback</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <div class="w-5 h-5 rounded-full bg-teal-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 12 12"><path stroke-linecap="round" stroke-linejoin="round" d="M2 6l3 3 5-5"/></svg>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-white">Licensed &amp; verified doctors</p>
+            <p class="text-xs text-teal-300 mt-0.5">Every credential is manually reviewed by our team</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <div class="w-5 h-5 rounded-full bg-teal-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 12 12"><path stroke-linecap="round" stroke-linejoin="round" d="M2 6l3 3 5-5"/></svg>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-white">Secure digital prescriptions</p>
+            <p class="text-xs text-teal-300 mt-0.5">Signed and delivered to your inbox within minutes</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="border-t border-teal-700 pt-6">
+      <div class="flex gap-8">
+        <div>
+          <p class="text-xl font-bold text-white">4,200+</p>
+          <p class="text-xs text-teal-300 mt-0.5">Verified Doctors</p>
+        </div>
+        <div>
+          <p class="text-xl font-bold text-white">38K+</p>
+          <p class="text-xs text-teal-300 mt-0.5">Consultations</p>
+        </div>
+        <div>
+          <p class="text-xl font-bold text-white">96%</p>
+          <p class="text-xs text-teal-300 mt-0.5">Satisfaction Rate</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right form panel -->
+  <div class="flex-1 flex flex-col justify-center px-6 py-12 lg:px-12 xl:px-16 overflow-y-auto">
+    <div class="w-full max-w-md mx-auto">
+
+      <!-- Mobile logo -->
+      <div class="flex items-center gap-2 mb-8 lg:hidden">
+        <div class="w-7 h-7 bg-teal-700 rounded-md flex items-center justify-center">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+        </div>
+        <span class="text-slate-900 font-semibold text-lg tracking-tight">DocFit</span>
+      </div>
+
+      <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Create your account</h1>
+      <p class="mt-1.5 text-sm text-slate-500">Get started in under a minute.</p>
+
+      <!-- Role selector -->
+      <div class="mt-6 flex rounded-lg border border-slate-200 p-1 bg-slate-50">
+        <button type="button" class="flex-1 py-2 text-sm font-semibold rounded-md bg-teal-700 text-white transition-colors">
+          Patient
+        </button>
+        <button type="button" class="flex-1 py-2 text-sm font-medium rounded-md text-slate-500 hover:text-slate-700 transition-colors">
+          Doctor
+        </button>
+      </div>
+
+      <form class="mt-5 space-y-4" novalidate>
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1.5">Full name</label>
+          <input type="text" placeholder="James Hartwell" class="w-full px-3 py-2.5 text-sm bg-white border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1.5">Email address</label>
+          <input type="email" placeholder="you@example.com" class="w-full px-3 py-2.5 text-sm bg-white border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1.5">Password</label>
+          <div class="relative">
+            <input type="password" placeholder="At least 12 characters" class="w-full px-3 py-2.5 pr-10 text-sm bg-white border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition" />
+            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-slate-700 mb-1.5">Country</label>
+            <select class="w-full px-3 py-2.5 text-sm bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
+              <option value="">Select…</option>
+              <option value="BD">Bangladesh</option>
+              <option value="IN">India</option>
+              <option value="GB" selected>United Kingdom</option>
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+              <option value="AU">Australia</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-700 mb-1.5">Timezone</label>
+            <select class="w-full px-3 py-2.5 text-sm bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
+              <option value="">Select…</option>
+              <option value="Asia/Dhaka">Asia/Dhaka</option>
+              <option value="Asia/Kolkata">Asia/Kolkata</option>
+              <option value="Europe/London" selected>Europe/London</option>
+              <option value="America/New_York">America/New_York</option>
+              <option value="America/Los_Angeles">America/Los_Angeles</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="flex items-start gap-2.5 cursor-pointer select-none">
+          <input type="checkbox" class="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-slate-300 text-teal-600 focus:ring-teal-500" />
+          <span class="text-xs text-slate-500 leading-snug">I agree to DocFit's <a href="#" class="text-teal-700 hover:underline font-medium">Terms of Service</a> and <a href="#" class="text-teal-700 hover:underline font-medium">Privacy Policy</a>. My health information will be collected and handled as described in the privacy notice.</span>
+        </label>
+
+        <button type="submit" class="w-full py-2.5 px-4 bg-teal-700 hover:bg-teal-800 text-white text-sm font-semibold rounded-lg transition-colors mt-1">
+          Create patient account
+        </button>
+      </form>
+
+      <p class="mt-5 text-center text-xs text-slate-500">
+        Already have an account? <a href="auth-signin.html" class="text-teal-700 font-medium hover:underline">Sign in</a>
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>
