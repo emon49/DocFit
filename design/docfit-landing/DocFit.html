@@ -1,0 +1,1033 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>DocFit</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap">
+
+<style>
+/* === Deep teal hero + light body + Fraunces display / DM Sans body === */
+:root {
+  --bg:          #F5F8F7;
+  --surface:     #FFFFFF;
+  --ink-1:       #0C2B28;
+  --ink-2:       #3E6560;
+  --teal:        #0C726A;
+  --teal-vivid:  #0EA89D;
+  --teal-faint:  #DFF3F1;
+  --border:      #C8E0DD;
+  --hero-bg:     #082E2B;
+  --hero-fg:     #E6F4F3;
+  --hero-subtle: #8FBDB9;
+
+  --ff-display: 'Fraunces', Georgia, serif;
+  --ff-body:    'DM Sans', system-ui, sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:          #091A19;
+    --surface:     #0D2422;
+    --ink-1:       #E0F2F0;
+    --ink-2:       #7BB5B1;
+    --teal:        #15B5AC;
+    --teal-vivid:  #22D3CB;
+    --teal-faint:  #0C2D2B;
+    --border:      #1B3F3C;
+    --hero-bg:     #041A18;
+    --hero-fg:     #E6F4F3;
+    --hero-subtle: #5A9B97;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg:          #091A19;
+  --surface:     #0D2422;
+  --ink-1:       #E0F2F0;
+  --ink-2:       #7BB5B1;
+  --teal:        #15B5AC;
+  --teal-vivid:  #22D3CB;
+  --teal-faint:  #0C2D2B;
+  --border:      #1B3F3C;
+  --hero-bg:     #041A18;
+  --hero-fg:     #E6F4F3;
+  --hero-subtle: #5A9B97;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; }
+
+body {
+  font-family: var(--ff-body);
+  background: var(--bg);
+  color: var(--ink-1);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-inline: 0;
+}
+
+/* ─── Nav ─── */
+.nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 100;
+  background: var(--hero-bg);
+  padding-inline: clamp(1rem, 4vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  height: 60px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--hero-fg);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  width: 30px;
+  height: 30px;
+  background: var(--teal);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: rgba(230,244,243,0.55);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--hero-fg); }
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* ─── Buttons ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-family: var(--ff-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.15s, background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+  line-height: 1;
+}
+.btn-lg { font-size: 0.95rem; padding: 0.75rem 1.6rem; }
+
+.btn-ghost {
+  background: transparent;
+  color: rgba(230,244,243,0.7);
+  border: 1px solid rgba(230,244,243,0.14);
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.07); color: var(--hero-fg); }
+
+.btn-vivid  { background: var(--teal-vivid); color: #fff; }
+.btn-vivid:hover { opacity: 0.88; }
+
+.btn-teal   { background: var(--teal); color: #fff; }
+.btn-teal:hover { opacity: 0.88; }
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink-1);
+  border: 1.5px solid var(--border);
+}
+.btn-outline:hover { background: var(--teal-faint); }
+
+/* ─── Hero ─── */
+.hero {
+  background: var(--hero-bg);
+  padding-block: clamp(4rem, 8vw, 6.5rem);
+  padding-inline: clamp(1rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--teal-vivid);
+  margin-bottom: 1.25rem;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal-vivid);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+.hero-headline {
+  font-family: var(--ff-display);
+  font-size: clamp(2.6rem, 4.5vw, 4rem);
+  font-weight: 700;
+  color: var(--hero-fg);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  margin-bottom: 1.25rem;
+}
+
+.hero-headline em {
+  font-style: italic;
+  color: var(--teal-vivid);
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--hero-subtle);
+  line-height: 1.72;
+  margin-bottom: 2rem;
+  max-width: 40ch;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.25rem;
+}
+
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--hero-subtle);
+}
+.trust-item svg { color: var(--teal-vivid); flex-shrink: 0; }
+
+/* ─── Mockup card ─── */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.mockup {
+  background: rgba(255,255,255,0.055);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px;
+  padding: 1.25rem;
+  width: 100%;
+  max-width: 370px;
+}
+
+.mockup-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.m-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #15B5AC, #0C726A);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.m-name  { font-size: 0.875rem; font-weight: 650; color: var(--hero-fg); }
+.m-spec  { font-size: 0.72rem;  color: var(--hero-subtle); margin-top: 1px; }
+
+.m-badge {
+  margin-left: auto;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.22rem 0.6rem;
+  border-radius: 20px;
+  background: rgba(14,168,157,0.18);
+  color: #0EA89D;
+  border: 1px solid rgba(14,168,157,0.28);
+  white-space: nowrap;
+}
+
+.m-video {
+  border-radius: 11px;
+  background: linear-gradient(140deg, #082E2B 0%, #0C3A36 100%);
+  aspect-ratio: 16/9;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.m-video-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 40%, rgba(14,168,157,0.09) 0%, transparent 60%);
+}
+
+.m-video-inner { position: relative; text-align: center; }
+
+.m-play-ring {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(14,168,157,0.18);
+  border: 1.5px solid rgba(14,168,157,0.38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.5rem;
+  color: #0EA89D;
+}
+
+.m-elapsed {
+  font-size: 0.68rem;
+  font-variant-numeric: tabular-nums;
+  color: rgba(230,244,243,0.35);
+}
+
+.m-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.m-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.11);
+  background: rgba(255,255,255,0.055);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--hero-fg);
+  flex-shrink: 0;
+}
+
+.m-btn-end {
+  background: rgba(239,68,68,0.14);
+  border-color: rgba(239,68,68,0.28);
+  color: #F87171;
+}
+
+.m-ratings {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.m-stars { display: flex; gap: 2px; color: #F59E0B; }
+
+.m-rating-text { font-size: 0.71rem; color: var(--hero-subtle); }
+
+/* ─── Stats strip ─── */
+.stats {
+  background: var(--surface);
+  border-block: 1px solid var(--border);
+  padding-block: 2.5rem;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+  display: flex;
+  justify-content: center;
+  gap: clamp(2rem, 6vw, 6rem);
+  flex-wrap: wrap;
+}
+
+.stat-num {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  color: var(--teal);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.stat-lbl {
+  font-size: 0.78rem;
+  color: var(--ink-2);
+  margin-top: 0.35rem;
+  letter-spacing: 0.01em;
+}
+
+/* ─── Shared section wrapper ─── */
+.section-wrap {
+  padding-block: clamp(3.5rem, 7vw, 6rem);
+  padding-inline: clamp(1rem, 4vw, 3rem);
+}
+
+.section-inner {
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.65rem;
+}
+
+.section-title {
+  font-family: var(--ff-display);
+  font-size: clamp(1.9rem, 3vw, 2.75rem);
+  font-weight: 700;
+  color: var(--ink-1);
+  letter-spacing: -0.022em;
+  line-height: 1.14;
+  text-wrap: balance;
+  margin-bottom: 0.9rem;
+}
+
+.section-sub {
+  font-size: 1rem;
+  color: var(--ink-2);
+  line-height: 1.72;
+  max-width: 52ch;
+}
+
+.section-header { margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+
+/* ─── Steps ─── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.step-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.75rem;
+}
+
+.step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--teal-faint);
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.step-title { font-size: 0.97rem; font-weight: 650; color: var(--ink-1); margin-bottom: 0.45rem; }
+.step-body  { font-size: 0.875rem; color: var(--ink-2); line-height: 1.65; }
+
+/* ─── Features ─── */
+.features-section {
+  background: var(--surface);
+  border-block: 1px solid var(--border);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.feature-cell {
+  background: var(--surface);
+  padding: 1.75rem;
+  display: flex;
+  gap: 1.1rem;
+}
+
+.feature-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--teal-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--teal);
+}
+
+.feature-title { font-size: 0.95rem; font-weight: 650; color: var(--ink-1); margin-bottom: 0.35rem; }
+.feature-body  { font-size: 0.855rem; color: var(--ink-2); line-height: 1.62; }
+
+/* ─── Doctor band ─── */
+.doctor-band {
+  background: var(--hero-bg);
+}
+
+.doctor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.doctor-eyebrow { color: var(--teal-vivid) !important; }
+
+.doctor-title {
+  font-family: var(--ff-display);
+  font-size: clamp(1.9rem, 3vw, 2.75rem);
+  font-weight: 700;
+  color: var(--hero-fg);
+  letter-spacing: -0.022em;
+  line-height: 1.14;
+  text-wrap: balance;
+  margin-bottom: 0.9rem;
+}
+
+.doctor-sub {
+  font-size: 1rem;
+  color: var(--hero-subtle);
+  line-height: 1.72;
+  margin-bottom: 1.75rem;
+}
+
+.doctor-perks { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1.75rem; }
+
+.perk {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.9rem;
+  color: var(--hero-subtle);
+}
+
+.perk-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(14,168,157,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--teal-vivid);
+}
+
+.doc-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.doc-stat-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.doc-stat-num {
+  font-family: var(--ff-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--teal-vivid);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.doc-stat-lbl { font-size: 0.79rem; color: var(--hero-subtle); }
+
+/* ─── Testimonial ─── */
+.testimonial-section {
+  background: var(--teal-faint);
+  border-block: 1px solid var(--border);
+}
+
+.testimonial-inner {
+  max-width: 680px;
+  margin-inline: auto;
+  text-align: center;
+  padding-block: clamp(3.5rem, 7vw, 5.5rem);
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.testimonial-quote {
+  font-family: var(--ff-display);
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--ink-1);
+  line-height: 1.52;
+  margin-bottom: 1.5rem;
+  text-wrap: balance;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.t-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0EA89D, #0C726A);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.t-meta strong { display: block; font-size: 0.88rem; font-weight: 650; color: var(--ink-1); }
+.t-meta span   { font-size: 0.78rem; color: var(--ink-2); }
+
+/* ─── Final CTA ─── */
+.final-cta {
+  text-align: center;
+  padding-block: clamp(4rem, 8vw, 7rem);
+  padding-inline: clamp(1rem, 4vw, 3rem);
+}
+
+.final-title {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
+  font-weight: 700;
+  color: var(--ink-1);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  text-wrap: balance;
+  margin-bottom: 0.85rem;
+}
+
+.final-sub {
+  font-size: 1.02rem;
+  color: var(--ink-2);
+  margin-bottom: 2rem;
+}
+
+.final-ctas {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* ─── Footer ─── */
+.footer {
+  background: var(--hero-bg);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-block: 2rem;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+  color: var(--hero-fg);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+.footer-links a {
+  font-size: 0.78rem;
+  color: rgba(230,244,243,0.38);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-links a:hover { color: rgba(230,244,243,0.78); }
+
+.footer-copy { font-size: 0.74rem; color: rgba(230,244,243,0.25); }
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .hero            { grid-template-columns: 1fr; }
+  .hero-visual     { order: -1; }
+  .hero-sub        { max-width: 100%; }
+  .steps-grid      { grid-template-columns: 1fr; }
+  .feature-grid    { grid-template-columns: 1fr; }
+  .doctor-grid     { grid-template-columns: 1fr; }
+  .nav-links       { display: none; }
+}
+
+@media (max-width: 500px) {
+  .stats           { gap: 2rem; }
+  .nav-actions .btn-ghost { display: none; }
+}
+</style>
+
+<!-- Nav -->
+<nav class="nav">
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">
+      <svg width="15" height="15" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+    </div>
+    DocFit
+  </a>
+  <ul class="nav-links">
+    <li><a href="#how-it-works">How it works</a></li>
+    <li><a href="#for-doctors">For doctors</a></li>
+    <li><a href="#">Specialisms</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#" class="btn btn-ghost">Sign in</a>
+    <a href="#" class="btn btn-vivid">Get started</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="pulse-dot"></span>
+      Online healthcare consultations
+    </div>
+    <h1 class="hero-headline">A doctor,<br><em>whenever</em><br>you need one.</h1>
+    <p class="hero-sub">Book a video consultation in minutes. Connect with verified specialists from home — and get real prescriptions, referrals, and follow-up care.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-vivid btn-lg">Book a consultation</a>
+      <a href="#how-it-works" class="btn btn-ghost btn-lg">See how it works</a>
+    </div>
+    <div class="hero-trust">
+      <span class="trust-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+        All doctors verified
+      </span>
+      <span class="trust-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+        End-to-end encrypted
+      </span>
+      <span class="trust-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Same-day appointments
+      </span>
+    </div>
+  </div>
+
+  <!-- Consultation mockup -->
+  <div class="hero-visual">
+    <div class="mockup">
+      <div class="mockup-head">
+        <div class="m-avatar">PK</div>
+        <div>
+          <div class="m-name">Dr. Priya Kapoor</div>
+          <div class="m-spec">General Medicine · Verified</div>
+        </div>
+        <div class="m-badge">● Live</div>
+      </div>
+
+      <div class="m-video">
+        <div class="m-video-glow"></div>
+        <div class="m-video-inner">
+          <div class="m-play-ring">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/></svg>
+          </div>
+          <div class="m-elapsed">12:34 elapsed</div>
+        </div>
+      </div>
+
+      <div class="m-controls">
+        <div class="m-btn" title="Microphone">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/></svg>
+        </div>
+        <div class="m-btn" title="Camera">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M12 18.75H4.5a2.25 2.25 0 01-2.25-2.25V9m12.75 0H18a2.25 2.25 0 012.25 2.25v2.25"/></svg>
+        </div>
+        <div class="m-btn m-btn-end" title="End call">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 3.75L18 6m0 0l2.25 2.25M18 6l2.25-2.25M18 6l-2.25 2.25m1.5 13.5c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 014.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 00-.38 1.21 12.035 12.035 0 007.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 011.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 01-2.25 2.25h-2.25z"/></svg>
+        </div>
+      </div>
+
+      <div class="m-ratings">
+        <div class="m-stars" aria-label="5 stars">
+          <!-- 5 star SVGs -->
+          <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <span class="m-rating-text">4.9 · 2,140 reviews</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats">
+  <div>
+    <div class="stat-num">4,200+</div>
+    <div class="stat-lbl">Verified doctors</div>
+  </div>
+  <div>
+    <div class="stat-num">38K+</div>
+    <div class="stat-lbl">Consultations completed</div>
+  </div>
+  <div>
+    <div class="stat-num">96%</div>
+    <div class="stat-lbl">Patient satisfaction</div>
+  </div>
+  <div>
+    <div class="stat-num">&lt;4 min</div>
+    <div class="stat-lbl">Avg. time to connect</div>
+  </div>
+</div>
+
+<!-- How it works -->
+<section id="how-it-works" class="section-wrap">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">For patients</div>
+      <h2 class="section-title">From symptom to care<br>in three steps</h2>
+      <p class="section-sub">No waiting rooms, no travel. Describe what's wrong, choose a specialist, and meet your doctor by video — usually the same day.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">Create your account</div>
+        <p class="step-body">Sign up with your email in under two minutes. Your account is free; you pay only for individual consultations when you book them.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">Describe your symptoms</div>
+        <p class="step-body">Tell us what's going on. We match you with a specialist whose expertise fits — your GP for general concerns, or a focused specialist for targeted care.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">Meet your doctor</div>
+        <p class="step-body">Join a secure video call at your chosen time. Your doctor can issue prescriptions and referrals immediately — stored in your DocFit health record.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<div class="features-section">
+  <div class="section-wrap">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">What you get</div>
+        <h2 class="section-title">Everything in one place</h2>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-cell">
+          <div class="feature-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/></svg>
+          </div>
+          <div>
+            <div class="feature-title">HD video consultations</div>
+            <p class="feature-body">End-to-end encrypted video on any device, with in-call chat for sharing photos or documents.</p>
+          </div>
+        </div>
+        <div class="feature-cell">
+          <div class="feature-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+          </div>
+          <div>
+            <div class="feature-title">Digital prescriptions</div>
+            <p class="feature-body">Doctors issue prescriptions directly in DocFit. Your pharmacy receives them instantly — no paper, no waiting.</p>
+          </div>
+        </div>
+        <div class="feature-cell">
+          <div class="feature-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776"/></svg>
+          </div>
+          <div>
+            <div class="feature-title">Persistent health record</div>
+            <p class="feature-body">Your consultation history, prescriptions, and referrals stay in your account — shareable with any DocFit doctor, anytime.</p>
+          </div>
+        </div>
+        <div class="feature-cell">
+          <div class="feature-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+          </div>
+          <div>
+            <div class="feature-title">Credential-verified doctors</div>
+            <p class="feature-body">Every doctor on DocFit has their licence and credentials reviewed before their first consultation. You see the badge; we did the check.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Doctor band -->
+<div id="for-doctors" class="doctor-band">
+  <div class="section-wrap">
+    <div class="section-inner">
+      <div class="doctor-grid">
+        <div>
+          <div class="eyebrow doctor-eyebrow">For doctors</div>
+          <h2 class="doctor-title">Practice on your<br>own terms.</h2>
+          <p class="doctor-sub">Set your own hours, choose your specialisms, and see patients anywhere. DocFit handles scheduling, payments, and records — you focus on the medicine.</p>
+          <div class="doctor-perks">
+            <div class="perk">
+              <div class="perk-check">
+                <svg width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              </div>
+              Weekly payouts, no threshold minimums
+            </div>
+            <div class="perk">
+              <div class="perk-check">
+                <svg width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              </div>
+              Set your schedule — mornings, evenings, weekends
+            </div>
+            <div class="perk">
+              <div class="perk-check">
+                <svg width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              </div>
+              Integrated prescription and referral tools
+            </div>
+            <div class="perk">
+              <div class="perk-check">
+                <svg width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              </div>
+              24-hour credential review, then you're live
+            </div>
+          </div>
+          <a href="#" class="btn btn-vivid btn-lg">Apply as a doctor</a>
+        </div>
+
+        <div class="doc-stats">
+          <div class="doc-stat-card">
+            <div class="doc-stat-num">$62</div>
+            <div class="doc-stat-lbl">Avg. per consultation</div>
+          </div>
+          <div class="doc-stat-card">
+            <div class="doc-stat-num">4.8★</div>
+            <div class="doc-stat-lbl">Doctor satisfaction</div>
+          </div>
+          <div class="doc-stat-card">
+            <div class="doc-stat-num">24h</div>
+            <div class="doc-stat-lbl">Credential review time</div>
+          </div>
+          <div class="doc-stat-card">
+            <div class="doc-stat-num">180+</div>
+            <div class="doc-stat-lbl">Specialisms on platform</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonial -->
+<div class="testimonial-section">
+  <div class="testimonial-inner">
+    <p class="testimonial-quote">"I had a chest infection on a Sunday evening. Within twenty minutes I was speaking with a doctor, and my prescription was at the pharmacy by 8am Monday. That's genuinely changed how I think about healthcare."</p>
+    <div class="testimonial-author">
+      <div class="t-avatar">JH</div>
+      <div class="t-meta">
+        <strong>James Hartwell</strong>
+        <span>Patient since 2025 · London, UK</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Final CTA -->
+<div class="final-cta">
+  <h2 class="final-title">Your health shouldn't<br>wait for an appointment.</h2>
+  <p class="final-sub">Create a free patient account and book your first consultation today.</p>
+  <div class="final-ctas">
+    <a href="#" class="btn btn-teal btn-lg">Get started for free</a>
+    <a href="#" class="btn btn-outline btn-lg">Apply as a doctor</a>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <a href="#" class="footer-logo">
+    <div class="logo-icon" style="width:24px;height:24px;border-radius:5px">
+      <svg width="12" height="12" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+    </div>
+    DocFit
+  </a>
+  <ul class="footer-links">
+    <li><a href="#">Privacy</a></li>
+    <li><a href="#">Terms</a></li>
+    <li><a href="#">For Doctors</a></li>
+    <li><a href="#">Help Centre</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 DocFit Ltd. All rights reserved.</p>
+</footer>
+
+</body></html>
