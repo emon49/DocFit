@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DocFit — Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>tailwind.config={theme:{extend:{colors:{teal:{700:'#0F766E',800:'#115E59',300:'#5EEAD4',200:'#99F6E4'}}}}}</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>body{font-family:'Inter',sans-serif;}</style>
+</head>
+<body class="bg-slate-50">
+
+<aside class="fixed left-0 top-0 h-screen w-56 bg-teal-800 flex flex-col z-20">
+  <div class="px-4 py-4 border-b border-teal-700/60">
+    <span class="text-white font-semibold text-base tracking-tight">DocFit</span>
+  </div>
+  <nav class="flex-1 p-3 space-y-0.5">
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-teal-200 hover:text-white hover:bg-teal-700/50">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-teal-200 hover:text-white hover:bg-teal-700/50">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5" r="3"/><path d="M1 14c0-3.314 3.134-6 7-6s7 2.686 7 6"/></svg>
+      Patients
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-sm bg-teal-700 text-white">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="12" height="12" rx="1.5"/><path d="M5 1v4M11 1v4M2 7h12"/></svg>
+      Schedule
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-teal-200 hover:text-white hover:bg-teal-700/50">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 10c0 1.1-.9 2-2 2H5l-3 3V4c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2v6z"/></svg>
+      Messages
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-teal-200 hover:text-white hover:bg-teal-700/50">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v1.5M8 9.5V11M6.5 6.5C6.5 5.7 7.2 5 8 5s1.5.7 1.5 1.5c0 1.5-3 1.5-3 3C6.5 10.3 7.2 11 8 11s1.5-.7 1.5-1.5"/></svg>
+      Earnings
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-teal-200 hover:text-white hover:bg-teal-700/50">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="2.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41"/></svg>
+      Settings
+    </a>
+  </nav>
+  <div class="p-3 border-t border-teal-700/60">
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-full bg-teal-600 text-white text-xs flex items-center justify-center font-semibold flex-shrink-0">AO</div>
+      <div class="min-w-0">
+        <div class="text-teal-200 text-xs font-medium truncate">Dr. A. Osei-Bonsu</div>
+        <div class="text-teal-400 text-xs">Cardiologist</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<div class="ml-56">
+  <header class="h-14 bg-white border-b border-slate-200 sticky top-0 z-10 flex items-center justify-between px-6">
+    <span class="text-base font-semibold text-slate-800 tracking-tight">My Schedule</span>
+    <div class="flex items-center gap-4">
+      <svg class="text-slate-400" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2a6 6 0 0 0-6 6v3l-1.5 2.5h15L16 11V8a6 6 0 0 0-6-6z"/><path d="M8.5 17.5a1.5 1.5 0 0 0 3 0"/></svg>
+      <div class="w-px h-5 bg-slate-200"></div>
+      <span class="text-sm text-slate-700">Dr. Amara Osei-Bonsu</span>
+      <div class="w-8 h-8 rounded-full bg-teal-100 text-teal-700 text-xs font-semibold flex items-center justify-center">AO</div>
+    </div>
+  </header>
+
+  <div class="bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between">
+    <span class="text-sm font-semibold text-slate-700">Recurring weekly schedule</span>
+    <div class="flex items-center gap-3">
+      <span class="text-sm text-slate-600">Slot length</span>
+      <select class="border border-slate-300 rounded-md text-sm px-3 py-1.5 text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-teal-600/20">
+        <option>15 min</option>
+        <option selected>20 min</option>
+        <option>30 min</option>
+      </select>
+      <button class="bg-teal-700 text-white text-sm px-4 py-1.5 rounded-md font-medium hover:bg-teal-800 transition-colors">Save changes</button>
+    </div>
+  </div>
+
+  <div class="flex gap-6 p-6">
+    <div class="flex-1 min-w-0">
+
+      <div class="bg-white border border-slate-200 rounded-lg mb-3 p-4">
+        <div class="flex items-center">
+          <span class="text-sm font-semibold text-slate-800 w-24 flex-shrink-0">Monday</span>
+          <div class="flex flex-wrap gap-2 flex-1">
+            <span class="bg-teal-50 border border-teal-200 rounded-md px-3 py-1 text-xs text-teal-800 font-medium inline-flex items-center gap-2">09:00 – 12:00 <button class="text-teal-400 hover:text-red-500 leading-none">✕</button></span>
+            <span class="bg-teal-50 border border-teal-200 rounded-md px-3 py-1 text-xs text-teal-800 font-medium inline-flex items-center gap-2">14:00 – 17:00 <button class="text-teal-400 hover:text-red-500 leading-none">✕</button></span>
+            <a href="#" class="text-xs text-teal-600 font-medium ml-1 self-center hover:text-teal-700">+ Add</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-lg mb-3 p-4">
+        <div class="flex items-center">
+          <span class="text-sm font-semibold text-slate-800 w-24 flex-shrink-0">Tuesday</span>
+          <div class="flex flex-wrap gap-2 flex-1">
+            <span class="bg-teal-50 border border-teal-200 rounded-md px-3 py-1 text-xs text-teal-800 font-medium inline-flex items-center gap-2">09:00 – 13:00 <button class="text-teal-400 hover:text-red-500 leading-none">✕</button></span>
+            <a href="#" class="text-xs text-teal-600 font-medium ml-1 self-center hover:text-teal-700">+ Add</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-lg mb-3 p-4 flex items-center justify-between">
+        <div class="flex items-center">
+          <span class="text-sm font-semibold text-slate-800 w-24 flex-shrink-0">Wednesday</span>
+          <span class="text-xs text-slate-400">No hours</span>
+        </div>
+        <button class="text-sm text-teal-700 font-medium border border-teal-200 rounded-md px-3 py-1.5 bg-teal-50 hover:bg-teal-100 flex-shrink-0">+ Add hours</button>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-lg mb-3 p-4">
+        <div class="flex items-center">
+          <span class="text-sm font-semibold text-slate-800 w-24 flex-shrink-0">Thursday</span>
+          <div class="flex flex-wrap gap-2 flex-1">
+            <span class="bg-teal-50 border border-teal-200 rounded-md px-3 py-1 text-xs text-teal-800 font-medium inline-flex items-center gap-2">08:30 – 12:30 <button class="text-teal-400 hover:text-red-500 leading-none">✕</button></span>
+            <span class="bg-teal-50 border border-teal-200 rounded-md px-3 py-1 text-xs text-teal-800 font-medium inline-flex items-center gap-2">14:00 – 16:00 <button class="text-teal-400 hover:text-red-500 leading-none">✕</button></span>
+            <a href="#" class="text-xs text-teal-600 font-medium ml-1 self-center hover:text-teal-700">+ Add</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-lg mb-3 p-4">
+        <div class="flex items-center">
+          <span class="text-sm font-semibold text-slate-800 w-24 flex-shrink-0">Friday</span>
+          <div class="flex flex-wrap gap-2 flex-1">
+            <span class="bg-teal-50 border border-teal-200 rounded-md px-3 py-1 text-xs text-teal-800 font-medium inline-flex items-center gap-2">09:00 – 12:00 <button class="text-teal-400 hover:text-red-500 leading-none">✕</button></span>
+            <a href="#" class="text-xs text-teal-600 font-medium ml-1 self-center hover:text-teal-700">+ Add</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-lg mb-3 p-4 flex items-center justify-between">
+        <div class="flex items-center">
+          <span class="text-sm font-semibold text-slate-800 w-24 flex-shrink-0">Saturday</span>
+          <span class="text-xs text-slate-400">No hours</span>
+        </div>
+        <button class="text-sm text-teal-700 font-medium border border-teal-200 rounded-md px-3 py-1.5 bg-teal-50 hover:bg-teal-100 flex-shrink-0">+ Add hours</button>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-lg mb-3 p-4 flex items-center justify-between">
+        <div class="flex items-center">
+          <span class="text-sm font-semibold text-slate-800 w-24 flex-shrink-0">Sunday</span>
+          <span class="text-xs text-slate-400">No hours</span>
+        </div>
+        <button class="text-sm text-teal-700 font-medium border border-teal-200 rounded-md px-3 py-1.5 bg-teal-50 hover:bg-teal-100 flex-shrink-0">+ Add hours</button>
+      </div>
+
+      <div class="mt-6 mb-3 flex items-center justify-between">
+        <span class="text-sm font-semibold text-slate-700">One-off exceptions</span>
+        <button class="text-sm text-teal-700 border border-teal-200 rounded-md px-3 py-1.5 bg-teal-50 hover:bg-teal-100 font-medium">Add exception +</button>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-md p-3 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="text-amber-500 text-base leading-none">●</span>
+          <span class="text-sm text-slate-700 font-medium">Mon 19 Oct 2026 · Leave — all day</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="#" class="text-xs text-teal-600 hover:text-teal-700 font-medium">Edit</a>
+          <a href="#" class="text-xs text-red-500 hover:text-red-600 font-medium">Remove</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="w-80 flex-shrink-0">
+      <div class="bg-white border border-slate-200 rounded-lg p-4 sticky top-20">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-sm font-semibold text-slate-700">Next 14 days</span>
+          <span class="text-xs bg-slate-100 text-slate-500 rounded px-2 py-0.5 font-medium">BST (UTC+1)</span>
+        </div>
+
+        <div class="space-y-3 max-h-[calc(100vh-220px)] overflow-y-auto pr-1">
+
+          <div>
+            <div class="text-sm font-semibold text-slate-800 mb-1">Sat 10 Oct</div>
+            <span class="text-xs text-slate-400 italic">No availability</span>
+          </div>
+
+          <div>
+            <div class="text-sm font-semibold text-slate-800 mb-1">Sun 11 Oct</div>
+            <span class="text-xs text-slate-400 italic">No availability</span>
+          </div>
+
+          <div>
+            <div class="text-sm font-semibold text-slate-800 mb-1">Mon 12 Oct</div>
+            <div class="flex flex-wrap gap-1">
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:20</span>
+              <span class="bg-teal-600 text-white rounded px-2 py-0.5 text-xs">10:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">14:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">14:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">14:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">15:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">15:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">15:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">16:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">16:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">16:40</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-sm font-semibold text-slate-800 mb-1">Tue 13 Oct</div>
+            <div class="flex flex-wrap gap-1">
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:40</span>
+              <span class="bg-teal-600 text-white rounded px-2 py-0.5 text-xs">10:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">12:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">12:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">12:40</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-sm font-semibold text-slate-800 mb-1">Wed 14 Oct</div>
+            <span class="text-xs text-slate-400 italic">No availability</span>
+          </div>
+
+          <div>
+            <div class="text-sm font-semibold text-slate-800 mb-1">Thu 15 Oct</div>
+            <div class="flex flex-wrap gap-1">
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">08:30</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">08:50</span>
+              <span class="bg-teal-600 text-white rounded px-2 py-0.5 text-xs">09:10</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:30</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:50</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:10</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:30</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:50</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:10</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:30</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:50</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">12:10</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">14:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">14:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">14:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">15:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">15:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">15:40</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-sm font-semibold text-slate-800 mb-1">Fri 16 Oct</div>
+            <div class="flex flex-wrap gap-1">
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:20</span>
+              <span class="bg-teal-600 text-white rounded px-2 py-0.5 text-xs">09:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:40</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-sm font-semibold text-slate-800 mb-1">Sat 17 Oct</div>
+            <span class="text-xs text-slate-400 italic">No availability</span>
+          </div>
+
+          <div>
+            <div class="text-sm font-semibold text-slate-800 mb-1">Sun 18 Oct</div>
+            <span class="text-xs text-slate-400 italic">No availability</span>
+          </div>
+
+          <div>
+            <div class="text-sm font-semibold text-slate-800 mb-1">Mon 19 Oct</div>
+            <span class="bg-amber-50 text-amber-700 border border-amber-200 text-xs rounded px-2 py-0.5">Leave — exception</span>
+          </div>
+
+          <div>
+            <div class="text-sm font-semibold text-slate-800 mb-1">Tue 20 Oct</div>
+            <div class="flex flex-wrap gap-1">
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">12:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">12:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">12:40</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-sm font-semibold text-slate-800 mb-1">Wed 21 Oct</div>
+            <span class="text-xs text-slate-400 italic">No availability</span>
+          </div>
+
+          <div>
+            <div class="text-sm font-semibold text-slate-800 mb-1">Thu 22 Oct</div>
+            <div class="flex flex-wrap gap-1">
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">08:30</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">08:50</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:10</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:30</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:50</span>
+              <span class="bg-teal-600 text-white rounded px-2 py-0.5 text-xs">10:10</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:30</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:50</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:10</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:30</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:50</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">12:10</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">14:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">14:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">14:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">15:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">15:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">15:40</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-sm font-semibold text-slate-800 mb-1">Fri 23 Oct</div>
+            <div class="flex flex-wrap gap-1">
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">09:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">10:40</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:00</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:20</span>
+              <span class="bg-green-50 text-green-700 border border-green-200 rounded px-2 py-0.5 text-xs">11:40</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="text-xs text-slate-500 border-t border-slate-100 mt-3 pt-3">
+          47 open slots · 4 booked · 1 leave day
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

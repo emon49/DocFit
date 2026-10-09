@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DocFit — Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>tailwind.config={theme:{extend:{colors:{teal:{700:'#0F766E',800:'#115E59',300:'#5EEAD4',200:'#99F6E4'}}}}}</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>body{font-family:'Inter',sans-serif;}</style>
+</head>
+<body class="bg-slate-50">
+
+<aside class="fixed left-0 top-0 h-screen w-56 bg-teal-800 flex flex-col z-20">
+  <div class="px-4 py-4 border-b border-teal-700/60">
+    <span class="text-white font-semibold text-base tracking-tight">DocFit</span>
+  </div>
+  <nav class="flex-1 p-3 space-y-0.5">
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-teal-200 hover:text-white hover:bg-teal-700/50">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-teal-200 hover:text-white hover:bg-teal-700/50">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5" r="3"/><path d="M1 14c0-3.314 3.134-6 7-6s7 2.686 7 6"/></svg>
+      Patients
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-sm bg-teal-700 text-white">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="12" height="12" rx="1.5"/><path d="M5 1v4M11 1v4M2 7h12"/></svg>
+      Schedule
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-teal-200 hover:text-white hover:bg-teal-700/50">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 10c0 1.1-.9 2-2 2H5l-3 3V4c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2v6z"/></svg>
+      Messages
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-teal-200 hover:text-white hover:bg-teal-700/50">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v1.5M8 9.5V11M6.5 6.5C6.5 5.7 7.2 5 8 5s1.5.7 1.5 1.5c0 1.5-3 1.5-3 3C6.5 10.3 7.2 11 8 11s1.5-.7 1.5-1.5"/></svg>
+      Earnings
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-teal-200 hover:text-white hover:bg-teal-700/50">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="2.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41"/></svg>
+      Settings
+    </a>
+  </nav>
+  <div class="p-3 border-t border-teal-700/60">
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-full bg-teal-600 text-white text-xs flex items-center justify-center font-semibold flex-shrink-0">AO</div>
+      <div class="min-w-0">
+        <div class="text-teal-200 text-xs font-medium truncate">Dr. A. Osei-Bonsu</div>
+        <div class="text-teal-400 text-xs">Cardiologist</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<div class="ml-56">
+  <header class="h-14 bg-white border-b border-slate-200 sticky top-0 z-10 flex items-center justify-between px-6">
+    <span class="text-base font-semibold text-slate-800 tracking-tight">My Schedule</span>
+    <div class="flex items-center gap-4">
+      <svg class="text-slate-400" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2a6 6 0 0 0-6 6v3l-1.5 2.5h15L16 11V8a6 6 0 0 0-6-6z"/><path d="M8.5 17.5a1.5 1.5 0 0 0 3 0"/></svg>
+      <div class="w-px h-5 bg-slate-200"></div>
+      <span class="text-sm text-slate-700">Dr. Amara Osei-Bonsu</span>
+      <div class="w-8 h-8 rounded-full bg-teal-100 text-teal-700 text-xs font-semibold flex items-center justify-center">AO</div>
+    </div>
+  </header>
+
+  <div class="bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between">
+    <span class="text-sm font-semibold text-slate-700">Recurring weekly schedule</span>
+    <div class="flex items-center gap-3">
+      <span class="text-sm text-slate-600">Slot length</span>
+      <select class="border border-slate-300 rounded-md text-sm px-3 py-1.5 text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-teal-600/20">
+        <option>15 min</option>
+        <option selected>20 min</option>
+        <option>30 min</option>
+      </select>
+      <button disabled class="bg-teal-700 text-white text-sm px-4 py-1.5 rounded-md font-medium opacity-50 cursor-not-allowed">Save changes</button>
+    </div>
+  </div>
+
+  <div class="flex gap-6 p-6 min-h-screen">
+    <div class="flex-1 min-w-0">
+      <div class="bg-white border border-slate-200 rounded-lg mb-3 p-4 flex items-start justify-between">
+        <div>
+          <div class="text-sm font-semibold text-slate-700">Monday</div>
+          <div class="text-xs text-slate-400 mt-0.5">No hours set</div>
+        </div>
+        <button class="text-sm text-teal-700 font-medium border border-teal-200 rounded-md px-3 py-1.5 bg-teal-50 hover:bg-teal-100 flex-shrink-0">+ Add hours</button>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-lg mb-3 p-4 flex items-start justify-between">
+        <div>
+          <div class="text-sm font-semibold text-slate-700">Tuesday</div>
+          <div class="text-xs text-slate-400 mt-0.5">No hours set</div>
+        </div>
+        <button class="text-sm text-teal-700 font-medium border border-teal-200 rounded-md px-3 py-1.5 bg-teal-50 hover:bg-teal-100 flex-shrink-0">+ Add hours</button>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-lg mb-3 p-4 flex items-start justify-between">
+        <div>
+          <div class="text-sm font-semibold text-slate-700">Wednesday</div>
+          <div class="text-xs text-slate-400 mt-0.5">No hours set</div>
+        </div>
+        <button class="text-sm text-teal-700 font-medium border border-teal-200 rounded-md px-3 py-1.5 bg-teal-50 hover:bg-teal-100 flex-shrink-0">+ Add hours</button>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-lg mb-3 p-4 flex items-start justify-between">
+        <div>
+          <div class="text-sm font-semibold text-slate-700">Thursday</div>
+          <div class="text-xs text-slate-400 mt-0.5">No hours set</div>
+        </div>
+        <button class="text-sm text-teal-700 font-medium border border-teal-200 rounded-md px-3 py-1.5 bg-teal-50 hover:bg-teal-100 flex-shrink-0">+ Add hours</button>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-lg mb-3 p-4 flex items-start justify-between">
+        <div>
+          <div class="text-sm font-semibold text-slate-700">Friday</div>
+          <div class="text-xs text-slate-400 mt-0.5">No hours set</div>
+        </div>
+        <button class="text-sm text-teal-700 font-medium border border-teal-200 rounded-md px-3 py-1.5 bg-teal-50 hover:bg-teal-100 flex-shrink-0">+ Add hours</button>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-lg mb-3 p-4 flex items-start justify-between">
+        <div>
+          <div class="text-sm font-semibold text-slate-700">Saturday</div>
+          <div class="text-xs text-slate-400 mt-0.5">No hours set</div>
+        </div>
+        <button class="text-sm text-teal-700 font-medium border border-teal-200 rounded-md px-3 py-1.5 bg-teal-50 hover:bg-teal-100 flex-shrink-0">+ Add hours</button>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-lg mb-3 p-4 flex items-start justify-between">
+        <div>
+          <div class="text-sm font-semibold text-slate-700">Sunday</div>
+          <div class="text-xs text-slate-400 mt-0.5">No hours set</div>
+        </div>
+        <button class="text-sm text-teal-700 font-medium border border-teal-200 rounded-md px-3 py-1.5 bg-teal-50 hover:bg-teal-100 flex-shrink-0">+ Add hours</button>
+      </div>
+
+      <div class="bg-teal-50 border border-teal-200 rounded-lg p-4 mt-2 flex items-start gap-3">
+        <svg class="text-teal-600 flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="12" height="12" rx="1.5"/><path d="M5 1v4M11 1v4M2 7h12"/></svg>
+        <p class="text-sm text-slate-600">Set your recurring weekly hours to start receiving patient bookings. You can add exceptions for holidays or extra sessions after saving your weekly schedule.</p>
+      </div>
+    </div>
+
+    <div class="w-80 flex-shrink-0">
+      <div class="bg-white border border-slate-200 rounded-lg p-4 h-fit sticky top-20">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-sm font-semibold text-slate-700">Next 14 days</span>
+          <span class="text-xs text-slate-400">Oct 10 – Oct 23</span>
+        </div>
+        <div class="flex flex-col items-center justify-center py-10">
+          <svg class="text-slate-300" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="24" height="24" rx="3"/><path d="M10 2v8M22 2v8M4 14h24"/></svg>
+          <p class="text-sm text-slate-500 mt-3">No slots yet</p>
+          <p class="text-xs text-slate-400 mt-1">Add weekly hours to generate bookable slots.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

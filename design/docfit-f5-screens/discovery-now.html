@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find a Doctor · DocFit</title>
+<script>tailwind.config={theme:{extend:{colors:{teal:{700:'#0F766E',800:'#115E59',300:'#5EEAD4',200:'#99F6E4',50:'#F0FDFA'}}}}}</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:'Inter',sans-serif;}</style>
+</head>
+<body class="bg-slate-50">
+
+  <!-- Sidebar -->
+  <aside class="w-56 bg-teal-800 fixed h-screen flex flex-col z-20">
+    <div class="p-4 border-b border-teal-700 flex items-center gap-2">
+      <svg class="w-6 h-6 text-teal-300" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+      </svg>
+      <span class="text-white text-lg font-bold">DocFit</span>
+    </div>
+    <nav class="flex-1 p-3 space-y-1">
+      <a href="#" class="flex items-center gap-3 p-3 text-sm font-medium text-teal-100 hover:bg-teal-700 rounded-lg">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        Home
+      </a>
+      <a href="#" class="flex items-center gap-3 p-3 text-sm font-medium bg-teal-700 text-white rounded-lg">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        Find a Doctor
+      </a>
+      <a href="#" class="flex items-center gap-3 p-3 text-sm font-medium text-teal-100 hover:bg-teal-700 rounded-lg">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        My Appointments
+      </a>
+      <a href="#" class="flex items-center gap-3 p-3 text-sm font-medium text-teal-100 hover:bg-teal-700 rounded-lg">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+        Messages
+      </a>
+      <a href="#" class="flex items-center gap-3 p-3 text-sm font-medium text-teal-100 hover:bg-teal-700 rounded-lg">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        Account
+      </a>
+    </nav>
+    <div class="p-3">
+      <div class="bg-teal-700/40 rounded-lg p-3 flex items-center gap-3">
+        <div class="w-8 h-8 bg-teal-300 rounded-full flex items-center justify-center text-teal-800 text-xs font-bold flex-shrink-0">JH</div>
+        <span class="text-teal-100 text-sm truncate">James Hartwell</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Top bar -->
+  <div class="ml-56 h-14 bg-white border-b border-slate-200 sticky top-0 z-10 flex items-center justify-between px-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500">
+      <span class="text-slate-400">Find a Doctor</span>
+      <svg class="w-3 h-3 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      <span class="text-slate-700 font-medium">Cardiology</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <button class="text-slate-400 hover:text-slate-600">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      </button>
+      <div class="w-px h-5 bg-slate-200"></div>
+      <span class="text-sm text-slate-600">James Hartwell</span>
+      <div class="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center text-teal-700 text-xs font-bold">JH</div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <main class="ml-56 pt-14 bg-slate-50 min-h-screen">
+    <div class="p-6 max-w-2xl">
+
+      <!-- Discovery header -->
+      <div class="bg-white rounded-xl shadow-sm p-5 mb-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="bg-teal-50 text-teal-700 text-xs font-medium px-3 py-1 rounded-full">Cardiology</span>
+            <button class="text-xs text-slate-400 hover:text-slate-600 font-medium">× Change specialty</button>
+          </div>
+          <div class="flex items-center rounded-lg border border-slate-200 overflow-hidden">
+            <button class="flex items-center gap-1.5 px-3 py-1.5 bg-teal-700 text-white text-xs font-medium">
+              <span class="w-1.5 h-1.5 bg-teal-300 rounded-full inline-block"></span>
+              Now
+            </button>
+            <button class="flex items-center gap-1.5 px-3 py-1.5 bg-white text-slate-600 text-xs font-medium border-l border-slate-200">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2"/></svg>
+              Preferred time
+            </button>
+          </div>
+        </div>
+        <div class="mt-3 pt-3 border-t border-slate-100">
+          <p class="text-xs text-slate-500 bg-slate-50 rounded-lg px-3 py-2">
+            Showing doctors with open slots in the next 30 minutes &middot; <span class="font-medium text-slate-600">10:42 AM</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Results count -->
+      <p class="text-sm text-slate-500 mb-3">3 doctors available now</p>
+
+      <!-- Card 1 -->
+      <div class="bg-white rounded-xl shadow-sm p-5 mb-3 flex items-start justify-between gap-4">
+        <div class="flex items-start gap-4 min-w-0">
+          <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center text-teal-700 text-base font-semibold flex-shrink-0">AO</div>
+          <div class="min-w-0">
+            <p class="text-base font-semibold text-slate-900 truncate max-w-xs">Dr. Amara Osei-Bonsu</p>
+            <p class="text-sm text-slate-500 mt-0.5">Cardiology</p>
+            <p class="text-xs text-slate-400 mt-1">⭐ 4.9 &middot; 312 reviews</p>
+          </div>
+        </div>
+        <div class="flex flex-col items-end gap-2 flex-shrink-0">
+          <div>
+            <span class="text-lg font-bold text-slate-900">$35</span>
+            <span class="text-xs text-slate-400">/session</span>
+          </div>
+          <span class="bg-green-50 text-green-700 text-xs font-medium rounded-full px-3 py-1 whitespace-nowrap">● Next slot: 10:47 AM</span>
+          <button class="bg-teal-700 text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-teal-800 transition-colors">Book now →</button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white rounded-xl shadow-sm p-5 mb-3 flex items-start justify-between gap-4">
+        <div class="flex items-start gap-4 min-w-0">
+          <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center text-teal-700 text-base font-semibold flex-shrink-0">PK</div>
+          <div class="min-w-0">
+            <p class="text-base font-semibold text-slate-900 truncate max-w-xs">Dr. Priya Krishnamurthy</p>
+            <p class="text-sm text-slate-500 mt-0.5">Cardiology</p>
+            <p class="text-xs text-slate-400 mt-1">⭐ 4.8 &middot; 189 reviews</p>
+          </div>
+        </div>
+        <div class="flex flex-col items-end gap-2 flex-shrink-0">
+          <div>
+            <span class="text-lg font-bold text-slate-900">$45</span>
+            <span class="text-xs text-slate-400">/session</span>
+          </div>
+          <span class="bg-green-50 text-green-700 text-xs font-medium rounded-full px-3 py-1 whitespace-nowrap">● Next slot: 10:53 AM</span>
+          <button class="bg-teal-700 text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-teal-800 transition-colors">Book now →</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white rounded-xl shadow-sm p-5 mb-3 flex items-start justify-between gap-4">
+        <div class="flex items-start gap-4 min-w-0">
+          <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center text-teal-700 text-base font-semibold flex-shrink-0">SO</div>
+          <div class="min-w-0">
+            <p class="text-base font-semibold text-slate-900 truncate max-w-xs">Dr. Samuel Obi-Nwosu</p>
+            <p class="text-sm text-slate-500 mt-0.5">Cardiology</p>
+            <p class="text-xs text-slate-400 mt-1">⭐ 4.7 &middot; 94 reviews</p>
+          </div>
+        </div>
+        <div class="flex flex-col items-end gap-2 flex-shrink-0">
+          <div>
+            <span class="text-lg font-bold text-slate-900">$55</span>
+            <span class="text-xs text-slate-400">/session</span>
+          </div>
+          <span class="bg-green-50 text-green-700 text-xs font-medium rounded-full px-3 py-1 whitespace-nowrap">● Next slot: 11:08 AM</span>
+          <button class="bg-teal-700 text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-teal-800 transition-colors">Book now →</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
