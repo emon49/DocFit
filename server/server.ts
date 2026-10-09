@@ -26,9 +26,9 @@ app.use(express.static(publicPath));
 const designPath = path.join(__dirname, '..', 'design', 'docfit-f1-screens');
 app.use('/design-preview', express.static(designPath));
 
-// Default fallback to index.html or signin
+// Default route to landing page index.html
 app.get('/', (req, res) => {
-  res.sendFile(path.join(publicPath, 'auth-signin.html'));
+  res.sendFile(path.join(publicPath, 'index.html'));
 });
 
 // Explicit route aliases to match both clean paths and .html paths
@@ -43,6 +43,7 @@ const pages = [
   'auth-mfa-enroll.html',
   'patient-dashboard.html',
   'auth-forbidden.html',
+  'screens.html',
   'index.html'
 ];
 
