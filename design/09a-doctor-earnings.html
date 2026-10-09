@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!-- ARCHETYPE: DATA_TABLE / GRID -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Earnings and Payouts · Meridian</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style type="text/tailwindcss">
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 h-8 px-3 rounded border border-slate-300 bg-white text-xs font-medium text-slate-900 hover:bg-slate-50 whitespace-nowrap; }
+  .btn-primary { @apply bg-teal-700 border-teal-700 text-white hover:bg-teal-800; }
+  .input { @apply h-8 w-full rounded border border-slate-300 bg-white px-2 text-sm text-slate-900 focus:outline-none focus:border-teal-700 focus:ring-1 focus:ring-teal-700; }
+  .help { @apply mt-1 text-xs text-slate-500; }
+  .tag { @apply inline-flex items-center h-5 px-2 rounded border text-[10px] font-medium whitespace-nowrap; }
+  .tag-ok { @apply bg-green-50 text-green-700 border-green-200; }
+  .tag-warn { @apply bg-amber-50 text-amber-700 border-amber-200; }
+  .tag-bad { @apply bg-red-50 text-red-700 border-red-200; }
+  .tag-mute { @apply bg-slate-100 text-slate-600 border-slate-200; }
+  .tab { @apply inline-flex items-center gap-2 h-6 px-2 rounded text-xs text-slate-500 hover:text-slate-900 aria-selected:bg-slate-900 aria-selected:text-white; }
+}
+</style>
+<style>
+  html { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .kbd { font-family: inherit; font-size: 10px; line-height: 16px; height: 16px; padding: 0 4px; border: 1px solid #cbd5e1; border-bottom-width: 2px; border-radius: 4px; background: #f1f5f9; color: #475569; }
+  [aria-selected="true"] .kbd { background: #334155; border-color: #475569; color: #e2e8f0; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-900 text-sm tracking-tight min-h-screen">
+
+<header class="h-12 bg-white border-b border-slate-200 px-4 flex items-center justify-between gap-4">
+  <div class="flex items-center gap-3">
+    <span class="text-sm font-semibold">Meridian</span>
+    <span class="text-xs text-slate-500">Feature 9 · Doctor earnings</span>
+  </div>
+  <div class="flex items-center gap-2 text-xs"><span>Dr. Farah Al-Sayed</span><span class="tag tag-ok">approved</span><span class="mono text-slate-500">GBP · GB · commission 15%</span></div>
+</header>
+
+<nav class="h-8 bg-white border-b border-slate-200 px-4 flex items-center gap-2 overflow-x-auto" aria-label="State inspector">
+  <span class="text-xs text-slate-500 mr-2">State</span>
+  <button class="tab" data-tab="list" aria-selected="true">Earnings <kbd class="kbd">1</kbd></button>
+  <button class="tab" data-tab="failed" aria-selected="false">Payout failed <kbd class="kbd">2</kbd></button>
+  <button class="tab" data-tab="empty" aria-selected="false">No consultations yet <kbd class="kbd">3</kbd></button>
+  <button class="tab" data-tab="forbidden" aria-selected="false">Another doctor's earnings <kbd class="kbd">4</kbd></button>
+  <span class="ml-auto text-xs text-slate-500 mono whitespace-nowrap">TC-01 · TC-04 · TC-06</span>
+</nav>
+
+<main class="max-w-[1200px] mx-auto p-6">
+
+  <section data-s="forbidden" hidden class="bg-white border border-slate-200 rounded p-6 text-center">
+    <p class="text-sm font-medium">You can't view these earnings</p>
+    <p class="help"><span class="mono">GET /doctors/b81c…/earnings</span> returned <span class="tag tag-bad">403</span>. No data was returned.</p>
+  </section>
+
+  <section data-s="empty" hidden class="bg-white border border-slate-200 rounded p-6 text-center">
+    <p class="text-sm font-medium">No earnings yet</p>
+    <p class="help max-w-[400px] mx-auto">Each completed consultation shows its fee, the 15% commission and your net amount. Payouts run weekly to your bank account. Add one now so your first payout is not delayed.</p>
+    <button class="btn btn-primary mt-4">Add payout account <kbd class="kbd">P</kbd></button>
+  </section>
+
+  <div data-s="failed" hidden class="mb-3 border border-red-200 bg-red-50 rounded p-3 text-xs text-red-700 flex items-center justify-between gap-4" role="alert">
+    <span><span class="font-medium">Payout PO-2026-W40-0114 failed.</span> Your bank rejected the account details. GBP 114.75 is held and will be included once you correct them.</span>
+    <button class="btn shrink-0">Update payout account <kbd class="kbd">P</kbd></button>
+  </div>
+
+  <div data-s="list failed" class="grid grid-cols-1 xl:grid-cols-[1fr_336px] gap-6 items-start">
+    <div class="min-w-0">
+      <section class="grid grid-cols-2 lg:grid-cols-4 bg-white border border-slate-200 rounded divide-x divide-slate-100 mb-3">
+        <div class="p-3"><p class="text-xs text-slate-500">Paid out</p><p class="text-lg font-semibold mono tabular-nums">GBP 114.75</p><p class="help">Mon 5 Oct · 3 consultations</p></div>
+        <div class="p-3"><p class="text-xs text-slate-500">Next payout · Mon 12 Oct</p><p class="text-lg font-semibold mono tabular-nums">GBP 114.75</p><p class="help mono">153.00 − 38.25 refund reversal</p></div>
+        <div class="p-3"><p class="text-xs text-slate-500">Commission (net of refunds)</p><p class="text-lg font-semibold mono tabular-nums">GBP 40.50</p><p class="help">6 × 6.75</p></div>
+        <div class="p-3"><p class="text-xs text-slate-500">Refunds</p><p class="text-lg font-semibold mono tabular-nums text-red-700">−GBP 45.00</p><p class="help">1 consultation</p></div>
+      </section>
+
+      <section class="bg-white border border-slate-200 rounded overflow-x-auto">
+        <div class="px-3 h-8 flex items-center justify-between border-b border-slate-200 text-xs"><span class="font-medium">Consultations · 29 Sep – 12 Oct</span><span class="mono text-slate-500">GET /doctors/me/earnings</span></div>
+        <table class="w-full text-xs table-fixed min-w-[900px]">
+          <colgroup><col style="width:96px"><col style="width:96px"><col><col style="width:88px"><col style="width:56px"><col style="width:80px"><col style="width:88px"><col style="width:192px"></colgroup>
+          <thead class="text-slate-500"><tr class="border-b border-slate-200 bg-slate-50 text-left"><th class="px-3 py-2 font-medium">Booking</th><th class="py-2 font-medium">Date</th><th class="py-2 font-medium">Patient</th><th class="py-2 font-medium text-right">Fee</th><th class="py-2 font-medium text-right">Rate</th><th class="py-2 font-medium text-right">Commission</th><th class="py-2 font-medium text-right pr-3">Net</th><th class="py-2 font-medium">Payout</th></tr></thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr><td class="px-3 py-2 mono">BK-20702</td><td class="py-2 mono tabular-nums">2026-09-29</td><td class="py-2 pr-2 truncate">Priya N.</td><td class="py-2 text-right mono tabular-nums">45.00</td><td class="py-2 text-right mono">15%</td><td class="py-2 text-right mono tabular-nums">6.75</td><td class="py-2 text-right pr-3 mono tabular-nums">38.25</td><td class="py-2"><span data-paid class="tag tag-ok">Paid · W40</span></td></tr>
+            <tr><td class="px-3 py-2 mono">BK-20719</td><td class="py-2 mono tabular-nums">2026-09-30</td><td class="py-2 pr-2 truncate">Tomás V.</td><td class="py-2 text-right mono tabular-nums">45.00</td><td class="py-2 text-right mono">15%</td><td class="py-2 text-right mono tabular-nums">6.75</td><td class="py-2 text-right pr-3 mono tabular-nums">38.25</td><td class="py-2"><span data-paid class="tag tag-ok">Paid · W40</span></td></tr>
+            <tr><td class="px-3 py-2 mono">BK-20744</td><td class="py-2 mono tabular-nums">2026-10-02</td><td class="py-2 pr-2 truncate">Ngozi E.</td><td class="py-2 text-right mono tabular-nums">45.00</td><td class="py-2 text-right mono">15%</td><td class="py-2 text-right mono tabular-nums">6.75</td><td class="py-2 text-right pr-3 mono tabular-nums">38.25</td><td class="py-2"><span data-paid class="tag tag-ok">Paid · W40</span></td></tr>
+            <tr class="bg-amber-50"><td class="px-3 py-2 mono">BK-20744 ↩</td><td class="py-2 mono tabular-nums">2026-10-09</td><td class="py-2 pr-2 truncate">Ngozi E. · refund</td><td class="py-2 text-right mono tabular-nums text-red-700">−45.00</td><td class="py-2 text-right mono">15%</td><td class="py-2 text-right mono tabular-nums text-red-700">−6.75</td><td class="py-2 text-right pr-3 mono tabular-nums text-red-700">−38.25</td><td class="py-2"><span class="tag tag-warn">Reversal · next payout</span></td></tr>
+            <tr><td class="px-3 py-2 mono">BK-20771</td><td class="py-2 mono tabular-nums">2026-10-06</td><td class="py-2 pr-2 truncate">Henrik S.</td><td class="py-2 text-right mono tabular-nums">45.00</td><td class="py-2 text-right mono">15%</td><td class="py-2 text-right mono tabular-nums">6.75</td><td class="py-2 text-right pr-3 mono tabular-nums">38.25</td><td class="py-2"><span class="tag tag-mute">Pending · 12 Oct</span></td></tr>
+            <tr><td class="px-3 py-2 mono">BK-20783</td><td class="py-2 mono tabular-nums">2026-10-06</td><td class="py-2 pr-2 truncate">Mei-Ling Tan</td><td class="py-2 text-right mono tabular-nums">45.00</td><td class="py-2 text-right mono">15%</td><td class="py-2 text-right mono tabular-nums">6.75</td><td class="py-2 text-right pr-3 mono tabular-nums">38.25</td><td class="py-2"><span class="tag tag-mute">Pending · 12 Oct</span></td></tr>
+            <tr><td class="px-3 py-2 mono">BK-20790</td><td class="py-2 mono tabular-nums">2026-10-07</td><td class="py-2 pr-2 truncate" title="Oluwaseun Adebayo-Okonkwo-Fashola">Oluwaseun Adebayo-Okonkwo-Fashola</td><td class="py-2 text-right mono tabular-nums">45.00</td><td class="py-2 text-right mono">15%</td><td class="py-2 text-right mono tabular-nums">6.75</td><td class="py-2 text-right pr-3 mono tabular-nums">38.25</td><td class="py-2"><span class="tag tag-mute">Pending · 12 Oct</span></td></tr>
+            <tr><td class="px-3 py-2 mono">BK-20802</td><td class="py-2 mono tabular-nums">2026-10-08</td><td class="py-2 pr-2 truncate">Amira H.</td><td class="py-2 text-right mono tabular-nums">45.00</td><td class="py-2 text-right mono">15%</td><td class="py-2 text-right mono tabular-nums">6.75</td><td class="py-2 text-right pr-3 mono tabular-nums">38.25</td><td class="py-2"><span class="tag tag-mute">Pending · 12 Oct</span></td></tr>
+          </tbody>
+          <tfoot><tr class="border-t border-slate-200 bg-slate-50 font-medium"><td class="px-3 py-2" colspan="3">Total after refund</td><td class="py-2 text-right mono tabular-nums">270.00</td><td></td><td class="py-2 text-right mono tabular-nums">40.50</td><td class="py-2 text-right pr-3 mono tabular-nums">229.50</td><td></td></tr></tfoot>
+        </table>
+        <div class="h-8 px-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500"><span>1–8 of 8 · amounts in GBP</span><span class="flex items-center gap-1"><kbd class="kbd">J</kbd><kbd class="kbd">K</kbd> move · <kbd class="kbd">⏎</kbd> ledger</span></div>
+      </section>
+    </div>
+
+    <aside class="bg-white border border-slate-200 rounded">
+      <div class="px-4 h-8 flex items-center justify-between border-b border-slate-200 text-xs font-medium"><span>Ledger · BK-20744</span><span class="mono text-slate-500">append-only</span></div>
+      <table class="w-full text-xs">
+        <thead class="text-slate-500"><tr class="border-b border-slate-200 text-left"><th class="px-4 py-2 font-medium">Entry</th><th class="py-2 font-medium text-right">Minor units</th><th class="py-2 pr-4 font-medium text-right">Your balance</th></tr></thead>
+        <tbody class="divide-y divide-slate-100 mono tabular-nums">
+          <tr><td class="px-4 py-2">charge</td><td class="py-2 text-right">4500</td><td class="py-2 pr-4 text-right text-slate-400">—</td></tr>
+          <tr><td class="px-4 py-2">commission</td><td class="py-2 text-right">675</td><td class="py-2 pr-4 text-right text-slate-400">—</td></tr>
+          <tr><td class="px-4 py-2">doctor_earning</td><td class="py-2 text-right">3825</td><td class="py-2 pr-4 text-right text-green-700">+3825</td></tr>
+          <tr><td class="px-4 py-2">payout W40</td><td class="py-2 text-right">3825</td><td class="py-2 pr-4 text-right text-slate-500">paid</td></tr>
+          <tr class="bg-amber-50"><td class="px-4 py-2">refund</td><td class="py-2 text-right">4500</td><td class="py-2 pr-4 text-right text-slate-400">—</td></tr>
+          <tr class="bg-amber-50"><td class="px-4 py-2">refund_commission</td><td class="py-2 text-right">675</td><td class="py-2 pr-4 text-right text-slate-400">—</td></tr>
+          <tr class="bg-amber-50"><td class="px-4 py-2">refund_doctor_reversal</td><td class="py-2 text-right">3825</td><td class="py-2 pr-4 text-right text-red-700">−3825</td></tr>
+        </tbody>
+      </table>
+      <dl class="grid grid-cols-[80px_1fr] text-xs border-t border-slate-200">
+        <dt class="px-4 py-2 text-slate-500">Payout ref</dt><dd class="py-2 pr-4 mono truncate" title="po_1QxYz7LkJ9mN3pRsTuVwXyZ2a_acct_1Hh7g8F3k9L2mPqR">po_1QxYz7LkJ9mN3pRsTuVwXyZ2a_acct_1Hh7g8F3k9L2mPqR</dd>
+        <dt class="px-4 py-2 text-slate-500 border-t border-slate-100">Net</dt><dd class="py-2 pr-4 border-t border-slate-100 mono tabular-nums">0 — original entries unchanged</dd>
+      </dl>
+      <p class="px-4 py-3 border-t border-slate-200 text-xs text-slate-500">The refund after payout creates new reversing entries. Original rows are never edited. The −38.25 comes off your next payout.</p>
+    </aside>
+  </div>
+</main>
+
+<script>
+  const tabs = [...document.querySelectorAll('[data-tab]')];
+  function show(name) {
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === name)));
+    document.querySelectorAll('[data-s]').forEach(el => el.hidden = !el.dataset.s.split(' ').includes(name));
+    document.querySelectorAll('[data-paid]').forEach(p => {
+      p.textContent = name === 'failed' ? 'Failed · W40' : 'Paid · W40';
+      p.className = 'tag ' + (name === 'failed' ? 'tag-bad' : 'tag-ok');
+    });
+  }
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
+  document.addEventListener('keydown', e => {
+    if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+    const i = parseInt(e.key, 10);
+    if (i >= 1 && i <= tabs.length) show(tabs[i - 1].dataset.tab);
+  });
+  show('list');
+</script>
+</body>
+</html>

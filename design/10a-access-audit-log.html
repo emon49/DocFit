@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!-- ARCHETYPE: DATA_TABLE / GRID -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Access Audit Log · Meridian Compliance</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style type="text/tailwindcss">
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 h-8 px-3 rounded border border-slate-300 bg-white text-xs font-medium text-slate-900 hover:bg-slate-50 whitespace-nowrap; }
+  .btn-primary { @apply bg-teal-700 border-teal-700 text-white hover:bg-teal-800; }
+  .input { @apply h-8 w-full rounded border border-slate-300 bg-white px-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-teal-700 focus:ring-1 focus:ring-teal-700; }
+  .lbl { @apply block text-xs font-medium text-slate-900 mb-1; }
+  .help { @apply mt-1 text-xs text-slate-500; }
+  .tag { @apply inline-flex items-center h-5 px-2 rounded border text-[10px] font-medium whitespace-nowrap; }
+  .tag-ok { @apply bg-green-50 text-green-700 border-green-200; }
+  .tag-warn { @apply bg-amber-50 text-amber-700 border-amber-200; }
+  .tag-bad { @apply bg-red-50 text-red-700 border-red-200; }
+  .tag-mute { @apply bg-slate-100 text-slate-600 border-slate-200; }
+  .tab { @apply inline-flex items-center gap-2 h-6 px-2 rounded text-xs text-slate-500 hover:text-slate-900 aria-selected:bg-slate-900 aria-selected:text-white; }
+}
+</style>
+<style>
+  html { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .kbd { font-family: inherit; font-size: 10px; line-height: 16px; height: 16px; padding: 0 4px; border: 1px solid #cbd5e1; border-bottom-width: 2px; border-radius: 4px; background: #f1f5f9; color: #475569; }
+  [aria-selected="true"] .kbd { background: #334155; border-color: #475569; color: #e2e8f0; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-900 text-sm tracking-tight min-h-screen">
+
+<header class="h-12 bg-white border-b border-slate-200 px-4 flex items-center justify-between gap-4">
+  <div class="flex items-center gap-3">
+    <span class="text-sm font-semibold">Meridian</span>
+    <span class="text-xs text-slate-500">Compliance · Feature 10 · Access audit log</span>
+  </div>
+  <div class="flex items-center gap-2 text-xs"><span class="mono">r.castellanos@meridian.example</span><span class="tag tag-mute">compliance</span><span class="tag tag-ok">mfa</span></div>
+</header>
+
+<nav class="h-8 bg-white border-b border-slate-200 px-4 flex items-center gap-2 overflow-x-auto" aria-label="State inspector">
+  <span class="text-xs text-slate-500 mr-2">State</span>
+  <button class="tab" data-tab="list" aria-selected="true">Log <kbd class="kbd">1</kbd></button>
+  <button class="tab" data-tab="empty" aria-selected="false">No matching entries <kbd class="kbd">2</kbd></button>
+  <button class="tab" data-tab="forbidden" aria-selected="false">Non-compliance admin <kbd class="kbd">3</kbd></button>
+  <button class="tab" data-tab="immutable" aria-selected="false">Write attempt rejected <kbd class="kbd">4</kbd></button>
+  <span class="ml-auto text-xs text-slate-500 mono whitespace-nowrap">TC-03 · TC-04 · TC-05</span>
+</nav>
+
+<main class="max-w-[1280px] mx-auto p-6">
+
+  <section data-s="forbidden" hidden class="bg-white border border-slate-200 rounded p-6 text-center">
+    <p class="text-sm font-medium">Access logs are restricted to the compliance role</p>
+    <p class="help"><span class="mono">GET /admin/access-logs?user_id=…</span> returned <span class="tag tag-bad">403</span> for support-admin <span class="mono">k.liu</span>. No logs were returned, and this request was itself logged.</p>
+  </section>
+
+  <section data-s="immutable" hidden class="bg-white border border-slate-200 rounded p-4">
+    <h1 class="text-lg font-semibold mb-1">Append-only enforcement</h1>
+    <p class="help mb-3">The application database role has insert and select only on <span class="mono">access_logs</span>.</p>
+    <pre class="mono text-xs bg-slate-900 text-slate-100 rounded p-3 overflow-x-auto">UPDATE access_logs SET purpose = 'support' WHERE id = 8841207;
+ERROR:  permission denied for table access_logs
+SQLSTATE: 42501
+
+DELETE FROM access_logs WHERE created_at &lt; now() - interval '30 days';
+ERROR:  permission denied for table access_logs</pre>
+    <div class="mt-3 flex items-center gap-2"><span class="tag tag-ok">row unchanged</span><span class="text-xs text-slate-500">Rejected writes raise an alert to the security channel.</span></div>
+  </section>
+
+  <div data-s="list empty">
+    <section class="bg-white border border-slate-200 rounded p-3 flex flex-wrap items-end gap-3">
+      <div class="w-[216px]"><label class="lbl" for="u">Patient or user ID</label><input id="u" class="input mono" value="usr_7f3a9c21e4"></div>
+      <div class="w-[152px]"><label class="lbl" for="f">From (UTC)</label><input id="f" type="date" class="input mono" value="2026-10-01"></div>
+      <div class="w-[152px]"><label class="lbl" for="t">To (UTC)</label><input id="t" type="date" class="input mono" value="2026-10-13"></div>
+      <div class="w-[160px]"><label class="lbl" for="r">Actor role</label><select id="r" class="input"><option>Any</option><option>Doctor</option><option>Admin</option><option>Patient</option></select></div>
+      <div class="w-[160px]"><label class="lbl" for="rt">Resource</label><select id="rt" class="input"><option>Any health data</option><option>Prescription</option><option>Consultation message</option><option>Intake</option></select></div>
+      <button class="btn btn-primary">Search <kbd class="kbd">⏎</kbd></button>
+      <button class="btn">Export CSV <kbd class="kbd">⌘E</kbd></button>
+      <span class="ml-auto text-xs text-slate-500 pb-2 mono" data-count>7 of 7 entries</span>
+    </section>
+
+    <section data-s="list" class="mt-3 bg-white border border-slate-200 rounded overflow-x-auto">
+      <table class="w-full text-xs table-fixed min-w-[1100px]">
+        <colgroup><col style="width:152px"><col style="width:176px"><col style="width:80px"><col style="width:136px"><col style="width:128px"><col style="width:80px"><col><col style="width:112px"></colgroup>
+        <thead class="text-slate-500"><tr class="border-b border-slate-200 bg-slate-50 text-left"><th class="px-3 py-2 font-medium">Time (UTC) ↓</th><th class="py-2 font-medium">Actor</th><th class="py-2 font-medium">Role</th><th class="py-2 font-medium">Resource</th><th class="py-2 font-medium">Resource ID</th><th class="py-2 font-medium">Action</th><th class="py-2 font-medium">Purpose</th><th class="py-2 pr-3 font-medium">IP</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr class="bg-teal-50"><td class="px-3 py-2 mono tabular-nums">2026-10-13 08:49:11</td><td class="py-2 pr-2 mono truncate">doc_4f2a91c0 · F. Al-Sayed</td><td class="py-2">doctor</td><td class="py-2">prescription</td><td class="py-2 mono truncate">c3a7e1b2</td><td class="py-2">read</td><td class="py-2 pr-2 truncate">Active consultation BK-20915 — reviewing before signing</td><td class="py-2 pr-3 mono tabular-nums">81.2.69.142</td></tr>
+          <tr><td class="px-3 py-2 mono tabular-nums">2026-10-13 08:44:02</td><td class="py-2 pr-2 mono truncate">doc_4f2a91c0 · F. Al-Sayed</td><td class="py-2">doctor</td><td class="py-2">intake</td><td class="py-2 mono truncate">in_55d02a</td><td class="py-2">read</td><td class="py-2 pr-2 truncate">Active consultation BK-20915</td><td class="py-2 pr-3 mono tabular-nums">81.2.69.142</td></tr>
+          <tr><td class="px-3 py-2 mono tabular-nums">2026-10-13 08:41:37</td><td class="py-2 pr-2 mono truncate">doc_4f2a91c0 · F. Al-Sayed</td><td class="py-2">doctor</td><td class="py-2">consult message</td><td class="py-2 mono truncate">sess_7c21a0</td><td class="py-2">write</td><td class="py-2 pr-2 truncate">Active consultation BK-20915</td><td class="py-2 pr-3 mono tabular-nums">81.2.69.142</td></tr>
+          <tr><td class="px-3 py-2 mono tabular-nums">2026-10-12 14:02:55</td><td class="py-2 pr-2 mono truncate">adm_91b0c7 · N. Farouk</td><td class="py-2">admin</td><td class="py-2">prescription</td><td class="py-2 mono truncate">8a02f4d6</td><td class="py-2">read</td><td class="py-2 pr-2 truncate" title="Support ticket SUP-4412: patient reports the emailed link does not open, verifying the document exists and the hash matches before re-sending the secure link">Support ticket SUP-4412: patient reports the emailed link does not open, verifying the document exists and the hash matches before re-sending the secure link</td><td class="py-2 pr-3 mono tabular-nums">103.145.8.20</td></tr>
+          <tr><td class="px-3 py-2 mono tabular-nums">2026-10-12 09:18:40</td><td class="py-2 pr-2 mono truncate">usr_7f3a9c21e4 · A. Haddad</td><td class="py-2">patient</td><td class="py-2">prescription</td><td class="py-2 mono truncate">c3a7e1b2</td><td class="py-2">export</td><td class="py-2 pr-2 truncate">Download PDF</td><td class="py-2 pr-3 mono tabular-nums">103.145.8.77</td></tr>
+          <tr><td class="px-3 py-2 mono tabular-nums">2026-10-09 21:30:12</td><td class="py-2 pr-2 mono truncate">usr_7f3a9c21e4 · A. Haddad</td><td class="py-2">patient</td><td class="py-2">intake</td><td class="py-2 mono truncate">in_55d02a</td><td class="py-2">write</td><td class="py-2 pr-2 truncate">Symptom intake submitted</td><td class="py-2 pr-3 mono tabular-nums">103.145.8.77</td></tr>
+          <tr class="bg-amber-50"><td class="px-3 py-2 mono tabular-nums">2026-10-08 03:12:09</td><td class="py-2 pr-2 mono truncate">adm_30e8d2 · J. Okonkwo</td><td class="py-2">admin</td><td class="py-2">consult message</td><td class="py-2 mono truncate">sess_61fe09</td><td class="py-2">read</td><td class="py-2 pr-2 truncate">Dispute DSP-0071 — fee refund review</td><td class="py-2 pr-3 mono tabular-nums">41.58.201.9</td></tr>
+        </tbody>
+      </table>
+      <div class="h-8 px-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500"><span>1–7 of 7 · every health-data read writes an entry from the data-access layer</span><span class="flex items-center gap-1"><kbd class="kbd">J</kbd><kbd class="kbd">K</kbd> move · <kbd class="kbd">/</kbd> filter</span></div>
+    </section>
+
+    <section data-s="empty" hidden class="mt-3 bg-white border border-slate-200 rounded p-6 text-center">
+      <p class="text-sm font-medium">No access entries match these filters</p>
+      <p class="help max-w-[400px] mx-auto">usr_7f3a9c21e4 has no entries for Consultation message between 2026-10-01 and 2026-10-13. Widen the date range or clear the resource filter.</p>
+      <button class="btn mt-4">Clear filters <kbd class="kbd">C</kbd></button>
+    </section>
+  </div>
+</main>
+
+<script>
+  const tabs = [...document.querySelectorAll('[data-tab]')];
+  function show(name) {
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === name)));
+    document.querySelectorAll('[data-s]').forEach(el => el.hidden = !el.dataset.s.split(' ').includes(name));
+    document.querySelector('[data-count]').textContent = name === 'empty' ? '0 entries' : '7 of 7 entries';
+    document.querySelector('#rt').selectedIndex = name === 'empty' ? 2 : 0;
+  }
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
+  document.addEventListener('keydown', e => {
+    if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+    const i = parseInt(e.key, 10);
+    if (i >= 1 && i <= tabs.length) show(tabs[i - 1].dataset.tab);
+  });
+  show('list');
+</script>
+</body>
+</html>

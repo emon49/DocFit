@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!-- ARCHETYPE: MASTER-DETAIL / SPLIT-VIEW -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consultation Console · Meridian</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style type="text/tailwindcss">
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 h-8 px-3 rounded border border-slate-300 bg-white text-xs font-medium text-slate-900 hover:bg-slate-50 whitespace-nowrap; }
+  .btn-primary { @apply bg-teal-700 border-teal-700 text-white hover:bg-teal-800; }
+  .btn-danger { @apply border-red-300 text-red-700 hover:bg-red-50; }
+  .input { @apply h-8 w-full rounded border border-slate-300 bg-white px-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-teal-700 focus:ring-1 focus:ring-teal-700; }
+  .help { @apply mt-1 text-xs text-slate-500; }
+  .tag { @apply inline-flex items-center h-5 px-2 rounded border text-[10px] font-medium whitespace-nowrap; }
+  .tag-ok { @apply bg-green-50 text-green-700 border-green-200; }
+  .tag-warn { @apply bg-amber-50 text-amber-700 border-amber-200; }
+  .tag-bad { @apply bg-red-50 text-red-700 border-red-200; }
+  .tag-mute { @apply bg-slate-100 text-slate-600 border-slate-200; }
+  .tab { @apply inline-flex items-center gap-2 h-6 px-2 rounded text-xs text-slate-500 hover:text-slate-900 aria-selected:bg-slate-900 aria-selected:text-white; }
+}
+</style>
+<style>
+  html { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .kbd { font-family: inherit; font-size: 10px; line-height: 16px; height: 16px; padding: 0 4px; border: 1px solid #cbd5e1; border-bottom-width: 2px; border-radius: 4px; background: #f1f5f9; color: #475569; }
+  [aria-selected="true"] .kbd { background: #334155; border-color: #475569; color: #e2e8f0; }
+  .on-dark .kbd { background: #334155; border-color: #475569; color: #e2e8f0; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-900 text-sm tracking-tight h-screen flex flex-col">
+
+<header class="h-12 shrink-0 bg-white border-b border-slate-200 px-4 flex items-center justify-between gap-4">
+  <div class="flex items-center gap-3">
+    <span class="text-sm font-semibold">Meridian</span>
+    <span class="text-xs text-slate-500">Feature 6 · Doctor console</span>
+  </div>
+  <div class="flex items-center gap-2 text-xs"><span>Dr. Farah Al-Sayed</span><span class="tag tag-ok">approved</span><span class="mono text-slate-500">Tue 13 Oct · <span data-clock>09:04</span> Europe/London</span></div>
+</header>
+
+<nav class="h-8 shrink-0 bg-white border-b border-slate-200 px-4 flex items-center gap-2 overflow-x-auto" aria-label="State inspector">
+  <span class="text-xs text-slate-500 mr-2">State</span>
+  <button class="tab" data-tab="queue" aria-selected="true">Patient waiting <kbd class="kbd">1</kbd></button>
+  <button class="tab" data-tab="session" aria-selected="false">In session <kbd class="kbd">2</kbd></button>
+  <button class="tab" data-tab="fallback" aria-selected="false">Video failed · chat <kbd class="kbd">3</kbd></button>
+  <button class="tab" data-tab="overdue" aria-selected="false">Not admitted in 10 min <kbd class="kbd">4</kbd></button>
+  <button class="tab" data-tab="empty" aria-selected="false">Queue empty <kbd class="kbd">5</kbd></button>
+  <span class="ml-auto text-xs text-slate-500 mono whitespace-nowrap">TC-01 · TC-03 · TC-06</span>
+</nav>
+
+<div class="flex-1 min-h-0 grid grid-cols-[304px_1fr_336px]">
+
+  <!-- QUEUE -->
+  <aside class="bg-white border-r border-slate-200 overflow-y-auto">
+    <div class="px-4 h-8 flex items-center justify-between border-b border-slate-200 text-xs"><span class="font-medium">Waiting room</span><span class="mono text-slate-500" data-qcount>1 waiting</span></div>
+
+    <ul data-s="queue" class="divide-y divide-slate-100 text-xs">
+      <li class="p-3 bg-teal-50 border-l-2 border-teal-700">
+        <div class="flex items-center justify-between gap-2"><span class="font-medium truncate">Joaquín Rodríguez-Villanueva</span><span class="mono tabular-nums shrink-0">03:48</span></div>
+        <div class="flex items-center justify-between gap-2 mt-1"><span class="mono text-slate-500">BK-20902 · 09:00 · GP</span><button class="btn h-6">Admit <kbd class="kbd">A</kbd></button></div>
+      </li>
+    </ul>
+    <ul data-s="session fallback" hidden class="divide-y divide-slate-100 text-xs">
+      <li class="p-3 bg-green-50 border-l-2 border-green-700">
+        <div class="flex items-center justify-between gap-2"><span class="font-medium truncate">Joaquín Rodríguez-Villanueva</span><span class="tag tag-ok">In session</span></div>
+        <div class="mono text-slate-500 mt-1">BK-20902 · started 09:04:48 · admitted</div>
+      </li>
+    </ul>
+    <ul data-s="overdue" hidden class="divide-y divide-slate-100 text-xs">
+      <li class="p-3 bg-red-50 border-l-2 border-red-700">
+        <div class="flex items-center justify-between gap-2"><span class="font-medium truncate">Joaquín Rodríguez-Villanueva</span><span class="mono tabular-nums text-red-700 shrink-0">10:05</span></div>
+        <div class="flex items-center justify-between gap-2 mt-1"><span class="mono text-slate-500">BK-20902 · 09:00 · GP</span><button class="btn btn-primary h-6">Admit now <kbd class="kbd">A</kbd></button></div>
+      </li>
+    </ul>
+    <div data-s="empty" hidden class="p-6 text-center">
+      <p class="text-sm font-medium">No patients waiting</p>
+      <p class="help">The next patient enters the room at 09:15 for the 09:20 slot (BK-20915).</p>
+    </div>
+
+    <div class="px-4 h-8 flex items-center border-y border-slate-200 text-xs font-medium">Upcoming today</div>
+    <ul class="divide-y divide-slate-100 text-xs">
+      <li class="px-4 py-2 flex items-center justify-between gap-2"><span class="truncate">Amira H.</span><span class="mono text-slate-500 shrink-0">09:20 · opens 09:15</span></li>
+      <li class="px-4 py-2 flex items-center justify-between gap-2"><span class="truncate">Chidi Eze</span><span class="mono text-slate-500 shrink-0">09:40 · opens 09:35</span></li>
+      <li class="px-4 py-2 flex items-center justify-between gap-2"><span class="truncate">Siobhan Gallagher-Thornton-Whitcombe</span><span class="mono text-slate-500 shrink-0">10:20</span></li>
+      <li class="px-4 py-2 flex items-center justify-between gap-2"><span class="truncate">Ravi Patel</span><span class="mono text-slate-500 shrink-0">11:00</span></li>
+    </ul>
+  </aside>
+
+  <!-- CENTER -->
+  <section class="min-w-0 flex flex-col bg-slate-50">
+
+    <div data-s="overdue" hidden class="m-4 mb-0 border border-red-200 bg-red-50 rounded p-3 text-xs text-red-700" role="alert">
+      <span class="font-medium">Patient not admitted within 10 minutes.</span> Joaquín Rodríguez-Villanueva was notified at 09:10 and offered rebooking. Booking BK-20902 stays open until you admit or cancel.
+    </div>
+
+    <!-- idle -->
+    <div data-s="queue overdue empty" class="flex-1 flex items-center justify-center p-6 text-center">
+      <div>
+        <p class="text-sm font-medium" data-idle-title>Select Admit to start the consultation</p>
+        <p class="help max-w-[360px] mx-auto" data-idle-help>The patient joins a video room as soon as you admit them. The room closes when you end the consultation.</p>
+      </div>
+    </div>
+
+    <!-- session -->
+    <div data-s="session fallback" hidden class="flex-1 min-h-0 p-4 flex flex-col gap-3">
+      <div data-s="fallback" hidden class="border border-amber-200 bg-amber-50 rounded p-3 text-xs text-amber-700" role="alert">
+        <span class="font-medium">Video lost. Continuing by text chat.</span> Reconnect failed after 3 attempts (09:07:12–09:07:41). The patient sees the same notice. Video will resume if either side rejoins.
+        <button class="btn mt-2 h-6">Retry video <kbd class="kbd">V</kbd></button>
+      </div>
+
+      <div class="flex-1 min-h-[240px] rounded bg-slate-900 text-slate-100 relative on-dark flex items-center justify-center">
+        <div data-s="session" class="text-center">
+          <p class="text-sm font-medium">Joaquín Rodríguez-Villanueva</p>
+          <p class="text-xs text-slate-400 mono">connected · 720p · 38 ms · TURN relay off</p>
+        </div>
+        <div data-s="fallback" hidden class="text-center">
+          <p class="text-sm font-medium text-slate-300">Video unavailable</p>
+          <p class="text-xs text-slate-400 mono">participant disconnected · last seen 09:07:12</p>
+        </div>
+        <span class="absolute top-2 left-2 mono text-xs bg-slate-800 rounded px-2 h-5 inline-flex items-center tabular-nums" data-timer>06:12</span>
+        <span class="absolute bottom-2 right-2 w-[96px] h-[64px] rounded border border-slate-600 bg-slate-800 text-[10px] text-slate-400 flex items-center justify-center">You</span>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <button class="btn">Mute <kbd class="kbd">M</kbd></button>
+          <button class="btn">Camera off <kbd class="kbd">V</kbd></button>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-slate-500">Ending unlocks the prescription builder.</span>
+          <button class="btn btn-danger">End consultation <kbd class="kbd" style="background:#fef2f2;border-color:#fca5a5;color:#b91c1c">⌘E</kbd></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIGHT: summary + chat -->
+  <aside class="bg-white border-l border-slate-200 flex flex-col min-h-0">
+    <div class="px-4 h-8 flex items-center border-b border-slate-200 text-xs font-medium shrink-0">Patient summary</div>
+    <div class="p-4 border-b border-slate-200 text-xs shrink-0" data-summary>
+      <dl class="grid grid-cols-[88px_1fr] gap-y-1 mb-2">
+        <dt class="text-slate-500">Patient</dt><dd class="truncate">Joaquín Rodríguez-Villanueva</dd>
+        <dt class="text-slate-500">Specialty</dt><dd>General Practice <span class="text-slate-500">(patient)</span></dd>
+        <dt class="text-slate-500">Booking</dt><dd class="mono">BK-20902 · 20 min</dd>
+      </dl>
+      <p class="text-slate-500 mb-1">Symptom description</p>
+      <p class="line-clamp-4 leading-5">Dizzy spells for three weeks, mostly on standing up quickly, with greying of vision and a pounding in my ears. Started after my blood pressure tablet was changed in September. No fainting. Some nausea. Mornings are worst. I also had a cold last week and have been drinking less water than usual because of a long run of night shifts at the warehouse.</p>
+      <button class="mt-1 text-teal-700 underline">Show more</button>
+    </div>
+
+    <div class="px-4 h-8 flex items-center justify-between border-b border-slate-200 text-xs shrink-0"><span class="font-medium">Chat</span><span class="mono text-slate-500">session:7c21…</span></div>
+    <div data-s="session fallback" hidden class="flex-1 overflow-y-auto p-4 space-y-3 text-xs">
+      <div><p class="text-slate-500 mono">09:05 · Dr. Al-Sayed</p><p>Hello Joaquín, can you hear me clearly?</p></div>
+      <div><p class="text-slate-500 mono">09:05 · Joaquín</p><p>Yes, clear. Thank you.</p></div>
+      <div data-s="fallback" hidden class="border border-amber-200 bg-amber-50 rounded p-2 text-amber-700">09:07 · Video failed. Continuing by chat.</div>
+      <div data-s="fallback" hidden><p class="text-slate-500 mono">09:08 · Joaquín</p><p>I stood up fast this morning and had to hold the wall. Is it the new tablet?</p></div>
+      <div data-s="fallback" hidden><p class="text-slate-500 mono">09:08 · Dr. Al-Sayed</p><p>Possibly. What is the name and dose of the tablet you were switched to?</p></div>
+    </div>
+    <div data-s="queue overdue empty" class="flex-1 p-4 text-xs text-slate-500">Chat opens when the session starts.</div>
+    <form data-s="session fallback" hidden class="p-3 border-t border-slate-200 flex items-center gap-2 shrink-0" onsubmit="return false">
+      <input class="input" placeholder="Type a message" aria-label="Message"><button class="btn btn-primary">Send <kbd class="kbd">⏎</kbd></button>
+    </form>
+  </aside>
+</div>
+
+<script>
+  const tabs = [...document.querySelectorAll('[data-tab]')];
+  function show(name) {
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === name)));
+    document.querySelectorAll('[data-s]').forEach(el => el.hidden = !el.dataset.s.split(' ').includes(name));
+    const q = document.querySelector('[data-qcount]');
+    q.textContent = name === 'empty' || name === 'session' || name === 'fallback' ? '0 waiting' : '1 waiting';
+    document.querySelector('[data-clock]').textContent = name === 'overdue' ? '09:10' : name === 'session' ? '09:11' : name === 'fallback' ? '09:12' : name === 'empty' ? '09:13' : '09:04';
+    document.querySelector('[data-idle-title]').textContent = name === 'empty' ? 'Waiting room is empty' : 'Select Admit to start the consultation';
+    document.querySelector('[data-timer]').textContent = name === 'fallback' ? '07:24' : '06:12';
+  }
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
+  document.addEventListener('keydown', e => {
+    if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+    const i = parseInt(e.key, 10);
+    if (i >= 1 && i <= tabs.length) show(tabs[i - 1].dataset.tab);
+  });
+  show('queue');
+</script>
+</body>
+</html>

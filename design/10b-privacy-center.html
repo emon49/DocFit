@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- ARCHETYPE: SETTINGS_FORM / COMPONENT PANEL -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Center · Meridian</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style type="text/tailwindcss">
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 h-8 px-3 rounded border border-slate-300 bg-white text-xs font-medium text-slate-900 hover:bg-slate-50 whitespace-nowrap; }
+  .btn-primary { @apply bg-teal-700 border-teal-700 text-white hover:bg-teal-800; }
+  .btn-danger { @apply border-red-300 text-red-700 hover:bg-red-50; }
+  .help { @apply mt-1 text-xs text-slate-500; }
+  .tag { @apply inline-flex items-center h-5 px-2 rounded border text-[10px] font-medium whitespace-nowrap; }
+  .tag-ok { @apply bg-green-50 text-green-700 border-green-200; }
+  .tag-warn { @apply bg-amber-50 text-amber-700 border-amber-200; }
+  .tag-bad { @apply bg-red-50 text-red-700 border-red-200; }
+  .tag-mute { @apply bg-slate-100 text-slate-600 border-slate-200; }
+  .tab { @apply inline-flex items-center gap-2 h-6 px-2 rounded text-xs text-slate-500 hover:text-slate-900 aria-selected:bg-slate-900 aria-selected:text-white; }
+}
+</style>
+<style>
+  html { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .kbd { font-family: inherit; font-size: 10px; line-height: 16px; height: 16px; padding: 0 4px; border: 1px solid #cbd5e1; border-bottom-width: 2px; border-radius: 4px; background: #f1f5f9; color: #475569; }
+  [aria-selected="true"] .kbd { background: #334155; border-color: #475569; color: #e2e8f0; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-900 text-sm tracking-tight min-h-screen">
+
+<header class="h-12 bg-white border-b border-slate-200 px-4 flex items-center justify-between gap-4">
+  <div class="flex items-center gap-3">
+    <span class="text-sm font-semibold">Meridian</span>
+    <span class="text-xs text-slate-500">Feature 10 · Privacy center</span>
+  </div>
+  <div class="flex items-center gap-2 text-xs"><span>Amira Haddad</span><span class="tag tag-mute">patient</span></div>
+</header>
+
+<nav class="h-8 bg-white border-b border-slate-200 px-4 flex items-center gap-2 overflow-x-auto" aria-label="State inspector">
+  <span class="text-xs text-slate-500 mr-2">State</span>
+  <button class="tab" data-tab="overview" aria-selected="true">Overview <kbd class="kbd">1</kbd></button>
+  <button class="tab" data-tab="export" aria-selected="false">Export ready <kbd class="kbd">2</kbd></button>
+  <button class="tab" data-tab="exportfail" aria-selected="false">Export failed <kbd class="kbd">3</kbd></button>
+  <button class="tab" data-tab="hold" aria-selected="false">Deletion deferred <kbd class="kbd">4</kbd></button>
+  <button class="tab" data-tab="fresh" aria-selected="false">No requests yet <kbd class="kbd">5</kbd></button>
+  <span class="ml-auto text-xs text-slate-500 mono whitespace-nowrap">TC-01 · TC-02</span>
+</nav>
+
+<main class="max-w-[960px] mx-auto p-6 space-y-4">
+
+  <!-- banners -->
+  <div data-s="export" hidden class="border border-green-200 bg-green-50 rounded p-3 text-xs text-green-700 flex items-center justify-between gap-4" role="status">
+    <span><span class="font-medium">Your data export is ready.</span> The secure link works once and expires on 2026-10-14 08:52 UTC. Contains 6 sections, 2.4 MB, encrypted ZIP.</span>
+    <button class="btn btn-primary shrink-0">Download <kbd class="kbd" style="background:#134e4a;border-color:#2dd4bf;color:#ccfbf1">D</kbd></button>
+  </div>
+  <div data-s="exportfail" hidden class="border border-red-200 bg-red-50 rounded p-3 text-xs text-red-700 flex items-center justify-between gap-4" role="alert">
+    <span><span class="font-medium">We couldn't build your export.</span> It failed on step 4 of 6 (consultation messages) after 3 automatic retries. Nothing was sent. We've been notified.</span>
+    <button class="btn shrink-0">Try again <kbd class="kbd">R</kbd></button>
+  </div>
+  <div data-s="hold" hidden class="border border-amber-200 bg-amber-50 rounded p-3 text-xs text-amber-700" role="status">
+    <p class="font-medium">Account deletion deferred.</p>
+    <p class="mt-1">An open payment dispute (DSP-0071) means we must keep the related consultation and payment records until it is closed. Everything else on your account is deleted or anonymized as normal. We'll email you when the held records are released. You have 1 upcoming booking (BK-20931, 15 Oct) — cancel it first, or deletion waits until it ends.</p>
+  </div>
+
+  <!-- actions -->
+  <section class="bg-white border border-slate-200 rounded grid grid-cols-1 md:grid-cols-2 md:divide-x divide-slate-100">
+    <div class="p-4">
+      <h2 class="text-sm font-semibold">Download my data</h2>
+      <p class="help">A copy of your profile, symptom intakes, bookings, consultation messages, prescriptions, payments and consents.</p>
+      <button class="btn mt-3" data-export>Request export <kbd class="kbd">E</kbd></button>
+    </div>
+    <div class="p-4">
+      <h2 class="text-sm font-semibold">Delete my account</h2>
+      <p class="help">We delete or anonymize your data once required retention periods end. Legal holds can delay this.</p>
+      <button class="btn btn-danger mt-3" data-delete>Request deletion <kbd class="kbd">⌘⌫</kbd></button>
+    </div>
+  </section>
+
+  <!-- consents -->
+  <section class="bg-white border border-slate-200 rounded overflow-x-auto">
+    <div class="px-4 h-8 flex items-center justify-between border-b border-slate-200 text-xs"><span class="font-medium">Consents</span><span class="mono text-slate-500">policy v2026.10</span></div>
+    <table class="w-full text-xs table-fixed min-w-[640px]">
+      <colgroup><col><col style="width:96px"><col style="width:96px"><col style="width:152px"><col style="width:112px"></colgroup>
+      <thead class="text-slate-500"><tr class="border-b border-slate-200 text-left bg-slate-50"><th class="px-4 py-2 font-medium">Consent</th><th class="py-2 font-medium">Status</th><th class="py-2 font-medium">Version</th><th class="py-2 font-medium">Recorded (UTC)</th><th class="py-2 pr-4"></th></tr></thead>
+      <tbody class="divide-y divide-slate-100">
+        <tr><td class="px-4 py-2">Terms of Service and Privacy Policy</td><td class="py-2"><span class="tag tag-ok">Granted</span></td><td class="py-2 mono">v2026.10</td><td class="py-2 mono tabular-nums">2026-10-09 21:12</td><td class="py-2 pr-4 text-right text-slate-400">required</td></tr>
+        <tr><td class="px-4 py-2">Symptom text processed by the triage service</td><td class="py-2"><span class="tag tag-ok">Granted</span></td><td class="py-2 mono">v2026.10</td><td class="py-2 mono tabular-nums">2026-10-09 21:12</td><td class="py-2 pr-4 text-right"><button class="btn h-6">Withdraw</button></td></tr>
+        <tr><td class="px-4 py-2">Voice description transcribed, audio not stored</td><td class="py-2"><span class="tag tag-mute">Not granted</span></td><td class="py-2 mono text-slate-400">—</td><td class="py-2 text-slate-400">asked before first voice use</td><td class="py-2 pr-4 text-right"><button class="btn h-6">Grant</button></td></tr>
+        <tr><td class="px-4 py-2 truncate" title="Product updates and research invitations from Meridian and selected clinical research partners, including anonymised outcome studies">Product updates and research invitations from Meridian and selected clinical research partners, including anonymised outcome studies</td><td class="py-2"><span class="tag tag-mute">Withdrawn</span></td><td class="py-2 mono">v2026.10</td><td class="py-2 mono tabular-nums">2026-10-11 07:40</td><td class="py-2 pr-4 text-right"><button class="btn h-6">Grant</button></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- requests -->
+  <section class="bg-white border border-slate-200 rounded overflow-x-auto">
+    <div class="px-4 h-8 flex items-center justify-between border-b border-slate-200 text-xs"><span class="font-medium">Your requests</span><span class="mono text-slate-500">GET /me/data-requests</span></div>
+
+    <div data-s="fresh" hidden class="p-6 text-center">
+      <p class="text-sm font-medium">No requests yet</p>
+      <p class="help max-w-[360px] mx-auto">Export or deletion requests appear here with their status. Exports are usually ready within an hour.</p>
+    </div>
+
+    <table data-s="overview export exportfail hold" class="w-full text-xs table-fixed min-w-[640px]">
+      <colgroup><col style="width:96px"><col style="width:96px"><col><col style="width:152px"><col style="width:152px"></colgroup>
+      <thead class="text-slate-500"><tr class="border-b border-slate-200 text-left bg-slate-50"><th class="px-4 py-2 font-medium">Request</th><th class="py-2 font-medium">Type</th><th class="py-2 font-medium">Status</th><th class="py-2 font-medium">Requested (UTC)</th><th class="py-2 pr-4 font-medium">Completed (UTC)</th></tr></thead>
+      <tbody class="divide-y divide-slate-100">
+        <tr data-s="export" hidden class="bg-green-50"><td class="px-4 py-2 mono">DR-1073</td><td class="py-2">export</td><td class="py-2"><span class="tag tag-ok">Ready · link unused</span></td><td class="py-2 mono tabular-nums">2026-10-13 07:52</td><td class="py-2 pr-4 mono tabular-nums">2026-10-13 08:52</td></tr>
+        <tr data-s="exportfail" hidden class="bg-red-50"><td class="px-4 py-2 mono">DR-1073</td><td class="py-2">export</td><td class="py-2"><span class="tag tag-bad">Failed · step 4 of 6</span></td><td class="py-2 mono tabular-nums">2026-10-13 07:52</td><td class="py-2 pr-4 text-slate-400">—</td></tr>
+        <tr data-s="hold" hidden class="bg-amber-50"><td class="px-4 py-2 mono">DR-1071</td><td class="py-2">deletion</td><td class="py-2"><span class="tag tag-warn">Deferred · legal hold</span></td><td class="py-2 mono tabular-nums">2026-10-13 07:31</td><td class="py-2 pr-4 text-slate-400">—</td></tr>
+        <tr><td class="px-4 py-2 mono">DR-1042</td><td class="py-2">export</td><td class="py-2"><span class="tag tag-mute">Completed · link used</span></td><td class="py-2 mono tabular-nums">2026-09-20 18:04</td><td class="py-2 pr-4 mono tabular-nums">2026-09-20 18:41</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- retention -->
+  <section class="bg-white border border-slate-200 rounded overflow-x-auto">
+    <div class="px-4 h-8 flex items-center justify-between border-b border-slate-200 text-xs"><span class="font-medium">How long we keep records</span><span class="mono text-slate-500">retention_policies</span></div>
+    <table class="w-full text-xs table-fixed min-w-[640px]">
+      <colgroup><col><col style="width:128px"><col style="width:128px"><col style="width:128px"></colgroup>
+      <thead class="text-slate-500"><tr class="border-b border-slate-200 text-left bg-slate-50"><th class="px-4 py-2 font-medium">Record type</th><th class="py-2 font-medium">United Kingdom</th><th class="py-2 font-medium">Bangladesh</th><th class="py-2 pr-4 font-medium">After retention</th></tr></thead>
+      <tbody class="divide-y divide-slate-100">
+        <tr><td class="px-4 py-2">Consultation messages</td><td class="py-2"><span class="tag tag-warn">Pending legal review</span></td><td class="py-2"><span class="tag tag-warn">Pending legal review</span></td><td class="py-2 pr-4">Delete</td></tr>
+        <tr><td class="px-4 py-2">Signed prescriptions and PDFs</td><td class="py-2"><span class="tag tag-warn">Pending legal review</span></td><td class="py-2"><span class="tag tag-warn">Pending legal review</span></td><td class="py-2 pr-4">Anonymize</td></tr>
+        <tr><td class="px-4 py-2">Symptom intakes</td><td class="py-2"><span class="tag tag-warn">Pending legal review</span></td><td class="py-2"><span class="tag tag-warn">Pending legal review</span></td><td class="py-2 pr-4">Delete</td></tr>
+        <tr><td class="px-4 py-2">Access logs</td><td class="py-2"><span class="tag tag-warn">Pending legal review</span></td><td class="py-2"><span class="tag tag-warn">Pending legal review</span></td><td class="py-2 pr-4">Anonymize</td></tr>
+      </tbody>
+    </table>
+    <p class="px-4 py-3 border-t border-slate-200 text-xs text-slate-500">Periods are set per country after legal review and are not yet published for launch markets.</p>
+  </section>
+</main>
+
+<script>
+  const tabs = [...document.querySelectorAll('[data-tab]')];
+  function show(name) {
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === name)));
+    document.querySelectorAll('[data-s]').forEach(el => el.hidden = !el.dataset.s.split(' ').includes(name));
+    const d = document.querySelector('[data-delete]');
+    d.disabled = name === 'hold'; d.style.opacity = name === 'hold' ? '.5' : '1';
+  }
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
+  document.addEventListener('keydown', e => {
+    if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+    const i = parseInt(e.key, 10);
+    if (i >= 1 && i <= tabs.length) show(tabs[i - 1].dataset.tab);
+  });
+  show('overview');
+</script>
+</body>
+</html>

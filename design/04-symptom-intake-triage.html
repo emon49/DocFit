@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!-- ARCHETYPE: SETTINGS_FORM / COMPONENT PANEL -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Symptom Intake and Triage · Meridian</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style type="text/tailwindcss">
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 h-8 px-3 rounded border border-slate-300 bg-white text-xs font-medium text-slate-900 hover:bg-slate-50 whitespace-nowrap; }
+  .btn-primary { @apply bg-teal-700 border-teal-700 text-white hover:bg-teal-800; }
+  .input { @apply h-8 w-full rounded border border-slate-300 bg-white px-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-teal-700 focus:ring-1 focus:ring-teal-700; }
+  .area { @apply w-full rounded border border-slate-300 bg-white p-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-teal-700 focus:ring-1 focus:ring-teal-700; }
+  .lbl { @apply block text-xs font-medium text-slate-900 mb-1; }
+  .help { @apply mt-1 text-xs text-slate-500; }
+  .err { @apply mt-1 text-xs text-red-700; }
+  .tag { @apply inline-flex items-center h-5 px-2 rounded border text-[10px] font-medium whitespace-nowrap; }
+  .tag-ok { @apply bg-green-50 text-green-700 border-green-200; }
+  .tag-warn { @apply bg-amber-50 text-amber-700 border-amber-200; }
+  .tag-bad { @apply bg-red-50 text-red-700 border-red-200; }
+  .tag-mute { @apply bg-slate-100 text-slate-600 border-slate-200; }
+  .tab { @apply inline-flex items-center gap-2 h-6 px-2 rounded text-xs text-slate-500 hover:text-slate-900 aria-selected:bg-slate-900 aria-selected:text-white; }
+}
+</style>
+<style>
+  html { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .kbd { font-family: inherit; font-size: 10px; line-height: 16px; height: 16px; padding: 0 4px; border: 1px solid #cbd5e1; border-bottom-width: 2px; border-radius: 4px; background: #f1f5f9; color: #475569; }
+  [aria-selected="true"] .kbd { background: #334155; border-color: #475569; color: #e2e8f0; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-900 text-sm tracking-tight min-h-screen">
+
+<header class="h-12 bg-white border-b border-slate-200 px-4 flex items-center justify-between gap-4">
+  <div class="flex items-center gap-3">
+    <span class="text-sm font-semibold">Meridian</span>
+    <span class="text-xs text-slate-500">Feature 4 · Symptom intake and specialty triage</span>
+  </div>
+  <div class="flex items-center gap-2 text-xs"><span>Amira Haddad</span><span class="tag tag-mute">patient</span></div>
+</header>
+
+<nav class="h-8 bg-white border-b border-slate-200 px-4 flex items-center gap-2 overflow-x-auto" aria-label="State inspector">
+  <span class="text-xs text-slate-500 mr-2">State</span>
+  <button class="tab" data-tab="empty" aria-selected="true">Empty <kbd class="kbd">1</kbd></button>
+  <button class="tab" data-tab="voice" aria-selected="false">Voice transcript <kbd class="kbd">2</kbd></button>
+  <button class="tab" data-tab="results" aria-selected="false">Results <kbd class="kbd">3</kbd></button>
+  <button class="tab" data-tab="timeout" aria-selected="false">Service timeout <kbd class="kbd">4</kbd></button>
+  <button class="tab" data-tab="toolong" aria-selected="false">Over length <kbd class="kbd">5</kbd></button>
+  <button class="tab" data-tab="escaped" aria-selected="false">Escaped input <kbd class="kbd">6</kbd></button>
+  <span class="ml-auto text-xs text-slate-500 mono whitespace-nowrap">TC-01 · TC-02 · TC-03 · TC-04 · TC-05</span>
+</nav>
+
+<main class="max-w-[1080px] mx-auto p-6 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 items-start">
+
+  <div class="space-y-4 min-w-0">
+
+    <!-- INPUT CARD -->
+    <section data-s="empty voice toolong" class="bg-white border border-slate-200 rounded p-4">
+      <div class="flex items-center justify-between mb-1">
+        <h1 class="text-lg font-semibold">Describe your symptoms</h1>
+        <span class="text-xs text-slate-500 mono">POST /intakes</span>
+      </div>
+      <p class="help mb-4">Include how long it has lasted, what makes it better or worse, and any medicines you already take. English only.</p>
+
+      <div data-s="empty">
+        <label class="lbl" for="d0">Description</label>
+        <textarea id="d0" rows="5" class="area" placeholder="Example: Sharp pain in my lower back for 3 days, worse when I bend forward. Ibuprofen helps a little."></textarea>
+        <div class="mt-1 flex items-center justify-between text-xs">
+          <span class="text-slate-500">Minimum 10 characters</span><span class="mono tabular-nums text-slate-500">0 / 2,000</span>
+        </div>
+      </div>
+
+      <div data-s="voice" hidden>
+        <div class="flex items-center justify-between mb-1">
+          <label class="lbl mb-0" for="d1">Transcript · edit before submitting</label>
+          <span class="tag tag-ok"><span class="mr-1">●</span> Stopped · 00:41 of 02:00</span>
+        </div>
+        <textarea id="d1" rows="5" class="area">I have had a dry cough and a sore throat for about four days. The fever comes and goes, 38.4 last night. Paracetamol helps for a few hours. No trouble breathing but I feel very tired.</textarea>
+        <div class="mt-1 flex items-center justify-between text-xs">
+          <span class="text-amber-700">Low confidence on "38.4" — check the number.</span><span class="mono tabular-nums text-slate-500">196 / 2,000</span>
+        </div>
+        <p class="help">Audio is processed and discarded. Only this text is kept.</p>
+      </div>
+
+      <div data-s="toolong" hidden>
+        <label class="lbl" for="d2">Description</label>
+        <textarea id="d2" rows="4" class="area border-red-600 ring-1 ring-red-600">For the past three weeks I have been experiencing recurring episodes of lightheadedness that usually begin shortly after standing up from a seated position, often accompanied by a brief greying of vision, a pounding sensation in my ears, and occasionally nausea that lasts several minutes before settling. I first noticed it after I started a new blood pressure medicine in September, but the episodes have become more frequent… (2,500 characters)</textarea>
+        <div class="mt-1 flex items-center justify-between text-xs">
+          <span class="err" role="alert">Description is 500 characters over the limit. Shorten it to continue. Nothing was sent.</span><span class="mono tabular-nums text-red-700">2,500 / 2,000</span>
+        </div>
+        <div class="mt-3 border border-amber-200 bg-amber-50 rounded p-2 text-xs text-amber-700" role="alert">Microphone access is blocked in this browser. Type your description instead, or allow the microphone in site settings.</div>
+      </div>
+
+      <div class="mt-4 flex items-center justify-between">
+        <button class="btn">
+          <span data-s="empty toolong">Speak instead</span><span data-s="voice" hidden>Record again</span> <kbd class="kbd">M</kbd>
+        </button>
+        <button data-submit class="btn btn-primary">Get recommendation <kbd class="kbd">⌘⏎</kbd></button>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section data-s="results" hidden class="bg-white border border-slate-200 rounded">
+      <div class="p-4 border-b border-slate-200">
+        <div class="flex items-center justify-between"><h1 class="text-lg font-semibold">Suggested specialty</h1><span class="mono text-xs text-slate-500">triage-v3.2.1 · 1.8 s</span></div>
+        <p class="help">Based on what you described. This is a suggestion, not a diagnosis.</p>
+      </div>
+      <ul class="divide-y divide-slate-100">
+        <li class="p-4">
+          <div class="flex items-center justify-between"><span class="text-sm font-medium">General Practice</span><span class="mono tabular-nums text-sm">62%</span></div>
+          <div class="mt-2 h-2 rounded bg-slate-100"><div class="h-2 rounded bg-teal-700" style="width:62%"></div></div>
+          <p class="help">Cough, sore throat and intermittent fever for several days are usually assessed first by a general doctor.</p>
+        </li>
+        <li class="p-4">
+          <div class="flex items-center justify-between"><span class="text-sm font-medium">ENT (Otolaryngology)</span><span class="mono tabular-nums text-sm">21%</span></div>
+          <div class="mt-2 h-2 rounded bg-slate-100"><div class="h-2 rounded bg-slate-400" style="width:21%"></div></div>
+          <p class="help">Considered because the sore throat is a leading symptom.</p>
+        </li>
+      </ul>
+      <div class="p-4 border-t border-slate-200 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-2"><label class="text-xs text-slate-500" for="sp">Not right? Choose another</label>
+          <select id="sp" class="input w-[200px]"><option>General Practice (suggested)</option><option>ENT (Otolaryngology)</option><option>Dermatology</option><option>Cardiology</option><option>Paediatrics</option><option>Psychiatry</option></select></div>
+        <button class="btn btn-primary">Find doctors <kbd class="kbd">⏎</kbd></button>
+      </div>
+      <div class="px-4 py-3 border-t border-slate-200 bg-red-50 text-xs text-red-700" role="note"><span class="font-medium">Emergency?</span> For chest pain, severe difficulty breathing, signs of stroke or heavy bleeding, call your local emergency number now instead of booking.</div>
+    </section>
+
+    <!-- TIMEOUT FALLBACK -->
+    <section data-s="timeout" hidden class="bg-white border border-slate-200 rounded">
+      <div class="p-4 border-b border-slate-200">
+        <div class="border border-amber-200 bg-amber-50 rounded p-2 text-xs text-amber-700" role="status">We could not suggest a specialty right now. Choose one from the list to continue.</div>
+      </div>
+      <table class="w-full text-xs">
+        <thead class="text-slate-500"><tr class="border-b border-slate-200 text-left"><th class="px-4 py-2 font-medium">Specialty</th><th class="py-2 font-medium w-[112px] text-right">Doctors online</th><th class="py-2 pr-4 w-[96px]"></th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="px-4 py-2">General Practice</td><td class="py-2 text-right mono tabular-nums">14</td><td class="py-2 pr-4 text-right"><button class="btn h-6">Select</button></td></tr>
+          <tr><td class="px-4 py-2">Dermatology</td><td class="py-2 text-right mono tabular-nums">5</td><td class="py-2 pr-4 text-right"><button class="btn h-6">Select</button></td></tr>
+          <tr><td class="px-4 py-2">ENT (Otolaryngology)</td><td class="py-2 text-right mono tabular-nums">3</td><td class="py-2 pr-4 text-right"><button class="btn h-6">Select</button></td></tr>
+          <tr><td class="px-4 py-2">Paediatrics</td><td class="py-2 text-right mono tabular-nums">6</td><td class="py-2 pr-4 text-right"><button class="btn h-6">Select</button></td></tr>
+          <tr><td class="px-4 py-2">Psychiatry</td><td class="py-2 text-right mono tabular-nums">2</td><td class="py-2 pr-4 text-right"><button class="btn h-6">Select</button></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- HISTORY: escaped input + overflow -->
+    <section data-s="escaped" hidden class="bg-white border border-slate-200 rounded">
+      <div class="px-4 h-8 flex items-center justify-between border-b border-slate-200 text-xs"><span class="font-medium">Your intakes</span><span class="mono text-slate-500">GET /me/intakes</span></div>
+      <table class="w-full text-xs table-fixed">
+        <thead class="text-slate-500"><tr class="border-b border-slate-200 text-left"><th class="px-4 py-2 font-medium w-[120px]">Date</th><th class="py-2 font-medium w-[64px]">Mode</th><th class="py-2 font-medium">Description</th><th class="py-2 font-medium w-[136px]">Specialty</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="px-4 py-2 mono">2026-10-09 22:14</td><td class="py-2">text</td><td class="py-2 pr-2 mono truncate">&lt;script&gt;alert(document.cookie)&lt;/script&gt; sore throat</td><td class="py-2">General Practice <span class="text-slate-500">· system</span></td></tr>
+          <tr><td class="px-4 py-2 mono">2026-10-02 08:41</td><td class="py-2">voice</td><td class="py-2 pr-2 truncate" title="Dry cough and a sore throat for about four days, fever comes and goes, paracetamol helps for a few hours, no trouble breathing but very tired, also my daughter has the same symptoms since Monday and her school has had two other cases">Dry cough and a sore throat for about four days, fever comes and goes, paracetamol helps for a few hours, no trouble breathing but very tired, also my daughter has the same symptoms since Monday and her school has had two other cases</td><td class="py-2">ENT <span class="text-slate-500">· you</span></td></tr>
+          <tr><td class="px-4 py-2 mono">2026-09-14 19:03</td><td class="py-2">text</td><td class="py-2 pr-2 truncate">Itchy rash on both forearms since Friday, no new soaps</td><td class="py-2">Dermatology <span class="text-slate-500">· system</span></td></tr>
+        </tbody>
+      </table>
+      <div class="px-4 py-3 border-t border-slate-200 text-xs">
+        <p class="font-medium mb-1">TC-05 · rendered as typed</p>
+        <p class="mono bg-slate-50 border border-slate-200 rounded p-2 break-all">&lt;script&gt;alert(document.cookie)&lt;/script&gt; sore throat</p>
+        <p class="help">Text is escaped before display. No script runs.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- RIGHT -->
+  <aside class="space-y-4">
+    <section class="bg-white border border-slate-200 rounded">
+      <div class="px-4 h-8 flex items-center border-b border-slate-200 text-xs font-medium">Sent to the triage service</div>
+      <dl class="grid grid-cols-[96px_1fr] text-xs">
+        <dt class="px-4 py-2 text-slate-500">Sent</dt><dd class="py-2">Description text only</dd>
+        <dt class="px-4 py-2 text-slate-500 border-t border-slate-100">Not sent</dt><dd class="py-2 border-t border-slate-100">Name, email, date of birth, country</dd>
+        <dt class="px-4 py-2 text-slate-500 border-t border-slate-100">Redacted</dt><dd class="py-2 border-t border-slate-100">Phone numbers and email addresses you type</dd>
+        <dt class="px-4 py-2 text-slate-500 border-t border-slate-100">Audio</dt><dd class="py-2 border-t border-slate-100">Transcribed, then discarded</dd>
+      </dl>
+    </section>
+    <section class="bg-white border border-slate-200 rounded">
+      <div class="px-4 h-8 flex items-center justify-between border-b border-slate-200 text-xs font-medium"><span>Triage client</span><span data-breaker class="tag tag-ok">breaker closed</span></div>
+      <dl class="grid grid-cols-[96px_1fr] text-xs">
+        <dt class="px-4 py-2 text-slate-500">Timeout</dt><dd class="py-2 mono">5 s</dd>
+        <dt class="px-4 py-2 text-slate-500 border-t border-slate-100">Limits</dt><dd class="py-2 border-t border-slate-100 mono">10–2,000 chars · 2 min audio</dd>
+        <dt class="px-4 py-2 text-slate-500 border-t border-slate-100">Rate limit</dt><dd class="py-2 border-t border-slate-100 mono">10 calls / hour / patient</dd>
+        <dt class="px-4 py-2 text-slate-500 border-t border-slate-100">Fallback rate</dt><dd class="py-2 border-t border-slate-100 mono tabular-nums">1.3% · 24 h</dd>
+      </dl>
+    </section>
+  </aside>
+</main>
+
+<script>
+  const tabs = [...document.querySelectorAll('[data-tab]')];
+  function show(name) {
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === name)));
+    document.querySelectorAll('[data-s]').forEach(el => el.hidden = !el.dataset.s.split(' ').includes(name));
+    const b = document.querySelector('[data-submit]');
+    const off = name === 'empty' || name === 'toolong';
+    b.disabled = off; b.style.opacity = off ? '.5' : '1';
+    const br = document.querySelector('[data-breaker]');
+    br.textContent = name === 'timeout' ? 'breaker open · 3 failures' : 'breaker closed';
+    br.className = 'tag ' + (name === 'timeout' ? 'tag-bad' : 'tag-ok');
+  }
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
+  document.addEventListener('keydown', e => {
+    if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+    const i = parseInt(e.key, 10);
+    if (i >= 1 && i <= tabs.length) show(tabs[i - 1].dataset.tab);
+  });
+  show('empty');
+</script>
+</body>
+</html>

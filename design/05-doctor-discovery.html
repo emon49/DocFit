@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<!-- ARCHETYPE: DATA_TABLE / GRID -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doctor Discovery · Meridian</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style type="text/tailwindcss">
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 h-8 px-3 rounded border border-slate-300 bg-white text-xs font-medium text-slate-900 hover:bg-slate-50 whitespace-nowrap; }
+  .btn-primary { @apply bg-teal-700 border-teal-700 text-white hover:bg-teal-800; }
+  .input { @apply h-8 w-full rounded border border-slate-300 bg-white px-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-teal-700 focus:ring-1 focus:ring-teal-700; }
+  .lbl { @apply block text-xs font-medium text-slate-900 mb-1; }
+  .help { @apply mt-1 text-xs text-slate-500; }
+  .tag { @apply inline-flex items-center h-5 px-2 rounded border text-[10px] font-medium whitespace-nowrap; }
+  .tag-ok { @apply bg-green-50 text-green-700 border-green-200; }
+  .tag-warn { @apply bg-amber-50 text-amber-700 border-amber-200; }
+  .tag-bad { @apply bg-red-50 text-red-700 border-red-200; }
+  .tag-mute { @apply bg-slate-100 text-slate-600 border-slate-200; }
+  .tab { @apply inline-flex items-center gap-2 h-6 px-2 rounded text-xs text-slate-500 hover:text-slate-900 aria-selected:bg-slate-900 aria-selected:text-white; }
+  .slot { @apply font-mono inline-flex items-center h-5 px-1 rounded border border-slate-200 bg-white text-[10px] tabular-nums text-slate-900; }
+  .seg { @apply h-8 px-3 text-xs border border-slate-300 bg-white aria-pressed:bg-slate-900 aria-pressed:text-white aria-pressed:border-slate-900; }
+  th.sort { @apply cursor-pointer; }
+}
+</style>
+<style>
+  html { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .kbd { font-family: inherit; font-size: 10px; line-height: 16px; height: 16px; padding: 0 4px; border: 1px solid #cbd5e1; border-bottom-width: 2px; border-radius: 4px; background: #f1f5f9; color: #475569; }
+  [aria-selected="true"] .kbd, [aria-pressed="true"] .kbd { background: #334155; border-color: #475569; color: #e2e8f0; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-900 text-sm tracking-tight min-h-screen">
+
+<header class="h-12 bg-white border-b border-slate-200 px-4 flex items-center justify-between gap-4">
+  <div class="flex items-center gap-3">
+    <span class="text-sm font-semibold">Meridian</span>
+    <span class="text-xs text-slate-500">Feature 5 · Find a doctor</span>
+  </div>
+  <div class="flex items-center gap-2 text-xs"><span>Amira Haddad</span><span class="tag tag-mute">patient</span><span class="mono text-slate-500">Asia/Dhaka · BDT</span></div>
+</header>
+
+<nav class="h-8 bg-white border-b border-slate-200 px-4 flex items-center gap-2 overflow-x-auto" aria-label="State inspector">
+  <span class="text-xs text-slate-500 mr-2">State</span>
+  <button class="tab" data-tab="scheduled" aria-selected="true">Preferred time <kbd class="kbd">1</kbd></button>
+  <button class="tab" data-tab="now" aria-selected="false">Now <kbd class="kbd">2</kbd></button>
+  <button class="tab" data-tab="zero" aria-selected="false">No availability <kbd class="kbd">3</kbd></button>
+  <button class="tab" data-tab="taken" aria-selected="false">Slot just taken <kbd class="kbd">4</kbd></button>
+  <span class="ml-auto text-xs text-slate-500 mono whitespace-nowrap">TC-01 · TC-02 · TC-03 · TC-04</span>
+</nav>
+
+<main class="max-w-[1200px] mx-auto p-6">
+
+  <!-- controls -->
+  <section class="bg-white border border-slate-200 rounded p-3 flex flex-wrap items-end gap-3">
+    <div class="w-[200px]">
+      <label class="lbl" for="sp">Specialty</label>
+      <select id="sp" class="input"><option data-gp>General Practice</option><option>Psychiatry</option><option>Dermatology</option></select>
+    </div>
+    <div>
+      <span class="lbl">When</span>
+      <div class="flex">
+        <button data-mode="now" class="seg rounded-l" aria-pressed="false">Now <kbd class="kbd">N</kbd></button>
+        <button data-mode="scheduled" class="seg rounded-r border-l-0" aria-pressed="true">Preferred time <kbd class="kbd">T</kbd></button>
+      </div>
+    </div>
+    <div data-sched>
+      <label class="lbl" for="dt">Date and time (Asia/Dhaka)</label>
+      <input id="dt" type="datetime-local" class="input mono w-[200px]" value="2026-10-10T02:00">
+    </div>
+    <div data-sched class="w-[120px]">
+      <label class="lbl" for="tol">Tolerance</label>
+      <select id="tol" class="input mono"><option>± 15 min</option><option>± 30 min</option><option selected>± 60 min</option><option>± 120 min</option></select>
+    </div>
+    <div data-nowinfo hidden class="text-xs text-slate-500 pb-2">Open slots starting within 30 minutes of 00:41.</div>
+    <div class="ml-auto text-xs text-slate-500 pb-2 mono" data-count>5 doctors · GET /discovery</div>
+  </section>
+
+  <div data-banner="taken" hidden class="mt-3 border border-amber-200 bg-amber-50 rounded p-2 text-xs text-amber-700" role="alert">That slot was just booked by another patient. The list has been refreshed — pick another time.</div>
+
+  <!-- TABLE -->
+  <section data-table class="mt-3 bg-white border border-slate-200 rounded overflow-x-auto">
+    <table class="w-full text-xs table-fixed min-w-[1040px]">
+      <colgroup><col style="width:40px"><col style="width:248px"><col><col style="width:72px"><col style="width:168px"><col style="width:120px"><col style="width:72px"><col style="width:104px"></colgroup>
+      <thead class="text-slate-500"><tr class="border-b border-slate-200 text-left bg-slate-50">
+        <th class="px-3 py-2 font-medium">#</th>
+        <th class="py-2 font-medium">Doctor</th>
+        <th class="py-2 font-medium">Specialties</th>
+        <th class="py-2 font-medium text-right pr-3">Exp.</th>
+        <th class="py-2 font-medium">Fee</th>
+        <th class="py-2 font-medium sort">Next slot ↑</th>
+        <th class="py-2 font-medium text-right pr-3" data-col="delta">Δ min</th>
+        <th class="py-2 pr-3"></th>
+      </tr></thead>
+      <tbody class="divide-y divide-slate-100">
+
+        <!-- scheduled rows -->
+        <tr data-s="scheduled" class="bg-teal-50"><td class="px-3 py-2 mono">1</td><td class="py-2 pr-2"><div class="font-medium truncate">Dr. Farah Al-Sayed</div><div class="text-slate-500 mono">GB · GMC 6119072</div></td><td class="py-2 pr-2 truncate">General Practice, Dermatology</td><td class="py-2 pr-3 text-right mono tabular-nums">11 y</td><td class="py-2"><span class="mono tabular-nums">GBP 45.00</span><div class="text-slate-500 mono tabular-nums">≈ BDT 7,119</div></td><td class="py-2 mono tabular-nums">Sat 02:00</td><td class="py-2 pr-3 text-right mono tabular-nums">0</td><td class="py-2 pr-3 text-right"><button class="btn h-6">Slots <kbd class="kbd">⏎</kbd></button></td></tr>
+        <tr data-s="scheduled"><td class="px-3 py-2 mono">2</td><td class="py-2 pr-2"><div class="font-medium truncate">Dr. Mohammad Shafiqul Islam Chowdhury Al-Mahmud</div><div class="text-slate-500 mono">BD · BMDC A-48213</div></td><td class="py-2 pr-2 truncate" title="General Practice, Internal Medicine, Diabetology, Endocrinology, Geriatric Medicine">General Practice, Internal Medicine, Diabetology, Endocrinology, Geriatric Medicine</td><td class="py-2 pr-3 text-right mono tabular-nums">22 y</td><td class="py-2"><span class="mono tabular-nums">BDT 1,200</span></td><td class="py-2 mono tabular-nums">Sat 01:40</td><td class="py-2 pr-3 text-right mono tabular-nums">20</td><td class="py-2 pr-3 text-right"><button class="btn h-6">Slots</button></td></tr>
+        <tr data-s="scheduled"><td class="px-3 py-2 mono">3</td><td class="py-2 pr-2"><div class="font-medium truncate">Dr. Daniel Osei-Bonsu</div><div class="text-slate-500 mono">GB · GMC 7403358</div></td><td class="py-2 pr-2 truncate">General Practice</td><td class="py-2 pr-3 text-right mono tabular-nums">7 y</td><td class="py-2"><span class="mono tabular-nums">GBP 38.00</span><div class="text-slate-500 mono tabular-nums">≈ BDT 6,012</div></td><td class="py-2 mono tabular-nums">Sat 02:20</td><td class="py-2 pr-3 text-right mono tabular-nums">20</td><td class="py-2 pr-3 text-right"><button class="btn h-6">Slots</button></td></tr>
+        <tr data-s="scheduled"><td class="px-3 py-2 mono">4</td><td class="py-2 pr-2"><div class="font-medium truncate">Dr. Ananya Krishnamurthy</div><div class="text-slate-500 mono">IN · NMC 2019/04/1187</div></td><td class="py-2 pr-2 truncate">General Practice, Family Medicine</td><td class="py-2 pr-3 text-right mono tabular-nums">8 y</td><td class="py-2"><span class="mono tabular-nums">USD 28.00</span><div class="text-slate-500 mono tabular-nums">≈ BDT 3,427</div></td><td class="py-2 mono tabular-nums">Sat 02:40</td><td class="py-2 pr-3 text-right mono tabular-nums">40</td><td class="py-2 pr-3 text-right"><button class="btn h-6">Slots</button></td></tr>
+        <tr data-s="scheduled"><td class="px-3 py-2 mono">5</td><td class="py-2 pr-2"><div class="font-medium truncate">Dr. Lachlan Whitford</div><div class="text-slate-500 mono">AU · AHPRA MED0002371845</div></td><td class="py-2 pr-2 truncate">General Practice</td><td class="py-2 pr-3 text-right mono tabular-nums">9 y</td><td class="py-2"><span class="mono tabular-nums">AUD 55.00</span><div class="text-slate-500 mono tabular-nums">≈ BDT 4,378</div></td><td class="py-2 mono tabular-nums">Sat 01:00</td><td class="py-2 pr-3 text-right mono tabular-nums">60</td><td class="py-2 pr-3 text-right"><button class="btn h-6">Slots</button></td></tr>
+        <tr data-s="scheduled" class="bg-slate-50 text-slate-500"><td class="px-3 py-2" colspan="8">1 doctor hidden: nearest slot is 61 min from 02:00 (Dr. Adaeze Okafor, 03:01). <button class="underline text-teal-700">Widen to ± 120 min</button></td></tr>
+
+        <!-- now rows -->
+        <tr data-s="now" hidden><td class="px-3 py-2 mono">1</td><td class="py-2 pr-2"><div class="font-medium truncate">Dr. Lachlan Whitford</div><div class="text-slate-500 mono">AU · AHPRA MED0002371845</div></td><td class="py-2 pr-2 truncate">General Practice</td><td class="py-2 pr-3 text-right mono tabular-nums">9 y</td><td class="py-2"><span class="mono tabular-nums">AUD 55.00</span><div class="text-slate-500 mono tabular-nums">≈ BDT 4,378</div></td><td class="py-2 mono tabular-nums">00:50 <span class="text-slate-500">in 9 min</span></td><td class="py-2 pr-3 text-right text-slate-400">—</td><td class="py-2 pr-3 text-right"><button class="btn h-6">Slots <kbd class="kbd">⏎</kbd></button></td></tr>
+        <tr data-s="now" hidden><td class="px-3 py-2 mono">2</td><td class="py-2 pr-2"><div class="font-medium truncate">Dr. Daniel Osei-Bonsu</div><div class="text-slate-500 mono">GB · GMC 7403358</div></td><td class="py-2 pr-2 truncate">General Practice</td><td class="py-2 pr-3 text-right mono tabular-nums">7 y</td><td class="py-2"><span class="mono tabular-nums">GBP 38.00</span><div class="text-slate-500 mono tabular-nums">≈ BDT 6,012</div></td><td class="py-2 mono tabular-nums">01:00 <span class="text-slate-500">in 19 min</span></td><td class="py-2 pr-3 text-right text-slate-400">—</td><td class="py-2 pr-3 text-right"><button class="btn h-6">Slots</button></td></tr>
+        <tr data-s="now" hidden><td class="px-3 py-2 mono">3</td><td class="py-2 pr-2"><div class="font-medium truncate">Dr. Mohammad Shafiqul Islam Chowdhury Al-Mahmud</div><div class="text-slate-500 mono">BD · BMDC A-48213</div></td><td class="py-2 pr-2 truncate">General Practice, Internal Medicine, Diabetology, Endocrinology, Geriatric Medicine</td><td class="py-2 pr-3 text-right mono tabular-nums">22 y</td><td class="py-2"><span class="mono tabular-nums">BDT 1,200</span></td><td class="py-2 mono tabular-nums">01:10 <span class="text-slate-500">in 29 min</span></td><td class="py-2 pr-3 text-right text-slate-400">—</td><td class="py-2 pr-3 text-right"><button class="btn h-6">Slots</button></td></tr>
+
+        <!-- taken -->
+        <tr data-s="taken" hidden class="bg-amber-50"><td class="px-3 py-2 mono">1</td><td class="py-2 pr-2"><div class="font-medium truncate">Dr. Farah Al-Sayed</div><div class="text-slate-500 mono">GB · GMC 6119072</div></td><td class="py-2 pr-2 truncate">General Practice, Dermatology</td><td class="py-2 pr-3 text-right mono tabular-nums">11 y</td><td class="py-2"><span class="mono tabular-nums">GBP 45.00</span><div class="text-slate-500 mono tabular-nums">≈ BDT 7,119</div></td><td class="py-2 mono tabular-nums">Sat 02:20 <span class="tag tag-warn">02:00 taken</span></td><td class="py-2 pr-3 text-right mono tabular-nums">20</td><td class="py-2 pr-3 text-right"><button class="btn h-6">Slots</button></td></tr>
+        <tr data-s="taken" hidden><td class="px-3 py-2 mono">2</td><td class="py-2 pr-2"><div class="font-medium truncate">Dr. Mohammad Shafiqul Islam Chowdhury Al-Mahmud</div><div class="text-slate-500 mono">BD · BMDC A-48213</div></td><td class="py-2 pr-2 truncate">General Practice, Internal Medicine, Diabetology, Endocrinology, Geriatric Medicine</td><td class="py-2 pr-3 text-right mono tabular-nums">22 y</td><td class="py-2"><span class="mono tabular-nums">BDT 1,200</span></td><td class="py-2 mono tabular-nums">Sat 01:40</td><td class="py-2 pr-3 text-right mono tabular-nums">20</td><td class="py-2 pr-3 text-right"><button class="btn h-6">Slots</button></td></tr>
+      </tbody>
+    </table>
+    <div class="h-8 px-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+      <span data-page>1–5 of 5 · ordered by closest to 02:00</span>
+      <span class="flex items-center gap-1"><kbd class="kbd">J</kbd><kbd class="kbd">K</kbd> move · <kbd class="kbd">⏎</kbd> open slots</span>
+    </div>
+  </section>
+
+  <!-- ZERO -->
+  <section data-zero hidden class="mt-3 bg-white border border-slate-200 rounded">
+    <div class="p-6 text-center border-b border-slate-200">
+      <p class="text-sm font-medium">No Psychiatry doctors have open slots between 02:00 and 04:00</p>
+      <p class="help">Showing the next available times across all Psychiatry doctors instead.</p>
+    </div>
+    <table class="w-full text-xs">
+      <thead class="text-slate-500"><tr class="border-b border-slate-200 text-left"><th class="px-4 py-2 font-medium">Next available</th><th class="py-2 font-medium">Doctor</th><th class="py-2 font-medium">Fee</th><th class="py-2 pr-4"></th></tr></thead>
+      <tbody class="divide-y divide-slate-100">
+        <tr><td class="px-4 py-2 mono tabular-nums">Sat 10 Oct 05:20</td><td class="py-2">Dr. Rafael Moreno-Castellanos</td><td class="py-2 mono tabular-nums">USD 40.00 <span class="text-slate-500">≈ BDT 4,896</span></td><td class="py-2 pr-4 text-right"><button class="btn h-6">Slots</button></td></tr>
+        <tr><td class="px-4 py-2 mono tabular-nums">Sat 10 Oct 18:00</td><td class="py-2">Dr. Priyanka Deshmukh</td><td class="py-2 mono tabular-nums">USD 35.00 <span class="text-slate-500">≈ BDT 4,284</span></td><td class="py-2 pr-4 text-right"><button class="btn h-6">Slots</button></td></tr>
+        <tr><td class="px-4 py-2 mono tabular-nums">Sun 11 Oct 09:40</td><td class="py-2">Dr. Rafael Moreno-Castellanos</td><td class="py-2 mono tabular-nums">USD 40.00 <span class="text-slate-500">≈ BDT 4,896</span></td><td class="py-2 pr-4 text-right"><button class="btn h-6">Slots</button></td></tr>
+      </tbody>
+    </table>
+    <div class="px-4 py-3 border-t border-slate-200 flex items-center justify-between text-xs">
+      <span class="text-slate-500">Waitlist is an open decision for launch and is not available yet.</span>
+      <button class="btn" disabled style="opacity:.5">Join waitlist</button>
+    </div>
+  </section>
+
+  <!-- SLOT PICKER -->
+  <section data-picker class="mt-4 bg-white border border-slate-200 rounded">
+    <div class="px-4 h-8 flex items-center justify-between border-b border-slate-200 text-xs"><span class="font-medium">Dr. Farah Al-Sayed · open slots, your time (Asia/Dhaka)</span><span class="mono text-slate-500">GET /doctors/6e1f…/slots</span></div>
+    <div class="p-4 flex flex-wrap items-center gap-1">
+      <span class="slot">Sat 02:00</span><span class="slot">02:20</span><span class="slot">02:40</span><span class="slot">03:00</span><span class="slot">03:20</span><span class="slot">03:40</span>
+      <span class="ml-2 text-xs text-slate-500">Choosing a slot holds it for 10 minutes during checkout.</span>
+    </div>
+  </section>
+</main>
+
+<script>
+  const tabs = [...document.querySelectorAll('[data-tab]')];
+  function show(name) {
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === name)));
+    const isZero = name === 'zero', isNow = name === 'now';
+    document.querySelectorAll('tr[data-s]').forEach(r => r.hidden = r.dataset.s !== name);
+    document.querySelector('[data-table]').hidden = isZero;
+    document.querySelector('[data-zero]').hidden = !isZero;
+    document.querySelector('[data-picker]').hidden = isZero;
+    document.querySelector('[data-banner="taken"]').hidden = name !== 'taken';
+    document.querySelectorAll('[data-sched]').forEach(e => e.hidden = isNow);
+    document.querySelector('[data-nowinfo]').hidden = !isNow;
+    document.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-pressed', String(isNow ? b.dataset.mode === 'now' : b.dataset.mode === 'scheduled')));
+    document.querySelector('[data-col="delta"]').textContent = isNow ? 'Starts' : 'Δ min';
+    document.querySelector('[data-count]').textContent = isZero ? '0 doctors · GET /discovery' : isNow ? '3 doctors · GET /discovery?mode=now' : name === 'taken' ? '2 doctors · refreshed 00:41:07' : '5 doctors · GET /discovery';
+    document.querySelector('[data-page]').textContent = isNow ? '1–3 of 3 · ordered by earliest slot' : name === 'taken' ? '1–2 of 2 · ordered by closest to 02:00' : '1–5 of 5 · ordered by closest to 02:00';
+    document.querySelector('#sp').selectedIndex = isZero ? 1 : 0;
+  }
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
+  document.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => show(b.dataset.mode === 'now' ? 'now' : 'scheduled')));
+  document.addEventListener('keydown', e => {
+    if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+    const k = e.key.toLowerCase(), i = parseInt(e.key, 10);
+    if (i >= 1 && i <= tabs.length) show(tabs[i - 1].dataset.tab);
+    if (k === 'n') show('now'); if (k === 't') show('scheduled');
+  });
+  show('scheduled');
+</script>
+</body>
+</html>

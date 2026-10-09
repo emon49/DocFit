@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!-- ARCHETYPE: MASTER-DETAIL / SPLIT-VIEW -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Availability Scheduling · Meridian</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style type="text/tailwindcss">
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 h-8 px-3 rounded border border-slate-300 bg-white text-xs font-medium text-slate-900 hover:bg-slate-50 whitespace-nowrap; }
+  .btn-primary { @apply bg-teal-700 border-teal-700 text-white hover:bg-teal-800; }
+  .btn-danger { @apply border-red-300 text-red-700 hover:bg-red-50; }
+  .input { @apply h-8 w-full rounded border border-slate-300 bg-white px-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-teal-700 focus:ring-1 focus:ring-teal-700; }
+  .input-err { @apply border-red-600 ring-1 ring-red-600; }
+  .lbl { @apply block text-xs font-medium text-slate-900 mb-1; }
+  .help { @apply mt-1 text-xs text-slate-500; }
+  .err { @apply mt-1 text-xs text-red-700; }
+  .tag { @apply inline-flex items-center h-5 px-2 rounded border text-[10px] font-medium whitespace-nowrap; }
+  .tag-ok { @apply bg-green-50 text-green-700 border-green-200; }
+  .tag-warn { @apply bg-amber-50 text-amber-700 border-amber-200; }
+  .tag-bad { @apply bg-red-50 text-red-700 border-red-200; }
+  .tag-mute { @apply bg-slate-100 text-slate-600 border-slate-200; }
+  .tab { @apply inline-flex items-center gap-2 h-6 px-2 rounded text-xs text-slate-500 hover:text-slate-900 aria-selected:bg-slate-900 aria-selected:text-white; }
+  .slot { @apply font-mono inline-flex items-center h-5 px-1 rounded border border-slate-200 bg-white text-[10px] tabular-nums text-slate-900; }
+  .slot-booked { @apply bg-teal-700 border-teal-700 text-white; }
+  .slot-blocked { @apply bg-slate-100 text-slate-400 line-through; }
+}
+</style>
+<style>
+  html { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .kbd { font-family: inherit; font-size: 10px; line-height: 16px; height: 16px; padding: 0 4px; border: 1px solid #cbd5e1; border-bottom-width: 2px; border-radius: 4px; background: #f1f5f9; color: #475569; }
+  [aria-selected="true"] .kbd { background: #334155; border-color: #475569; color: #e2e8f0; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-900 text-sm tracking-tight h-screen flex flex-col">
+
+<header class="h-12 shrink-0 bg-white border-b border-slate-200 px-4 flex items-center justify-between gap-4">
+  <div class="flex items-center gap-3">
+    <span class="text-sm font-semibold">Meridian</span>
+    <span class="text-xs text-slate-500">Feature 3 · Availability</span>
+  </div>
+  <div class="flex items-center gap-2 text-xs">
+    <span>Dr. Farah Al-Sayed</span><span class="tag tag-ok">approved</span><span class="mono text-slate-500">Europe/London · slots 20 min</span>
+  </div>
+</header>
+
+<nav class="h-8 shrink-0 bg-white border-b border-slate-200 px-4 flex items-center gap-2" aria-label="State inspector">
+  <span class="text-xs text-slate-500 mr-2">State</span>
+  <button class="tab" data-tab="default" aria-selected="true">Rules saved <kbd class="kbd">1</kbd></button>
+  <button class="tab" data-tab="overlap" aria-selected="false">Overlap error <kbd class="kbd">2</kbd></button>
+  <button class="tab" data-tab="conflict" aria-selected="false">Leave conflicts with bookings <kbd class="kbd">3</kbd></button>
+  <button class="tab" data-tab="empty" aria-selected="false">No rules yet <kbd class="kbd">4</kbd></button>
+  <span class="ml-auto text-xs text-slate-500 mono">TC-01 · TC-02 · TC-03</span>
+</nav>
+
+<div class="flex-1 min-h-0 grid grid-cols-[440px_1fr]">
+
+  <!-- LEFT: rules (master) -->
+  <aside class="bg-white border-r border-slate-200 overflow-y-auto">
+
+    <div data-s="empty" hidden class="p-6 text-center">
+      <p class="text-sm font-medium">No availability rules</p>
+      <p class="help max-w-[320px] mx-auto">Patients see no open slots for you until you add weekly hours. Slots for the next 14 days are generated automatically when you save.</p>
+      <div class="mt-4 flex items-center justify-center gap-2">
+        <button class="btn btn-primary">Add weekly hours <kbd class="kbd">N</kbd></button>
+        <button class="btn">Use Mon–Fri 09:00–17:00</button>
+      </div>
+    </div>
+
+    <div data-s="default overlap conflict">
+      <div class="px-4 h-8 flex items-center justify-between border-b border-slate-200 text-xs">
+        <span class="font-medium">Weekly rules</span><span class="mono text-slate-500">PUT /doctors/me/availability-rules</span>
+      </div>
+
+      <table class="w-full text-xs">
+        <thead class="text-slate-500"><tr class="border-b border-slate-200 text-left"><th class="px-4 py-2 font-medium w-[64px]">Day</th><th class="py-2 font-medium">Blocks (local)</th><th class="py-2 pr-4 font-medium text-right w-[64px]">Slots</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr data-s="default conflict"><td class="px-4 py-2 font-medium">Mon</td><td class="py-2 mono">09:00–12:00 · 14:00–17:00</td><td class="py-2 pr-4 mono text-right tabular-nums">18</td></tr>
+          <tr data-s="overlap" class="bg-red-50"><td class="px-4 py-2 font-medium align-top">Mon</td>
+            <td class="py-2" colspan="2">
+              <div class="flex items-center gap-2 mb-2"><input class="input mono w-[80px] input-err" value="09:00"><span>–</span><input class="input mono w-[80px] input-err" value="11:00"><span class="tag tag-bad">overlaps</span></div>
+              <div class="flex items-center gap-2"><input class="input mono w-[80px] input-err" value="10:00"><span>–</span><input class="input mono w-[80px] input-err" value="12:00"><span class="tag tag-bad">overlaps</span></div>
+              <p class="err pr-4" role="alert">Blocks 09:00–11:00 and 10:00–12:00 overlap. Nothing was saved.</p>
+            </td></tr>
+          <tr><td class="px-4 py-2 font-medium">Tue</td><td class="py-2 mono">09:00–13:00</td><td class="py-2 pr-4 mono text-right tabular-nums">12</td></tr>
+          <tr><td class="px-4 py-2 font-medium text-slate-400">Wed</td><td class="py-2 text-slate-400">No hours</td><td class="py-2 pr-4 mono text-right text-slate-400">0</td></tr>
+          <tr><td class="px-4 py-2 font-medium">Thu</td><td class="py-2 mono">10:00–12:00 · 13:00–16:00</td><td class="py-2 pr-4 mono text-right tabular-nums">15</td></tr>
+          <tr><td class="px-4 py-2 font-medium">Fri</td><td class="py-2 mono">09:00–12:00</td><td class="py-2 pr-4 mono text-right tabular-nums">9</td></tr>
+          <tr><td class="px-4 py-2 font-medium text-slate-400">Sat–Sun</td><td class="py-2 text-slate-400">No hours</td><td class="py-2 pr-4 mono text-right text-slate-400">0</td></tr>
+        </tbody>
+      </table>
+
+      <div class="px-4 py-3 border-t border-slate-200 flex items-center justify-between">
+        <div class="flex items-center gap-2"><label class="text-xs text-slate-500" for="len">Slot length</label><select id="len" class="input w-[96px]"><option>20 min</option><option>15 min</option><option>30 min</option></select></div>
+        <div class="flex items-center gap-2"><button class="btn">Discard</button><button data-save class="btn btn-primary">Save and regenerate <kbd class="kbd">⌘S</kbd></button></div>
+      </div>
+
+      <div class="px-4 h-8 flex items-center justify-between border-y border-slate-200 text-xs">
+        <span class="font-medium">Exceptions</span><button class="btn h-6">Add exception <kbd class="kbd">E</kbd></button>
+      </div>
+      <ul class="text-xs divide-y divide-slate-100">
+        <li data-s="default overlap" class="px-4 py-2 flex items-center justify-between"><span><span class="mono">Tue 20 Oct</span> · annual leave</span><span class="tag tag-mute">block · all day</span></li>
+        <li data-s="default overlap conflict" class="px-4 py-2 flex items-center justify-between"><span><span class="mono">Wed 21 Oct 18:00–19:00</span> · extra session</span><span class="tag tag-ok">extra</span></li>
+        <li data-s="conflict" class="px-4 py-2 flex items-center justify-between bg-amber-50"><span><span class="mono">Thu 15 Oct</span> · leave (unsaved)</span><span class="tag tag-warn">2 bookings affected</span></li>
+      </ul>
+
+      <div data-s="conflict" hidden class="m-4 border border-amber-200 bg-amber-50 rounded p-3 text-xs" role="alert">
+        <p class="font-medium text-amber-700">Thu 15 Oct has 2 confirmed consultations.</p>
+        <p class="text-amber-700 mt-1">Saving this leave will not cancel them silently. Choose what happens to each booking.</p>
+        <table class="w-full mt-2 bg-white border border-amber-200 rounded">
+          <tbody class="divide-y divide-slate-100">
+            <tr><td class="p-2 mono">BK-20817</td><td class="p-2 mono">10:20–10:40</td><td class="p-2 truncate max-w-[96px]">Amira H.</td><td class="p-2"><select class="input h-6 text-xs"><option>Reschedule</option><option>Cancel + refund</option></select></td></tr>
+            <tr><td class="p-2 mono">BK-20834</td><td class="p-2 mono">14:00–14:20</td><td class="p-2 truncate max-w-[96px]">Joaquín Rodríguez-Villanueva</td><td class="p-2"><select class="input h-6 text-xs"><option>Cancel + refund</option><option>Reschedule</option></select></td></tr>
+          </tbody>
+        </table>
+        <div class="mt-3 flex items-center gap-2"><button class="btn btn-primary">Confirm leave and notify patients</button><button class="btn">Keep my hours</button></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- RIGHT: slot preview (detail) -->
+  <section class="overflow-y-auto min-w-0">
+    <div class="px-6 h-8 flex items-center justify-between border-b border-slate-200 bg-white text-xs sticky top-0">
+      <span class="font-medium">Generated slots · next 14 days</span>
+      <span class="mono text-slate-500">GET /doctors/me/slots?from=2026-10-12&amp;to=2026-10-25 · times Europe/London</span>
+    </div>
+
+    <div data-s="empty" hidden class="p-6 text-center text-xs text-slate-500">0 slots generated. Preview appears after you save weekly hours.</div>
+
+    <div data-s="default overlap conflict">
+      <table class="w-full text-xs">
+        <thead class="text-slate-500"><tr class="border-b border-slate-200 text-left bg-white"><th class="px-6 py-2 font-medium w-[96px]">Date</th><th class="py-2 font-medium w-[64px] text-right pr-4">Slots</th><th class="py-2 font-medium">Preview</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="px-6 py-2 mono">Mon 12 Oct</td><td class="py-2 pr-4 text-right mono tabular-nums">18</td><td class="py-2"><div class="flex flex-wrap gap-1"><span class="slot slot-booked">09:00</span><span class="slot">09:20</span><span class="slot">09:40</span><span class="slot">10:00</span><span class="slot slot-booked">10:20</span><span class="slot">10:40</span><span class="slot">11:00</span><span class="slot">11:20</span><span class="slot">11:40</span><span class="text-slate-500">+9</span></div><p class="help">TC-01 · 09:00–12:00 at 20 min = 9 slots</p></td></tr>
+          <tr><td class="px-6 py-2 mono">Tue 13 Oct</td><td class="py-2 pr-4 text-right mono tabular-nums">12</td><td class="py-2"><div class="flex flex-wrap gap-1"><span class="slot">09:00</span><span class="slot">09:20</span><span class="slot">09:40</span><span class="slot">10:00</span><span class="slot">10:20</span><span class="slot">10:40</span><span class="text-slate-500">+6</span></div></td></tr>
+          <tr class="text-slate-400"><td class="px-6 py-2 mono">Wed 14 Oct</td><td class="py-2 pr-4 text-right mono">0</td><td class="py-2">No rule</td></tr>
+          <tr data-s="default overlap"><td class="px-6 py-2 mono">Thu 15 Oct</td><td class="py-2 pr-4 text-right mono tabular-nums">15</td><td class="py-2"><div class="flex flex-wrap gap-1"><span class="slot">10:00</span><span class="slot">10:20</span><span class="slot">10:40</span><span class="slot">11:00</span><span class="slot">11:20</span><span class="slot">11:40</span><span class="text-slate-500">+9</span></div></td></tr>
+          <tr data-s="conflict" class="bg-amber-50"><td class="px-6 py-2 mono">Thu 15 Oct</td><td class="py-2 pr-4 text-right mono tabular-nums">0 <span class="text-slate-400">/ 15</span></td><td class="py-2"><div class="flex flex-wrap gap-1"><span class="slot slot-blocked">10:00</span><span class="slot slot-booked">10:20</span><span class="slot slot-blocked">10:40</span><span class="slot slot-blocked">11:00</span><span class="slot slot-booked">14:00</span><span class="text-slate-500">pending decision</span></div></td></tr>
+          <tr><td class="px-6 py-2 mono">Fri 16 Oct</td><td class="py-2 pr-4 text-right mono tabular-nums">9</td><td class="py-2"><div class="flex flex-wrap gap-1"><span class="slot">09:00</span><span class="slot">09:20</span><span class="slot">09:40</span><span class="slot">10:00</span><span class="slot">10:20</span><span class="slot">10:40</span><span class="text-slate-500">+3</span></div></td></tr>
+          <tr class="text-slate-400"><td class="px-6 py-2 mono">Sat 17 Oct</td><td class="py-2 pr-4 text-right mono">0</td><td class="py-2">No rule</td></tr>
+          <tr class="text-slate-400"><td class="px-6 py-2 mono">Sun 18 Oct</td><td class="py-2 pr-4 text-right mono">0</td><td class="py-2">No rule</td></tr>
+          <tr><td class="px-6 py-2 mono">Mon 19 Oct</td><td class="py-2 pr-4 text-right mono tabular-nums">18</td><td class="py-2"><div class="flex flex-wrap gap-1"><span class="slot">09:00</span><span class="slot">09:20</span><span class="slot">09:40</span><span class="slot">10:00</span><span class="slot">10:20</span><span class="slot">10:40</span><span class="text-slate-500">+12</span></div></td></tr>
+          <tr><td class="px-6 py-2 mono">Tue 20 Oct</td><td class="py-2 pr-4 text-right mono">0</td><td class="py-2"><span class="tag tag-mute">Annual leave</span></td></tr>
+          <tr><td class="px-6 py-2 mono">Wed 21 Oct</td><td class="py-2 pr-4 text-right mono tabular-nums">3</td><td class="py-2"><div class="flex flex-wrap gap-1"><span class="slot">18:00</span><span class="slot">18:20</span><span class="slot">18:40</span><span class="tag tag-ok ml-1">extra</span></div></td></tr>
+          <tr><td class="px-6 py-2 mono">Thu 22 Oct</td><td class="py-2 pr-4 text-right mono tabular-nums">15</td><td class="py-2"><div class="flex flex-wrap gap-1"><span class="slot">10:00</span><span class="slot">10:20</span><span class="slot">10:40</span><span class="slot">11:00</span><span class="slot">11:20</span><span class="slot">11:40</span><span class="text-slate-500">+9</span></div></td></tr>
+          <tr><td class="px-6 py-2 mono">Fri 23 Oct</td><td class="py-2 pr-4 text-right mono tabular-nums">9</td><td class="py-2"><div class="flex flex-wrap gap-1"><span class="slot">09:00</span><span class="slot">09:20</span><span class="slot">09:40</span><span class="slot">10:00</span><span class="slot">10:20</span><span class="slot">10:40</span><span class="text-slate-500">+3</span></div></td></tr>
+          <tr class="text-slate-400"><td class="px-6 py-2 mono">Sat 24 Oct</td><td class="py-2 pr-4 text-right mono">0</td><td class="py-2">No rule</td></tr>
+          <tr class="text-slate-400"><td class="px-6 py-2 mono">Sun 25 Oct</td><td class="py-2 pr-4 text-right mono">0</td><td class="py-2"><span class="tag tag-warn">Clocks go back 02:00 → 01:00</span></td></tr>
+        </tbody>
+      </table>
+      <p class="px-6 py-3 text-xs text-slate-500">Legend: <span class="slot slot-booked">booked</span> <span class="slot slot-blocked">blocked</span> <span class="slot">open</span> · Slots are stored in UTC and regenerated nightly and on every change.</p>
+    </div>
+  </section>
+</div>
+
+<script>
+  const tabs = [...document.querySelectorAll('[data-tab]')];
+  function show(name) {
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === name)));
+    document.querySelectorAll('[data-s]').forEach(el => el.hidden = !el.dataset.s.split(' ').includes(name));
+    const save = document.querySelector('[data-save]');
+    if (save) { save.disabled = name === 'overlap'; save.style.opacity = name === 'overlap' ? '.5' : '1'; }
+  }
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
+  document.addEventListener('keydown', e => {
+    if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+    const i = parseInt(e.key, 10);
+    if (i >= 1 && i <= tabs.length) show(tabs[i - 1].dataset.tab);
+  });
+  show('default');
+</script>
+</body>
+</html>
