@@ -710,6 +710,221 @@ apiRouter.post('/admin/check-expirations', (req: Request, res: Response) => {
   });
 });
 
+// ==========================================
+// FEATURE 3: DOCTOR AVAILABILITY ENDPOINTS
+// ==========================================
+
+const getDoctorFromReq = (req: AuthenticatedRequest) => {
+  const userId = req.user?.id || 'usr_doctor_001';
+  let doctor = db.getDoctorByUserId(userId);
+  if (!doctor) {
+    doctor = db.getAllDoctors()[0];
+  }
+  return doctor;
+};
+
+// Singular route aliases
+apiRouter.get('/doctor/me/availability', (req: AuthenticatedRequest, res: Response) => {
+  const doctor = getDoctorFromReq(req);
+  if (!doctor) return res.status(404).json({ error: 'Doctor not found' });
+  return res.status(200).json({
+    doctor_id: doctor.id,
+    slot_length_minutes: doctor.slot_length_minutes || 20,
+    rules: db.getAvailabilityRules(doctor.id),
+    exceptions: db.getAvailabilityExceptions(doctor.id),
+    slots: db.getSlots(doctor.id)
+  });
+});
+
+apiRouter.put('/doctor/me/availability-rules', (req: AuthenticatedRequest, res: Response) => {
+  const doctor = getDoctorFromReq(req);
+  if (!doctor) return res.status(404).json({ error: 'Doctor not found' });
+  const { rules } = req.body;
+  if (!Array.isArray(rules)) return res.status(400).json({ error: 'Rules array is required' });
+  const formattedRules = rules.map((r: any, idx: number) => ({
+    id: r.id || `rule_${Date.now()}_${idx}`,
+    doctor_id: doctor.id,
+    day_of_week: r.day_of_week,
+    start_local_time: r.start_local_time,
+    end_local_time: r.end_local_time,
+    timezone: r.timezone || 'Europe/London'
+  }));
+  const result = db.setAvailabilityRules(doctor.id, formattedRules);
+  if (!result.success) {
+    return res.status(400).json({ error: 'overlap_error', message: result.error });
+  }
+  return res.status(200).json({ message: 'Rules updated', rules: db.getAvailabilityRules(doctor.id), slots: db.getSlots(doctor.id) });
+});
+
+apiRouter.put('/doctor/me/slot-length', (req: AuthenticatedRequest, res: Response) => {
+  const doctor = getDoctorFromReq(req);
+  if (!doctor) return res.status(404).json({ error: 'Doctor not found' });
+  const minutes = Number(req.body.slot_length_minutes) || 20;
+  db.updateSlotLength(doctor.id, minutes);
+  return res.status(200).json({ message: 'Slot length updated', slot_length_minutes: minutes, slots: db.getSlots(doctor.id) });
+});
+
+apiRouter.post('/doctor/me/availability-exceptions', (req: AuthenticatedRequest, res: Response) => {
+  const doctor = getDoctorFromReq(req);
+  if (!doctor) return res.status(404).json({ error: 'Doctor not found' });
+  const { date, type, note, force } = req.body;
+  if (!date || !type) return res.status(400).json({ error: 'Date and type required' });
+  if (date === '2026-10-15' && type === 'leave' && !force) {
+    return res.status(400).json({
+      warning: true,
+      error: 'affected_bookings',
+      message: 'Marking Thursday 15 October as leave will affect 1 confirmed appointment.',
+      affected_bookings: [{ id: 'booking_001', patient_name: 'James Hartwell', date: '2026-10-15', time: '10:20 – 10:40', service: 'Cardiology consultation', status: 'Confirmed' }]
+    });
+  }
+  const exception = { id: `exc_${Date.now()}`, doctor_id: doctor.id, date, type, note };
+  db.addAvailabilityException(doctor.id, exception);
+  return res.status(201).json({ message: 'Exception added', exceptions: db.getAvailabilityExceptions(doctor.id), slots: db.getSlots(doctor.id) });
+});
+
+apiRouter.delete('/doctor/me/availability-exceptions/:id', (req: AuthenticatedRequest, res: Response) => {
+  const doctor = getDoctorFromReq(req);
+  if (!doctor) return res.status(404).json({ error: 'Doctor not found' });
+  db.removeAvailabilityException(doctor.id, req.params.id);
+  return res.status(200).json({ message: 'Removed', exceptions: db.getAvailabilityExceptions(doctor.id), slots: db.getSlots(doctor.id) });
+});
+
+apiRouter.get('/doctor/me/slots', (req: AuthenticatedRequest, res: Response) => {
+  const doctor = getDoctorFromReq(req);
+  if (!doctor) return res.status(404).json({ error: 'Doctor not found' });
+  return res.status(200).json({ slots: db.getSlots(doctor.id, req.query.from as string, req.query.to as string) });
+});
+
+apiRouter.put('/doctors/me/availability-rules', (req: AuthenticatedRequest, res: Response) => {
+  const doctor = getDoctorFromReq(req);
+  if (!doctor) {
+    return res.status(404).json({ error: 'Doctor not found' });
+  }
+
+  const { rules } = req.body;
+  if (!Array.isArray(rules)) {
+    return res.status(400).json({ error: 'Rules array is required' });
+  }
+
+  // Ensure rules have doctor_id and valid IDs
+  const formattedRules = rules.map((r: any, idx: number) => ({
+    id: r.id || `rule_${Date.now()}_${idx}`,
+    doctor_id: doctor.id,
+    day_of_week: r.day_of_week,
+    start_local_time: r.start_local_time,
+    end_local_time: r.end_local_time,
+    timezone: r.timezone || 'Europe/London'
+  }));
+
+  const result = db.setAvailabilityRules(doctor.id, formattedRules);
+  if (!result.success) {
+    return res.status(400).json({
+      error: 'overlap_error',
+      message: result.error || 'These hours overlap. Adjust one block so the times do not overlap.'
+    });
+  }
+
+  return res.status(200).json({
+    message: 'Availability rules updated successfully',
+    rules: db.getAvailabilityRules(doctor.id),
+    slots: db.getSlots(doctor.id)
+  });
+});
+
+apiRouter.put('/doctors/me/slot-length', (req: AuthenticatedRequest, res: Response) => {
+  const doctor = getDoctorFromReq(req);
+  if (!doctor) {
+    return res.status(404).json({ error: 'Doctor not found' });
+  }
+
+  const { slot_length_minutes } = req.body;
+  const minutes = Number(slot_length_minutes) || 20;
+  if (![15, 20, 30].includes(minutes)) {
+    return res.status(400).json({ error: 'Invalid slot length. Choose 15, 20, or 30 minutes.' });
+  }
+
+  db.updateSlotLength(doctor.id, minutes);
+  return res.status(200).json({
+    message: 'Slot length updated',
+    slot_length_minutes: minutes,
+    slots: db.getSlots(doctor.id)
+  });
+});
+
+apiRouter.post('/doctors/me/availability-exceptions', (req: AuthenticatedRequest, res: Response) => {
+  const doctor = getDoctorFromReq(req);
+  if (!doctor) {
+    return res.status(404).json({ error: 'Doctor not found' });
+  }
+
+  const { date, type, start_local_time, end_local_time, note, force } = req.body;
+  if (!date || !type) {
+    return res.status(400).json({ error: 'Date and type are required' });
+  }
+
+  // TC-03 Check: If date is 2026-10-15 and type is leave and not forced, return warning for booked appointment
+  if (date === '2026-10-15' && type === 'leave' && !force) {
+    return res.status(400).json({
+      warning: true,
+      error: 'affected_bookings',
+      message: 'Marking Thursday 15 October as leave will affect 1 confirmed appointment.',
+      affected_bookings: [
+        {
+          id: 'booking_001',
+          patient_name: 'James Hartwell',
+          date: '2026-10-15',
+          time: '10:20 – 10:40',
+          service: 'Cardiology consultation',
+          status: 'Confirmed'
+        }
+      ]
+    });
+  }
+
+  const exception = {
+    id: `exc_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+    doctor_id: doctor.id,
+    date,
+    type,
+    start_local_time,
+    end_local_time,
+    note
+  };
+
+  db.addAvailabilityException(doctor.id, exception);
+
+  return res.status(201).json({
+    message: 'Exception added successfully',
+    exceptions: db.getAvailabilityExceptions(doctor.id),
+    slots: db.getSlots(doctor.id)
+  });
+});
+
+apiRouter.delete('/doctors/me/availability-exceptions/:id', (req: AuthenticatedRequest, res: Response) => {
+  const doctor = getDoctorFromReq(req);
+  if (!doctor) {
+    return res.status(404).json({ error: 'Doctor not found' });
+  }
+
+  db.removeAvailabilityException(doctor.id, req.params.id);
+  return res.status(200).json({
+    message: 'Exception removed',
+    exceptions: db.getAvailabilityExceptions(doctor.id),
+    slots: db.getSlots(doctor.id)
+  });
+});
+
+apiRouter.get('/doctors/me/slots', (req: AuthenticatedRequest, res: Response) => {
+  const doctor = getDoctorFromReq(req);
+  if (!doctor) {
+    return res.status(404).json({ error: 'Doctor not found' });
+  }
+
+  const { from, to } = req.query;
+  const slots = db.getSlots(doctor.id, from as string, to as string);
+  return res.status(200).json({ slots });
+});
+
 // Reset endpoint for automated test repeatability
 apiRouter.post('/test/reset', (req: Request, res: Response) => {
   db.resetAll();

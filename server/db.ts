@@ -17,6 +17,36 @@ export interface User {
   status: 'pending_verification' | 'active';
 }
 
+export interface AvailabilityRule {
+  id: string;
+  doctor_id: string;
+  day_of_week: string; // 'monday', 'tuesday', etc. or 0-6
+  start_local_time: string; // '09:00'
+  end_local_time: string; // '12:00'
+  timezone: string;
+}
+
+export interface AvailabilityException {
+  id: string;
+  doctor_id: string;
+  date: string; // '2026-10-19'
+  type: 'leave' | 'extra';
+  start_local_time?: string;
+  end_local_time?: string;
+  note?: string;
+}
+
+export interface Slot {
+  id: string;
+  doctor_id: string;
+  date: string; // '2026-10-12'
+  starts_at_utc: string;
+  ends_at_utc: string;
+  time_str: string; // '09:00'
+  status: 'open' | 'booked' | 'blocked';
+  booking_id?: string | null;
+}
+
 export interface ConsultationFees {
   initial: number;
   follow_up: number;
@@ -74,6 +104,7 @@ export interface Doctor {
   allow_reapply?: boolean;
   affected_bookings_count?: number;
   suspended_at?: string | null;
+  slot_length_minutes?: number; // 15, 20, 30
   created_at: string;
   updated_at: string;
 }
@@ -83,14 +114,175 @@ class Database {
   private emailToId: Map<string, string> = new Map();
   private doctors: Map<string, Doctor> = new Map();
   private userToDoctorId: Map<string, string> = new Map();
+  private availabilityRules: Map<string, AvailabilityRule[]> = new Map();
+  private availabilityExceptions: Map<string, AvailabilityException[]> = new Map();
+  private slots: Map<string, Slot[]> = new Map();
 
   constructor() {
     this.seedDefaultUsers();
   }
 
-  public async seedDefaultUsers() {
-    const salt = await bcrypt.genSalt(10);
-    const defaultPasswordHash = await bcrypt.hash('SecurePassword2026!', salt);
+  public seedDefaultAvailability(doctorId: string) {
+    const defaultRules: AvailabilityRule[] = [
+      { id: 'rule_1', doctor_id: doctorId, day_of_week: 'monday', start_local_time: '09:00', end_local_time: '12:00', timezone: 'Europe/London' },
+      { id: 'rule_2', doctor_id: doctorId, day_of_week: 'monday', start_local_time: '14:00', end_local_time: '17:00', timezone: 'Europe/London' },
+      { id: 'rule_3', doctor_id: doctorId, day_of_week: 'tuesday', start_local_time: '09:00', end_local_time: '13:00', timezone: 'Europe/London' },
+      { id: 'rule_4', doctor_id: doctorId, day_of_week: 'thursday', start_local_time: '08:30', end_local_time: '12:30', timezone: 'Europe/London' },
+      { id: 'rule_5', doctor_id: doctorId, day_of_week: 'thursday', start_local_time: '14:00', end_local_time: '16:00', timezone: 'Europe/London' },
+      { id: 'rule_6', doctor_id: doctorId, day_of_week: 'friday', start_local_time: '09:00', end_local_time: '12:00', timezone: 'Europe/London' },
+    ];
+    this.availabilityRules.set(doctorId, defaultRules);
+
+    const defaultExceptions: AvailabilityException[] = [
+      { id: 'exc_1', doctor_id: doctorId, date: '2026-10-19', type: 'leave', note: 'Annual leave' }
+    ];
+    this.availabilityExceptions.set(doctorId, defaultExceptions);
+
+    const doc = this.doctors.get(doctorId);
+    if (doc) {
+      doc.slot_length_minutes = doc.slot_length_minutes || 20;
+    }
+
+    this.generateSlots(doctorId);
+  }
+
+  public validateRulesOverlap(rules: AvailabilityRule[]): { hasOverlap: boolean; overlappingDay?: string } {
+    const byDay: Record<string, AvailabilityRule[]> = {};
+    for (const r of rules) {
+      const day = r.day_of_week.toLowerCase();
+      if (!byDay[day]) byDay[day] = [];
+      byDay[day].push(r);
+    }
+
+    for (const [day, dayRules] of Object.entries(byDay)) {
+      // sort by start time
+      const sorted = [...dayRules].sort((a, b) => a.start_local_time.localeCompare(b.start_local_time));
+      for (let i = 0; i < sorted.length - 1; i++) {
+        const current = sorted[i];
+        const next = sorted[i + 1];
+        if (current.end_local_time > next.start_local_time) {
+          return { hasOverlap: true, overlappingDay: day };
+        }
+      }
+    }
+    return { hasOverlap: false };
+  }
+
+  public getAvailabilityRules(doctorId: string): AvailabilityRule[] {
+    return this.availabilityRules.get(doctorId) || [];
+  }
+
+  public setAvailabilityRules(doctorId: string, rules: AvailabilityRule[]): { success: boolean; error?: string } {
+    const validation = this.validateRulesOverlap(rules);
+    if (validation.hasOverlap) {
+      return { success: false, error: `Overlapping hours on ${validation.overlappingDay}` };
+    }
+    this.availabilityRules.set(doctorId, rules);
+    this.generateSlots(doctorId);
+    return { success: true };
+  }
+
+  public getAvailabilityExceptions(doctorId: string): AvailabilityException[] {
+    return this.availabilityExceptions.get(doctorId) || [];
+  }
+
+  public addAvailabilityException(doctorId: string, exception: AvailabilityException): void {
+    const exs = this.availabilityExceptions.get(doctorId) || [];
+    exs.push(exception);
+    this.availabilityExceptions.set(doctorId, exs);
+    this.generateSlots(doctorId);
+  }
+
+  public removeAvailabilityException(doctorId: string, exceptionId: string): void {
+    let exs = this.availabilityExceptions.get(doctorId) || [];
+    exs = exs.filter(e => e.id !== exceptionId);
+    this.availabilityExceptions.set(doctorId, exs);
+    this.generateSlots(doctorId);
+  }
+
+  public updateSlotLength(doctorId: string, minutes: number): void {
+    const doc = this.doctors.get(doctorId);
+    if (doc) {
+      doc.slot_length_minutes = minutes;
+    }
+    this.generateSlots(doctorId);
+  }
+
+  public generateSlots(doctorId: string): void {
+    const doc = this.doctors.get(doctorId);
+    const slotLength = doc?.slot_length_minutes || 20;
+    const rules = this.getAvailabilityRules(doctorId);
+    const exceptions = this.getAvailabilityExceptions(doctorId);
+
+    const generatedSlots: Slot[] = [];
+    const startDate = new Date('2026-10-10T00:00:00Z'); // start from Sat 10 Oct 2026 matching designs
+
+    for (let i = 0; i < 14; i++) {
+      const d = new Date(startDate.getTime() + i * 24 * 60 * 60 * 1000);
+      const dateStr = d.toISOString().split('T')[0]; // '2026-10-12'
+      const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+      const dayName = dayNames[d.getUTCDay()];
+
+      // Check exceptions for this date
+      const dateException = exceptions.find(e => e.date === dateStr);
+      if (dateException && dateException.type === 'leave' && !dateException.start_local_time) {
+        // Full day leave
+        continue;
+      }
+
+      const dayRules = rules.filter(r => r.day_of_week.toLowerCase() === dayName);
+      for (const rule of dayRules) {
+        let [startH, startM] = rule.start_local_time.split(':').map(Number);
+        const [endH, endM] = rule.end_local_time.split(':').map(Number);
+
+        let currentMinutes = startH * 60 + startM;
+        const endMinutes = endH * 60 + endM;
+
+        while (currentMinutes + slotLength <= endMinutes) {
+          const h = Math.floor(currentMinutes / 60);
+          const m = currentMinutes % 60;
+          const timeStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+          
+          const nextMinutes = currentMinutes + slotLength;
+          const nh = Math.floor(nextMinutes / 60);
+          const nm = nextMinutes % 60;
+          const endTimeStr = `${String(nh).padStart(2, '0')}:${String(nm).padStart(2, '0')}`;
+
+          const slotId = `slot_${doctorId}_${dateStr}_${timeStr.replace(':', '')}`;
+          // check if already booked or existing
+          const existing = (this.slots.get(doctorId) || []).find(s => s.id === slotId);
+
+          generatedSlots.push({
+            id: slotId,
+            doctor_id: doctorId,
+            date: dateStr,
+            time_str: timeStr,
+            starts_at_utc: `${dateStr}T${timeStr}:00Z`,
+            ends_at_utc: `${dateStr}T${endTimeStr}:00Z`,
+            status: existing ? existing.status : 'open',
+            booking_id: existing ? existing.booking_id : null
+          });
+
+          currentMinutes = nextMinutes;
+        }
+      }
+    }
+
+    this.slots.set(doctorId, generatedSlots);
+  }
+
+  public getSlots(doctorId: string, from?: string, to?: string): Slot[] {
+    const list = this.slots.get(doctorId) || [];
+    if (!from && !to) return list;
+    return list.filter(s => {
+      if (from && s.date < from) return false;
+      if (to && s.date > to) return false;
+      return true;
+    });
+  }
+
+  public seedDefaultUsers() {
+    const defaultPasswordHash = bcrypt.hashSync('SecurePassword2026!', 10);
 
     // Seeded verified patient
     const patientUser: User = {
@@ -258,6 +450,7 @@ class Database {
       updated_at: '2026-10-09T14:32:00Z'
     };
     this.addDoctor(amaraDoc);
+    this.seedDefaultAvailability('doc_amara_001');
 
     const rajeshDoc: Doctor = {
       id: 'doc_rajesh_002',

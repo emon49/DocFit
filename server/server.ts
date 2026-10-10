@@ -63,7 +63,8 @@ const pages = [
   'admin-review-detail.html',
   'admin-approve-confirm.html',
   'admin-reject.html',
-  'admin-request-info.html'
+  'admin-request-info.html',
+  'doctor-schedule.html'
 ];
 
 for (const page of pages) {
