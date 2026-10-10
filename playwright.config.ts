@@ -12,13 +12,11 @@ export default defineConfig({
     baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
     headless: true,
+    launchOptions: {
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
+    },
   },
-  webServer: {
-    command: 'npx tsx server/server.ts',
-    url: 'http://localhost:3000',
-    reuseExistingServer: true,
-    timeout: 15000,
-  },
+
   projects: [
     {
       name: 'chromium',

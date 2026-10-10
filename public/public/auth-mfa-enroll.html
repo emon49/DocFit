@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set up two-factor authentication · DocFit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>*{font-family:Inter,sans-serif}.qr-cell-dark{fill:#134e4a}.qr-cell-light{fill:#f0fdfa}</style>
+</head>
+<body class="min-h-screen bg-slate-50 flex flex-col items-center justify-center px-4 py-12">
+
+  <!-- Logo -->
+  <a href="index.html" class="flex items-center gap-2.5 mb-8">
+    <div class="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center">
+      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+    </div>
+    <span class="text-slate-900 font-semibold text-xl tracking-tight">DocFit</span>
+  </a>
+
+  <!-- Required banner -->
+  <div class="w-full max-w-md flex items-start gap-3 bg-amber-50 border border-amber-300 rounded-lg px-4 py-3 mb-5">
+    <svg class="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+    <p class="text-xs text-amber-800 leading-snug"><span class="font-semibold">Two-factor authentication is required for doctor accounts.</span> Complete this setup before you can access DocFit.</p>
+  </div>
+
+  <div class="w-full max-w-md bg-white rounded-xl shadow-sm border border-slate-200 px-8 py-8">
+
+    <h1 class="text-xl font-bold text-slate-900 tracking-tight">Set up two-factor authentication</h1>
+    <p class="mt-1 text-sm text-slate-500">Protect your account and your patients' trust.</p>
+
+    <div id="error-banner" class="hidden mt-4 p-2.5 bg-red-50 border border-red-200 text-red-800 text-xs rounded-lg text-left"></div>
+
+    <!-- Steps -->
+    <ol class="mt-6 space-y-6">
+
+      <!-- Step 1 -->
+      <li class="flex gap-4">
+        <div class="flex-shrink-0 w-6 h-6 rounded-full bg-teal-700 text-white text-xs font-bold flex items-center justify-center mt-0.5">1</div>
+        <div class="flex-1">
+          <p class="text-sm font-medium text-slate-800">Download an authenticator app</p>
+          <p class="text-xs text-slate-400 mt-0.5 leading-snug">Google Authenticator, Authy, or 1Password work well. Install it on your phone before continuing.</p>
+        </div>
+      </li>
+
+      <!-- Step 2 — QR code -->
+      <li class="flex gap-4">
+        <div class="flex-shrink-0 w-6 h-6 rounded-full bg-teal-700 text-white text-xs font-bold flex items-center justify-center mt-0.5">2</div>
+        <div class="flex-1">
+          <p class="text-sm font-medium text-slate-800">Scan this QR code</p>
+          <p class="text-xs text-slate-400 mt-0.5">Open your authenticator app and scan the code below.</p>
+
+          <!-- QR code — generated SVG pattern -->
+          <div class="mt-3 inline-block bg-teal-50 border border-teal-200 rounded-xl p-3">
+            <svg width="140" height="140" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+              <rect width="140" height="140" fill="#f0fdfa"/>
+              <!-- Finder pattern TL -->
+              <rect x="8" y="8" width="35" height="35" rx="2" fill="#134e4a"/>
+              <rect x="13" y="13" width="25" height="25" rx="1" fill="#f0fdfa"/>
+              <rect x="18" y="18" width="15" height="15" rx="1" fill="#134e4a"/>
+              <!-- Finder pattern TR -->
+              <rect x="97" y="8" width="35" height="35" rx="2" fill="#134e4a"/>
+              <rect x="102" y="13" width="25" height="25" rx="1" fill="#f0fdfa"/>
+              <rect x="107" y="18" width="15" height="15" rx="1" fill="#134e4a"/>
+              <!-- Finder pattern BL -->
+              <rect x="8" y="97" width="35" height="35" rx="2" fill="#134e4a"/>
+              <rect x="13" y="102" width="25" height="25" rx="1" fill="#f0fdfa"/>
+              <rect x="18" y="107" width="15" height="15" rx="1" fill="#134e4a"/>
+              <!-- Data modules -->
+              <rect x="50" y="8" width="5" height="5" fill="#134e4a"/>
+              <rect x="60" y="8" width="5" height="5" fill="#134e4a"/>
+              <rect x="75" y="8" width="5" height="5" fill="#134e4a"/>
+              <rect x="85" y="8" width="5" height="5" fill="#134e4a"/>
+              <rect x="50" y="18" width="5" height="5" fill="#134e4a"/>
+              <rect x="70" y="18" width="5" height="5" fill="#134e4a"/>
+              <rect x="85" y="18" width="5" height="5" fill="#134e4a"/>
+              <rect x="55" y="28" width="5" height="5" fill="#134e4a"/>
+              <rect x="65" y="28" width="5" height="5" fill="#134e4a"/>
+              <rect x="80" y="28" width="5" height="5" fill="#134e4a"/>
+              <rect x="50" y="38" width="5" height="5" fill="#134e4a"/>
+              <rect x="60" y="38" width="5" height="5" fill="#134e4a"/>
+              <rect x="75" y="38" width="5" height="5" fill="#134e4a"/>
+              <rect x="8" y="50" width="5" height="5" fill="#134e4a"/>
+              <rect x="18" y="50" width="5" height="5" fill="#134e4a"/>
+              <rect x="35" y="50" width="5" height="5" fill="#134e4a"/>
+              <rect x="50" y="50" width="5" height="5" fill="#134e4a"/>
+              <rect x="65" y="50" width="5" height="5" fill="#134e4a"/>
+              <rect x="75" y="50" width="5" height="5" fill="#134e4a"/>
+              <rect x="90" y="50" width="5" height="5" fill="#134e4a"/>
+              <rect x="110" y="50" width="5" height="5" fill="#134e4a"/>
+              <rect x="127" y="50" width="5" height="5" fill="#134e4a"/>
+              <rect x="8" y="60" width="5" height="5" fill="#134e4a"/>
+              <rect x="28" y="60" width="5" height="5" fill="#134e4a"/>
+              <rect x="50" y="60" width="5" height="5" fill="#134e4a"/>
+              <rect x="70" y="60" width="5" height="5" fill="#134e4a"/>
+              <rect x="80" y="60" width="5" height="5" fill="#134e4a"/>
+              <rect x="97" y="60" width="5" height="5" fill="#134e4a"/>
+              <rect x="115" y="60" width="5" height="5" fill="#134e4a"/>
+              <rect x="127" y="60" width="5" height="5" fill="#134e4a"/>
+              <rect x="18" y="70" width="5" height="5" fill="#134e4a"/>
+              <rect x="35" y="70" width="5" height="5" fill="#134e4a"/>
+              <rect x="55" y="70" width="5" height="5" fill="#134e4a"/>
+              <rect x="75" y="70" width="5" height="5" fill="#134e4a"/>
+              <rect x="90" y="70" width="5" height="5" fill="#134e4a"/>
+              <rect x="105" y="70" width="5" height="5" fill="#134e4a"/>
+              <rect x="127" y="70" width="5" height="5" fill="#134e4a"/>
+              <rect x="8" y="80" width="5" height="5" fill="#134e4a"/>
+              <rect x="28" y="80" width="5" height="5" fill="#134e4a"/>
+              <rect x="50" y="80" width="5" height="5" fill="#134e4a"/>
+              <rect x="65" y="80" width="5" height="5" fill="#134e4a"/>
+              <rect x="80" y="80" width="5" height="5" fill="#134e4a"/>
+              <rect x="97" y="80" width="5" height="5" fill="#134e4a"/>
+              <rect x="115" y="80" width="5" height="5" fill="#134e4a"/>
+              <rect x="50" y="97" width="5" height="5" fill="#134e4a"/>
+              <rect x="65" y="97" width="5" height="5" fill="#134e4a"/>
+              <rect x="80" y="97" width="5" height="5" fill="#134e4a"/>
+              <rect x="97" y="97" width="5" height="5" fill="#134e4a"/>
+              <rect x="115" y="97" width="5" height="5" fill="#134e4a"/>
+              <rect x="127" y="97" width="5" height="5" fill="#134e4a"/>
+            </svg>
+          </div>
+
+          <div class="mt-3">
+            <p class="text-xs text-slate-400 mb-1">Can't scan? Enter this setup key manually:</p>
+            <div class="flex items-center gap-2">
+              <code id="setup-key" class="text-xs font-mono font-semibold text-slate-700 bg-slate-100 px-3 py-1.5 rounded tracking-widest flex-1">JBSW Y3DP EHPK 3PXP QUYT EMLS</code>
+              <button id="copy-btn" type="button" title="Copy" class="flex-shrink-0 w-7 h-7 flex items-center justify-center text-slate-400 hover:text-slate-600 border border-slate-200 rounded bg-white">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- Step 3 — confirm code -->
+      <li class="flex gap-4">
+        <div class="flex-shrink-0 w-6 h-6 rounded-full bg-teal-700 text-white text-xs font-bold flex items-center justify-center mt-0.5">3</div>
+        <div class="flex-1">
+          <p class="text-sm font-medium text-slate-800">Enter the 6-digit code to confirm</p>
+          <p class="text-xs text-slate-400 mt-0.5">Enter the code your authenticator app shows for DocFit.</p>
+          <form id="enroll-form" class="mt-3 space-y-3" novalidate>
+            <input id="enroll-code" type="text" inputmode="numeric" maxlength="6" placeholder="000 000" class="w-full px-4 py-2.5 text-xl font-bold text-center bg-white border-2 border-slate-200 rounded-lg text-slate-900 placeholder-slate-300 focus:outline-none focus:border-teal-500 transition tracking-widest font-mono" autocomplete="one-time-code" required />
+            <button id="enroll-btn" type="submit" class="w-full py-2.5 px-4 bg-teal-700 hover:bg-teal-800 text-white text-sm font-semibold rounded-lg transition-colors">
+              Activate two-factor authentication
+            </button>
+          </form>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <p class="mt-6 text-center text-xs text-slate-400">
+    <a href="auth-signin.html" class="text-slate-500 hover:underline">Log out</a>
+  </p>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const email = urlParams.get('email') || 'p.kapoor@hospital.org';
+    const form = document.getElementById('enroll-form');
+    const codeInput = document.getElementById('enroll-code');
+    const enrollBtn = document.getElementById('enroll-btn');
+    const errorBanner = document.getElementById('error-banner');
+    const copyBtn = document.getElementById('copy-btn');
+
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('JBSWY3DPEHPK3PXPQUYTEMLS');
+      copyBtn.classList.add('text-teal-600');
+      setTimeout(() => copyBtn.classList.remove('text-teal-600'), 1500);
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorBanner.classList.add('hidden');
+
+      const code = codeInput.value.trim();
+      if (!code || code.length < 6) {
+        errorBanner.textContent = 'Please enter a 6-digit confirmation code (e.g. 123456).';
+        errorBanner.classList.remove('hidden');
+        return;
+      }
+
+      enrollBtn.disabled = true;
+      enrollBtn.textContent = 'Activating…';
+
+      try {
+        const res = await fetch('/api/auth/mfa/enroll', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, code })
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          errorBanner.textContent = data.error || 'Failed to activate MFA.';
+          errorBanner.classList.remove('hidden');
+          enrollBtn.disabled = false;
+          enrollBtn.textContent = 'Activate two-factor authentication';
+          return;
+        }
+
+        // Store full access token
+        localStorage.setItem('docfit_token', data.token);
+        localStorage.setItem('docfit_user', JSON.stringify(data.user));
+
+        // Redirect to dashboard (or doctor surface)
+        window.location.href = 'patient-dashboard.html';
+      } catch (err) {
+        errorBanner.textContent = 'Network error activating two-factor authentication.';
+        errorBanner.classList.remove('hidden');
+        enrollBtn.disabled = false;
+        enrollBtn.textContent = 'Activate two-factor authentication';
+      }
+    });
+  </script>
+</body>
+</html>

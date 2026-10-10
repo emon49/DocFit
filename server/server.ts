@@ -18,8 +18,11 @@ app.use(express.urlencoded({ extended: true }));
 // API routes
 app.use('/api', apiRouter);
 
+import fs from 'fs';
+
 // Static assets and UI pages
-const publicPath = path.join(__dirname, '..', 'public');
+const distPublicPath = path.join(__dirname, '..', 'dist', 'public');
+const publicPath = fs.existsSync(distPublicPath) ? distPublicPath : path.join(__dirname, '..', 'public');
 app.use(express.static(publicPath));
 
 // Also serve the raw designs if requested directly
