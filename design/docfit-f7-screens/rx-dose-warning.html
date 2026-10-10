@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prescription — Dose Warning · DocFit</title>
+<script>tailwind.config={theme:{extend:{colors:{teal:{700:'#0F766E',800:'#115E59',300:'#5EEAD4',200:'#99F6E4',50:'#F0FDFA'}}}}}</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-50" style="font-family:'Inter',sans-serif">
+
+<!-- Sidebar -->
+<div class="w-56 bg-teal-800 fixed h-screen flex flex-col z-20">
+  <div class="p-4 border-b border-teal-700 flex items-center">
+    <svg class="w-6 h-6 text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+    <span class="text-white text-lg font-bold ml-2">DocFit</span>
+  </div>
+  <nav class="flex-1 p-3 space-y-1">
+    <a href="#" class="text-teal-100 hover:bg-teal-700 rounded-lg p-3 flex items-center gap-3 text-sm font-medium">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a href="#" class="bg-teal-700 text-white rounded-lg p-3 flex items-center gap-3 text-sm font-medium">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.768-.231-1.48-.634-2.072M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.768.231-1.48.634-2.072M14 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      Patients
+    </a>
+    <a href="#" class="text-teal-100 hover:bg-teal-700 rounded-lg p-3 flex items-center gap-3 text-sm font-medium">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Schedule
+    </a>
+    <a href="#" class="text-teal-100 hover:bg-teal-700 rounded-lg p-3 flex items-center gap-3 text-sm font-medium">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+      Messages
+    </a>
+    <a href="#" class="text-teal-100 hover:bg-teal-700 rounded-lg p-3 flex items-center gap-3 text-sm font-medium">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      Earnings
+    </a>
+    <a href="#" class="text-teal-100 hover:bg-teal-700 rounded-lg p-3 flex items-center gap-3 text-sm font-medium">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      Settings
+    </a>
+  </nav>
+  <div class="p-3 border-t border-teal-700">
+    <div class="bg-teal-700/40 rounded-lg p-3 flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-teal-300 text-teal-800 flex items-center justify-center text-xs font-bold flex-shrink-0">AO</div>
+      <div>
+        <p class="text-teal-100 text-xs font-semibold">Dr. A. Osei-Bonsu</p>
+        <p class="text-teal-300 text-[10px]">Cardiologist</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Top bar -->
+<div class="ml-56 h-14 bg-white border-b border-slate-200 sticky top-0 z-10 flex items-center justify-between px-6">
+  <nav class="text-sm text-slate-500">
+    <span class="hover:text-slate-700 cursor-pointer">Patients</span>
+    <span class="mx-1.5 text-slate-300">/</span>
+    <span class="hover:text-slate-700 cursor-pointer">James Hartwell</span>
+    <span class="mx-1.5 text-slate-300">/</span>
+    <span class="text-slate-800 font-medium">Prescription</span>
+  </nav>
+  <div class="flex items-center gap-3">
+    <button class="text-slate-500 hover:text-slate-700">
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+    </button>
+    <div class="w-px h-5 bg-slate-200"></div>
+    <span class="text-sm text-slate-700 font-medium">Dr. A. Osei-Bonsu</span>
+    <div class="w-8 h-8 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-xs font-bold">AO</div>
+  </div>
+</div>
+
+<!-- Content -->
+<div class="ml-56 pt-14 p-6 bg-slate-50 min-h-screen">
+  <div class="flex gap-5 items-start">
+
+    <!-- Left consultation context panel -->
+    <div class="w-64 flex-shrink-0 bg-white rounded-xl shadow-sm p-4 self-start sticky top-6">
+      <p class="text-xs text-slate-400 uppercase tracking-wide font-medium mb-3">Consultation</p>
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-sm font-bold flex-shrink-0">JH</div>
+        <div>
+          <p class="text-sm font-semibold text-slate-800">James Hartwell</p>
+          <p class="text-xs text-slate-400">37 years · Male</p>
+        </div>
+      </div>
+      <div class="space-y-2 mt-3">
+        <div class="flex justify-between text-xs">
+          <span class="text-slate-400">Date</span>
+          <span class="text-slate-700 font-medium">13 Oct 2026</span>
+        </div>
+        <div class="flex justify-between text-xs">
+          <span class="text-slate-400">Time</span>
+          <span class="text-slate-700 font-medium">2:05 PM</span>
+        </div>
+        <div class="flex justify-between text-xs">
+          <span class="text-slate-400">Specialty</span>
+          <span class="text-slate-700 font-medium">Cardiology</span>
+        </div>
+        <div class="flex justify-between text-xs">
+          <span class="text-slate-400">Ref</span>
+          <span class="text-slate-700 font-mono">#BK-20261013-4892</span>
+        </div>
+      </div>
+      <div class="border-t border-slate-100 mt-3 pt-3">
+        <p class="text-[10px] text-slate-400 uppercase tracking-wide font-medium mb-1.5">Reported symptoms</p>
+        <p class="text-xs text-slate-600 leading-relaxed line-clamp-5">Recurring chest tightness and mild shortness of breath on exertion, worsening over 3 weeks. Occasional palpitations. Family history of CAD (father, age 58). Non-smoker.</p>
+        <p class="text-[10px] text-teal-600 mt-1">Triage match: Stable Angina — moderate priority</p>
+      </div>
+    </div>
+
+    <!-- Right panel -->
+    <div class="flex-1 min-w-0">
+
+      <!-- Form header -->
+      <div class="bg-white rounded-xl shadow-sm p-5 mb-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <h1 class="text-base font-semibold text-slate-800">Prescription</h1>
+            <span class="bg-amber-100 text-amber-700 text-xs font-medium px-2.5 py-0.5 rounded-full">Draft</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="border border-slate-200 text-slate-600 text-sm font-medium px-3 py-1.5 rounded-lg hover:bg-slate-50">Preview</button>
+            <button class="border border-slate-200 text-slate-600 text-sm font-medium px-3 py-1.5 rounded-lg hover:bg-slate-50">Save draft</button>
+            <button class="bg-teal-700 text-white text-sm font-medium px-4 py-1.5 rounded-lg opacity-50 cursor-not-allowed" disabled>Sign &amp; send →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diagnosis -->
+      <div class="bg-white rounded-xl shadow-sm p-5 mb-4">
+        <h2 class="text-sm font-semibold text-slate-700 mb-3">Diagnosis</h2>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs text-slate-500 font-medium block mb-1">Diagnosis</label>
+            <div class="border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-800 bg-slate-50">Stable Angina Pectoris</div>
+          </div>
+          <div>
+            <label class="text-xs text-slate-500 font-medium block mb-1">ICD-10 Code</label>
+            <div class="border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-800 bg-slate-50 font-mono">I20.9</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medicines -->
+      <div class="bg-white rounded-xl shadow-sm p-5 mb-4">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-sm font-semibold text-slate-700">Medicines</h2>
+          <button class="text-teal-700 border border-teal-200 text-xs font-medium px-3 py-1.5 rounded-lg hover:bg-teal-50">+ Add medicine</button>
+        </div>
+
+        <!-- Table header -->
+        <div class="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_auto] gap-3 pb-2 border-b border-slate-100 text-[10px] text-slate-400 uppercase tracking-wide font-medium">
+          <span>Medicine</span>
+          <span>Dose</span>
+          <span>Route</span>
+          <span>Frequency</span>
+          <span>Duration</span>
+          <span></span>
+        </div>
+
+        <!-- Row 1 — Metoprolol Succinate with offending dose -->
+        <div class="mt-2 px-3 py-3 border-b border-slate-50">
+          <div class="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_auto] gap-3 items-start">
+            <span class="text-sm text-slate-800 font-medium">Metoprolol Succinate</span>
+            <div class="flex items-center gap-1.5">
+              <span class="bg-red-50 border border-red-300 text-red-700 rounded px-2 py-0.5 text-sm font-mono font-medium">400 mg</span>
+              <svg class="w-4 h-4 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <span class="text-sm text-slate-700">Oral</span>
+            <span class="text-sm text-slate-700">Once daily</span>
+            <span class="text-sm text-slate-700">30 days</span>
+            <button class="text-slate-400 hover:text-red-500 text-base leading-none">×</button>
+          </div>
+          <p class="text-xs text-red-600 mt-1.5">⚠ Maximum recommended dose for oral Metoprolol Succinate is 200 mg/day. A reason is required to proceed.</p>
+        </div>
+
+        <!-- Row 2 — Atorvastatin Calcium (normal) -->
+        <div class="mt-1 px-3 py-3 grid grid-cols-[2fr_1fr_1fr_1fr_1fr_auto] gap-3 items-center">
+          <span class="text-sm text-slate-800 font-medium">Atorvastatin Calcium</span>
+          <span class="text-sm text-slate-700">20 mg</span>
+          <span class="text-sm text-slate-700">Oral</span>
+          <span class="text-sm text-slate-700">Once daily at bedtime</span>
+          <span class="text-sm text-slate-700">90 days</span>
+          <button class="text-slate-400 hover:text-red-500 text-base leading-none">×</button>
+        </div>
+
+        <!-- Dose warning block -->
+        <div class="mt-4 bg-amber-50 border border-amber-200 rounded-xl p-4">
+          <div class="flex items-start gap-2">
+            <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+            <div class="flex-1">
+              <p class="text-sm font-semibold text-amber-900">Dose outside recommended range</p>
+              <p class="text-sm text-amber-700 mt-0.5">Metoprolol Succinate: entered dose (400 mg) exceeds the maximum recommended oral dose (200 mg/day). Provide a clinical reason to enable signing.</p>
+              <div class="mt-3">
+                <label class="text-xs text-slate-600 font-medium block mb-1">Reason for dose</label>
+                <textarea placeholder="Enter your clinical justification for this dose…" class="w-full border border-amber-300 focus:border-amber-500 rounded-lg px-3 py-2 text-sm h-20 resize-none outline-none bg-white"></textarea>
+                <p class="text-xs text-slate-400 mt-1">Required before signing. This reason will be recorded.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- General advice -->
+      <div class="bg-white rounded-xl shadow-sm p-5 mb-4">
+        <h2 class="text-sm font-semibold text-slate-700 mb-3">General advice</h2>
+        <textarea class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700 h-24 resize-none outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-200 bg-slate-50">Avoid strenuous physical exertion until next review. Monitor resting heart rate daily — target 55–65 bpm. Take Metoprolol at the same time each morning with or without food. Report any new chest pain at rest, syncope, or significant dyspnoea immediately. Follow a low-saturated-fat diet and maintain a BMI below 25. Attend lipid panel review in 6 weeks.</textarea>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="bg-white rounded-xl shadow-sm px-5 py-3 flex items-center justify-between">
+        <span class="text-xs text-slate-400">Draft saved 3 min ago</span>
+        <div class="flex items-center gap-2">
+          <button class="border border-slate-200 text-slate-600 text-sm font-medium px-3 py-1.5 rounded-lg hover:bg-slate-50">Preview</button>
+          <button class="border border-slate-200 text-slate-600 text-sm font-medium px-3 py-1.5 rounded-lg hover:bg-slate-50">Save draft</button>
+          <button class="bg-teal-700 text-white text-sm font-medium px-4 py-1.5 rounded-lg opacity-50 cursor-not-allowed" disabled>Sign &amp; send →</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

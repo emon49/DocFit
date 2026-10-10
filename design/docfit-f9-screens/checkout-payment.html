@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DocFit – Complete your booking</title>
+<script>tailwind.config={theme:{extend:{colors:{teal:{700:'#0F766E',800:'#115E59',300:'#5EEAD4',200:'#99F6E4',50:'#F0FDFA'}}}}}</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:'Inter',sans-serif;}</style>
+</head>
+<body class="bg-slate-50">
+
+<aside class="fixed top-0 left-0 w-56 h-screen bg-teal-800 flex flex-col z-20">
+  <div class="p-4 flex items-center gap-2">
+    <svg class="w-7 h-7 text-teal-300" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M13 2L4.09 12.97 12 12l-1 9.03L20.91 12H13L13 2z"/>
+    </svg>
+    <span class="text-white text-lg font-bold tracking-tight">DocFit</span>
+  </div>
+  <nav class="flex-1 mt-2 space-y-0.5">
+    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg mx-2 text-teal-100 hover:bg-teal-700/60">Home</a>
+    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg mx-2 text-teal-100 hover:bg-teal-700/60">Find a Doctor</a>
+    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg mx-2 bg-teal-700 text-white">My Appointments</a>
+    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg mx-2 text-teal-100 hover:bg-teal-700/60">Messages</a>
+    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg mx-2 text-teal-100 hover:bg-teal-700/60">Account</a>
+  </nav>
+  <div class="mt-auto border-t border-teal-700 p-4 flex items-center">
+    <div class="w-8 h-8 rounded-full bg-teal-600 text-white text-xs flex items-center justify-center font-semibold flex-shrink-0">JH</div>
+    <span class="text-teal-100 text-sm ml-3">James Hartwell</span>
+  </div>
+</aside>
+
+<header class="ml-56 h-14 bg-white border-b border-slate-200 sticky top-0 z-10 flex items-center px-6 justify-between">
+  <span class="text-sm text-slate-500">My Appointments / Checkout</span>
+  <div class="flex items-center gap-3">
+    <button class="text-slate-400 hover:text-slate-600">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+    </button>
+    <span class="text-sm text-slate-700">James Hartwell</span>
+    <div class="w-8 h-8 rounded-full bg-teal-600 text-white text-xs flex items-center justify-center font-semibold">JH</div>
+  </div>
+</header>
+
+<main class="ml-56 pt-14 min-h-screen bg-slate-50">
+  <div class="max-w-2xl mx-auto p-6 space-y-6">
+
+    <div>
+      <h1 class="text-xl font-semibold text-slate-900 tracking-tight">Complete your booking</h1>
+    </div>
+
+    <div class="bg-amber-50 border border-amber-200 rounded-lg px-4 py-3 flex items-center gap-2">
+      <svg class="w-4 h-4 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <span class="text-sm text-amber-700">Your slot is reserved for <span class="font-mono font-semibold text-amber-700">08:27</span></span>
+    </div>
+
+    <div class="bg-white border border-slate-200 rounded-xl p-5">
+      <p class="text-sm font-semibold text-slate-900 mb-4 tracking-tight">Appointment summary</p>
+      <div class="grid grid-cols-2 gap-x-6 gap-y-2.5 text-sm">
+        <div>
+          <span class="text-slate-500 text-xs uppercase tracking-wide">Doctor</span>
+          <p class="text-slate-900 font-medium mt-0.5">Dr. Ama Osei-Bonsu</p>
+        </div>
+        <div>
+          <span class="text-slate-500 text-xs uppercase tracking-wide">Specialty</span>
+          <p class="text-slate-900 font-medium mt-0.5">Cardiology</p>
+        </div>
+        <div>
+          <span class="text-slate-500 text-xs uppercase tracking-wide">Date</span>
+          <p class="text-slate-900 font-medium mt-0.5">Wed 14 Oct 2026</p>
+        </div>
+        <div>
+          <span class="text-slate-500 text-xs uppercase tracking-wide">Time</span>
+          <p class="text-slate-900 font-medium mt-0.5">2:05 PM (WAT)</p>
+        </div>
+        <div>
+          <span class="text-slate-500 text-xs uppercase tracking-wide">Mode</span>
+          <p class="text-slate-900 font-medium mt-0.5">Video consultation</p>
+        </div>
+        <div>
+          <span class="text-slate-500 text-xs uppercase tracking-wide">Ref</span>
+          <p class="text-slate-900 font-medium mt-0.5 font-mono text-xs">BK-20261014-5041</p>
+        </div>
+      </div>
+      <div class="border-t border-slate-100 mt-4 pt-4 space-y-2">
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-600">Consultation fee</span>
+          <span class="text-slate-900">$35.00</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span class="text-slate-600">Platform fee</span>
+          <span class="text-slate-400">$0.00</span>
+        </div>
+        <div class="border-t border-slate-100 pt-2 mt-2 flex justify-between text-sm">
+          <span class="font-semibold text-slate-900">Total due today</span>
+          <span class="font-semibold text-slate-900">$35.00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white border border-slate-200 rounded-xl p-5">
+      <div class="flex items-center gap-2 mb-1">
+        <p class="text-sm font-semibold text-slate-900 tracking-tight">Payment</p>
+        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+      </div>
+      <p class="text-xs text-slate-500 mb-4">Your card is processed securely. DocFit does not store card details.</p>
+
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1">Card number</label>
+          <div class="relative">
+            <input type="text" placeholder="1234 5678 9012 3456" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-teal-600 pr-10">
+            <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+              <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2" stroke-width="1.5"/><path d="M2 10h20" stroke-width="1.5"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-slate-700 mb-1">Expiry</label>
+            <input type="text" placeholder="MM / YY" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-teal-600">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-700 mb-1">CVC</label>
+            <input type="text" placeholder="123" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-teal-600">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1">Cardholder name</label>
+          <input type="text" placeholder="Name as on card" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-teal-600">
+        </div>
+
+        <button class="w-full bg-teal-700 text-white font-semibold py-3 rounded-lg text-sm mt-4 hover:bg-teal-800 transition-colors">Pay $35.00 →</button>
+
+        <div class="flex items-center justify-center gap-1 text-xs text-slate-400 mt-2">
+          <span>Secured by</span>
+          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          <span>Stripe</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+</body>
+</html>

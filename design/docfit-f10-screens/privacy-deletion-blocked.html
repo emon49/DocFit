@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy & Data — DocFit</title>
+<script>tailwind.config={theme:{extend:{colors:{teal:{700:'#0F766E',800:'#115E59',300:'#5EEAD4',200:'#99F6E4',50:'#F0FDFA'}}}}}</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:'Inter',sans-serif;}</style>
+</head>
+<body class="bg-slate-50">
+
+<!-- Sidebar -->
+<aside class="fixed w-56 bg-teal-800 h-screen flex flex-col z-20">
+  <div class="p-4 flex items-center">
+    <svg class="w-6 h-6 text-teal-300 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+    <span class="text-white text-lg font-bold">DocFit</span>
+  </div>
+  <nav class="mt-2 flex-1">
+    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg mx-2 text-teal-100 hover:bg-teal-700 mb-1">Home</a>
+    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg mx-2 text-teal-100 hover:bg-teal-700 mb-1">Find a Doctor</a>
+    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg mx-2 text-teal-100 hover:bg-teal-700 mb-1">My Appointments</a>
+    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg mx-2 text-teal-100 hover:bg-teal-700 mb-1">Messages</a>
+    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg mx-2 bg-teal-700 text-white mb-1">Account</a>
+  </nav>
+  <div class="mt-auto border-t border-teal-700 p-4 flex items-center">
+    <div class="w-8 h-8 rounded-full bg-teal-600 text-white text-xs flex items-center justify-center font-medium flex-shrink-0">JH</div>
+    <span class="text-teal-100 text-sm ml-3">James Hartwell</span>
+  </div>
+</aside>
+
+<!-- Top bar -->
+<div class="ml-56 h-14 bg-white border-b border-slate-200 sticky top-0 z-10 flex items-center px-6 justify-between">
+  <nav class="flex items-center gap-1 text-sm text-slate-500">
+    <span>Account</span>
+    <span class="mx-1">/</span>
+    <span class="text-slate-900 font-medium">Privacy</span>
+  </nav>
+  <div class="flex items-center gap-3">
+    <span class="text-sm text-slate-600">James Hartwell</span>
+    <div class="w-8 h-8 rounded-full bg-teal-600 text-white text-xs flex items-center justify-center font-medium">JH</div>
+  </div>
+</div>
+
+<!-- Main content -->
+<main class="ml-56 pt-14 min-h-screen bg-slate-50">
+  <div class="p-6 max-w-3xl">
+
+    <!-- Sub-nav tabs -->
+    <div class="border-b border-slate-200 mb-6">
+      <nav class="flex gap-6">
+        <a href="#" class="pb-3 text-sm font-medium text-slate-500 hover:text-slate-700">Profile</a>
+        <a href="#" class="pb-3 text-sm font-medium text-slate-500 hover:text-slate-700">Notifications</a>
+        <a href="#" class="pb-3 text-sm font-medium border-b-2 border-teal-700 text-teal-700">Privacy</a>
+        <a href="#" class="pb-3 text-sm font-medium text-slate-500 hover:text-slate-700">Security</a>
+      </nav>
+    </div>
+
+    <!-- Page heading -->
+    <h1 class="text-xl font-bold text-slate-900 mb-6 tracking-tight">Privacy &amp; Data</h1>
+
+    <!-- Deletion status block -->
+    <div class="bg-amber-50 border border-amber-300 rounded-xl p-5 mb-8 flex gap-4">
+      <svg class="w-8 h-8 text-amber-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+      </svg>
+      <div class="flex-1">
+        <p class="text-sm font-bold text-amber-900">Account deletion deferred</p>
+        <p class="text-sm text-amber-800 mt-1">Your deletion request is on hold. One or more of your health records must be retained under legal obligations before your account can be fully deleted.</p>
+        <div class="mt-3 bg-amber-100/50 rounded-lg p-3 space-y-2 text-xs text-amber-800">
+          <div class="flex gap-2">
+            <span class="font-medium w-40 flex-shrink-0">Applicable rule:</span>
+            <span>Medical Record Retention (United Kingdom) — NHS Records Management Code of Practice</span>
+          </div>
+          <div class="flex gap-2">
+            <span class="font-medium w-40 flex-shrink-0">Retention period:</span>
+            <span>8 years from date of last entry</span>
+          </div>
+          <div class="flex gap-2">
+            <span class="font-medium w-40 flex-shrink-0">Last entry date:</span>
+            <span>14 Oct 2026</span>
+          </div>
+          <div class="flex gap-2">
+            <span class="font-medium w-40 flex-shrink-0">Estimated deletion date:</span>
+            <span>October 2034</span>
+          </div>
+        </div>
+        <p class="text-xs text-amber-700 mt-3">If you have questions about your rights, please contact <a href="mailto:privacy@docfit.com" class="underline">privacy@docfit.com</a>.</p>
+      </div>
+    </div>
+
+    <!-- Your consents section -->
+    <div class="mb-8">
+      <h2 class="text-base font-semibold text-slate-900 mb-3">Your consents</h2>
+      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-slate-50 border-b border-slate-200">
+              <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-4">Document</th>
+              <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-4">Status</th>
+              <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-4">Version</th>
+              <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-4">Date</th>
+              <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-4">Action</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr>
+              <td class="py-3 px-4 text-slate-900 font-medium">Terms of Service</td>
+              <td class="py-3 px-4"><span class="flex items-center gap-1 text-green-600 text-xs font-medium"><svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Agreed</span></td>
+              <td class="py-3 px-4 text-slate-500 text-xs">v2.3</td>
+              <td class="py-3 px-4 text-slate-500 text-xs">1 Oct 2026</td>
+              <td class="py-3 px-4 text-slate-400 text-xs">—</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 text-slate-900 font-medium">Privacy Policy</td>
+              <td class="py-3 px-4"><span class="flex items-center gap-1 text-green-600 text-xs font-medium"><svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Agreed</span></td>
+              <td class="py-3 px-4 text-slate-500 text-xs">v2.3</td>
+              <td class="py-3 px-4 text-slate-500 text-xs">1 Oct 2026</td>
+              <td class="py-3 px-4 text-slate-400 text-xs">—</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 text-slate-900 font-medium">Health data processing</td>
+              <td class="py-3 px-4"><span class="flex items-center gap-1 text-green-600 text-xs font-medium"><svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Agreed</span></td>
+              <td class="py-3 px-4 text-slate-500 text-xs">v2.3</td>
+              <td class="py-3 px-4 text-slate-500 text-xs">1 Oct 2026</td>
+              <td class="py-3 px-4 text-slate-400 text-xs">—</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 text-slate-900 font-medium">Voice transcription</td>
+              <td class="py-3 px-4"><span class="flex items-center gap-1 text-green-600 text-xs font-medium"><svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Agreed</span></td>
+              <td class="py-3 px-4 text-slate-500 text-xs">v2.1</td>
+              <td class="py-3 px-4 text-slate-500 text-xs">14 Oct 2026</td>
+              <td class="py-3 px-4"><button class="text-xs text-red-600 font-medium border border-red-200 rounded-lg px-2.5 py-1 hover:bg-red-50">Withdraw</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Your data section -->
+    <div class="mb-8">
+      <h2 class="text-base font-semibold text-slate-900 mb-3">Your data</h2>
+      <div class="space-y-3">
+        <!-- Export card -->
+        <div class="bg-white border border-slate-200 rounded-xl p-5 flex items-start justify-between gap-4">
+          <div>
+            <p class="text-sm font-semibold text-slate-900">Export your data</p>
+            <p class="text-sm text-slate-500 mt-1">Download a copy of your health records, consultation notes, and account information in a portable format.</p>
+          </div>
+          <button class="flex-shrink-0 bg-teal-700 text-white text-sm font-medium rounded-lg px-4 py-2 hover:bg-teal-800">Request export</button>
+        </div>
+        <!-- Delete card — amber-tinted, pending -->
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-5 flex items-start justify-between gap-4">
+          <div>
+            <p class="text-sm font-semibold text-amber-900">Delete your account — Pending legal hold</p>
+            <p class="text-sm text-amber-800 mt-1">Your deletion request has been received. Your account will be deleted once the retention period elapses. You may continue to use DocFit in the meantime.</p>
+          </div>
+          <span class="flex-shrink-0 bg-amber-100 text-amber-700 text-xs rounded-full px-3 py-1.5 font-medium whitespace-nowrap">Pending</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Request history -->
+    <div>
+      <h2 class="text-base font-semibold text-slate-900 mb-3">Request history</h2>
+      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-slate-50 border-b border-slate-200">
+              <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-4">Request type</th>
+              <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-4">Submitted</th>
+              <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-4">Status</th>
+              <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-4"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="py-3 px-4 text-slate-900 font-medium">Account deletion</td>
+              <td class="py-3 px-4 text-slate-500 text-xs">10 Oct 2026, 08:44 AM</td>
+              <td class="py-3 px-4"><span class="bg-amber-100 text-amber-700 text-xs rounded-full px-2.5 py-1 font-medium">Deferred — legal hold</span></td>
+              <td class="py-3 px-4 text-right"><button class="text-xs text-teal-700 font-medium hover:underline">View details</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</main>
+</body>
+</html>

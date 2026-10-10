@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Audit Log — DocFit Admin</title>
+<script>tailwind.config={theme:{extend:{colors:{teal:{700:'#0F766E',800:'#115E59',300:'#5EEAD4',200:'#99F6E4',50:'#F0FDFA'}}}}}</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:'Inter',sans-serif;}</style>
+</head>
+<body class="bg-slate-50">
+
+<!-- Sidebar -->
+<aside class="fixed w-56 bg-teal-800 h-screen flex flex-col z-20">
+  <div class="p-4 flex items-center">
+    <svg class="w-6 h-6 text-teal-300 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+    <span class="text-white text-lg font-bold">DocFit</span>
+  </div>
+  <nav class="mt-2 flex-1">
+    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg mx-2 text-teal-100 hover:bg-teal-700 mb-1">Dashboard</a>
+    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg mx-2 text-teal-100 hover:bg-teal-700 mb-1">Doctors</a>
+    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg mx-2 text-teal-100 hover:bg-teal-700 mb-1">Patients</a>
+    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg mx-2 bg-teal-700 text-white mb-1">Audit Log</a>
+    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg mx-2 text-teal-100 hover:bg-teal-700 mb-1">Settings</a>
+  </nav>
+  <div class="mt-auto border-t border-teal-700 p-4">
+    <div class="flex items-center">
+      <div class="w-8 h-8 rounded-full bg-teal-500 text-white text-xs flex items-center justify-center font-medium flex-shrink-0">SA</div>
+      <div class="ml-2">
+        <p class="text-teal-100 text-sm font-medium leading-tight">System Admin</p>
+        <p class="text-teal-300 text-xs leading-tight mt-0.5">Compliance Officer</p>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- Top bar -->
+<div class="ml-56 h-14 bg-white border-b border-slate-200 sticky top-0 z-10 flex items-center px-6 justify-between">
+  <nav class="flex items-center gap-1 text-sm text-slate-500">
+    <span class="text-slate-900 font-medium">Audit Log</span>
+  </nav>
+  <div class="flex items-center gap-3">
+    <span class="text-sm text-slate-600">System Admin</span>
+    <div class="w-8 h-8 rounded-full bg-teal-500 text-white text-xs flex items-center justify-center font-medium">SA</div>
+  </div>
+</div>
+
+<!-- Main content -->
+<main class="ml-56 pt-14 min-h-screen bg-slate-50">
+  <div class="p-6">
+
+    <!-- Page heading row -->
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Audit Log</h1>
+      <button class="border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        Export log (.csv)
+      </button>
+    </div>
+
+    <!-- Filter row -->
+    <div class="bg-white border border-slate-200 rounded-xl p-4 mb-6 flex flex-wrap gap-3 items-end">
+      <div class="flex-1 min-w-48">
+        <p class="text-xs text-slate-500 mb-1">Actor</p>
+        <input type="text" placeholder="Name or ID…" class="border border-slate-300 rounded-lg px-3 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+      </div>
+      <div class="w-48">
+        <p class="text-xs text-slate-500 mb-1">Resource type</p>
+        <select class="border border-slate-300 rounded-lg px-3 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white">
+          <option>All types</option>
+          <option>Prescription</option>
+          <option>Consultation</option>
+          <option>Intake</option>
+          <option>Profile</option>
+        </select>
+      </div>
+      <div class="w-36">
+        <p class="text-xs text-slate-500 mb-1">From</p>
+        <input type="date" value="2026-10-08" class="border border-slate-300 rounded-lg px-3 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-teal-500">
+      </div>
+      <div class="w-36">
+        <p class="text-xs text-slate-500 mb-1">To</p>
+        <input type="date" value="2026-10-14" class="border border-slate-300 rounded-lg px-3 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-teal-500">
+      </div>
+      <button class="bg-teal-700 text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-teal-800">Apply</button>
+    </div>
+
+    <!-- Access log table -->
+    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+      <table class="w-full">
+        <thead>
+          <tr class="bg-slate-50 border-b border-slate-200">
+            <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-3 w-44">Timestamp</th>
+            <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-3 w-48">Actor</th>
+            <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-3 w-24">Role</th>
+            <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-3">Resource</th>
+            <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-3 w-24">Action</th>
+            <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-3 w-40">Purpose</th>
+            <th class="text-left text-xs font-semibold text-slate-500 uppercase py-2 px-3 w-32">IP Address</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr class="hover:bg-slate-50">
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-600">2026-10-14 14:09:33</td>
+            <td class="py-2.5 px-3 text-xs text-slate-900 font-medium">Dr. A. Osei-Bonsu</td>
+            <td class="py-2.5 px-3"><span class="bg-teal-100 text-teal-700 text-xs rounded-full px-1.5 py-0.5 font-medium">Doctor</span></td>
+            <td class="py-2.5 px-3 text-xs text-slate-700">Prescription RX-BD-2026-001892</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Read</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Consultation ref.</td>
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-400">41.203.172.11</td>
+          </tr>
+          <tr class="hover:bg-slate-50">
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-600">2026-10-14 14:07:12</td>
+            <td class="py-2.5 px-3 text-xs text-slate-900 font-medium">James Hartwell</td>
+            <td class="py-2.5 px-3"><span class="bg-blue-100 text-blue-700 text-xs rounded-full px-1.5 py-0.5 font-medium">Patient</span></td>
+            <td class="py-2.5 px-3 text-xs text-slate-700">Prescription RX-BD-2026-001892</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Read</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Patient download</td>
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-400">86.24.133.192</td>
+          </tr>
+          <tr class="hover:bg-slate-50">
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-600">2026-10-14 13:55:04</td>
+            <td class="py-2.5 px-3 text-xs text-slate-900 font-medium">Dr. A. Osei-Bonsu</td>
+            <td class="py-2.5 px-3"><span class="bg-teal-100 text-teal-700 text-xs rounded-full px-1.5 py-0.5 font-medium">Doctor</span></td>
+            <td class="py-2.5 px-3 text-xs text-slate-700">Consultation #CNS-20261014-0042</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Read</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Active consult.</td>
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-400">41.203.172.11</td>
+          </tr>
+          <tr class="hover:bg-slate-50">
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-600">2026-10-14 13:55:01</td>
+            <td class="py-2.5 px-3 text-xs text-slate-900 font-medium">James Hartwell</td>
+            <td class="py-2.5 px-3"><span class="bg-blue-100 text-blue-700 text-xs rounded-full px-1.5 py-0.5 font-medium">Patient</span></td>
+            <td class="py-2.5 px-3 text-xs text-slate-700">Intake #INT-20261014-0089</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Read</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Triage review</td>
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-400">86.24.133.192</td>
+          </tr>
+          <tr class="hover:bg-slate-50">
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-600">2026-10-13 11:22:47</td>
+            <td class="py-2.5 px-3 text-xs text-slate-400 italic">retention-job</td>
+            <td class="py-2.5 px-3"><span class="bg-slate-100 text-slate-600 text-xs rounded-full px-1.5 py-0.5 font-medium">System</span></td>
+            <td class="py-2.5 px-3 text-xs text-slate-700">Profile #USR-00028841</td>
+            <td class="py-2.5 px-3"><span class="bg-amber-100 text-amber-700 text-xs rounded-full px-1.5 py-0.5 font-medium">Anonymize</span></td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Retention policy</td>
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-400">—</td>
+          </tr>
+          <tr class="hover:bg-slate-50">
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-600">2026-10-13 09:15:22</td>
+            <td class="py-2.5 px-3 text-xs text-slate-900 font-medium max-w-[160px] truncate">Fatima Al-Nkrumah-Asante</td>
+            <td class="py-2.5 px-3"><span class="bg-blue-100 text-blue-700 text-xs rounded-full px-1.5 py-0.5 font-medium">Patient</span></td>
+            <td class="py-2.5 px-3 text-xs text-slate-700">Consultation #CNS-20261013-0039</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Read</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Consult. review</td>
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-400">197.210.44.93</td>
+          </tr>
+          <tr class="hover:bg-slate-50">
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-600">2026-10-12 16:44:05</td>
+            <td class="py-2.5 px-3 text-xs text-slate-900 font-medium">System Admin</td>
+            <td class="py-2.5 px-3"><span class="bg-purple-100 text-purple-700 text-xs rounded-full px-1.5 py-0.5 font-medium">Admin</span></td>
+            <td class="py-2.5 px-3 text-xs text-slate-700">Prescription RX-BD-2026-000741</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Read</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Compliance audit</td>
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-400">10.0.0.1</td>
+          </tr>
+          <tr class="hover:bg-slate-50">
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-600">2026-10-12 10:03:11</td>
+            <td class="py-2.5 px-3 text-xs text-slate-900 font-medium truncate max-w-[160px]">Dr. Amara Ndiaye-Kouyaté</td>
+            <td class="py-2.5 px-3"><span class="bg-teal-100 text-teal-700 text-xs rounded-full px-1.5 py-0.5 font-medium">Doctor</span></td>
+            <td class="py-2.5 px-3 text-xs text-slate-700">Consultation #CNS-20261012-0031</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Read</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Consultation ref.</td>
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-400">196.192.144.22</td>
+          </tr>
+          <tr class="hover:bg-slate-50">
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-600">2026-10-10 08:19:55</td>
+            <td class="py-2.5 px-3 text-xs text-slate-900 font-medium">James Hartwell</td>
+            <td class="py-2.5 px-3"><span class="bg-blue-100 text-blue-700 text-xs rounded-full px-1.5 py-0.5 font-medium">Patient</span></td>
+            <td class="py-2.5 px-3 text-xs text-slate-700">Profile #USR-00028841</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Read</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Profile view</td>
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-400">86.24.133.192</td>
+          </tr>
+          <tr class="hover:bg-slate-50">
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-600">2026-10-10 08:19:30</td>
+            <td class="py-2.5 px-3 text-xs text-slate-900 font-medium">James Hartwell</td>
+            <td class="py-2.5 px-3"><span class="bg-blue-100 text-blue-700 text-xs rounded-full px-1.5 py-0.5 font-medium">Patient</span></td>
+            <td class="py-2.5 px-3 text-xs text-slate-700">Intake #INT-20261010-0071</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Read</td>
+            <td class="py-2.5 px-3 text-xs text-slate-500">Triage review</td>
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-400">86.24.133.192</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination footer -->
+      <div class="bg-slate-50 border-t border-slate-200 px-4 py-3 flex items-center justify-between text-sm text-slate-500">
+        <span>Showing 1–10 of 8,847 entries</span>
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-2">
+            <span class="text-xs">Rows per page:</span>
+            <select class="border border-slate-300 rounded px-2 py-1 text-xs bg-white focus:outline-none">
+              <option>10</option>
+              <option>25</option>
+              <option>50</option>
+            </select>
+          </div>
+          <button disabled class="text-xs px-3 py-1.5 rounded border border-slate-200 text-slate-300 cursor-not-allowed">&lt; Prev</button>
+          <button class="text-xs px-3 py-1.5 rounded border border-slate-300 text-slate-600 hover:bg-slate-100">Next &gt;</button>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-xs text-slate-400 mt-2">Access logs are append-only and cannot be modified. All timestamps are UTC.</p>
+
+  </div>
+</main>
+</body>
+</html>

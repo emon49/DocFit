@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Link Expired — DocFit</title>
+<script>tailwind.config={theme:{extend:{colors:{teal:{700:'#0F766E',800:'#115E59',300:'#5EEAD4',200:'#99F6E4',50:'#F0FDFA'}}}}}</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-50 min-h-screen flex items-center justify-center" style="font-family:'Inter',sans-serif">
+
+  <!-- Top brand banner -->
+  <div class="fixed top-0 left-0 right-0 h-12 bg-teal-800 flex items-center px-6 z-10">
+    <svg class="w-5 h-5 text-teal-300 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    <span class="text-white font-bold text-base">DocFit</span>
+  </div>
+
+  <div class="w-full max-w-md mx-auto px-4">
+
+    <!-- Main card -->
+    <div class="bg-white rounded-2xl shadow-sm p-8 text-center mt-16">
+
+      <!-- Expired clock + X icon -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-14 h-14 text-slate-400 mx-auto">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+        <line x1="19.07" y1="4.93" x2="4.93" y2="19.07" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+
+      <h1 class="text-2xl font-bold text-slate-900 mt-4">This link has already been used</h1>
+      <p class="text-sm text-slate-500 mt-1 max-w-xs mx-auto">Prescription download links can only be used once and expire after 72 hours.</p>
+
+      <!-- What to do instead -->
+      <div class="bg-slate-50 rounded-xl p-4 mt-5 text-left space-y-3">
+        <p class="text-xs text-slate-400 uppercase font-medium mb-2">To access your prescriptions:</p>
+        <ol class="space-y-2 list-none">
+          <li class="flex gap-2 items-start">
+            <span class="flex-shrink-0 w-5 h-5 rounded-full bg-teal-100 text-teal-700 text-xs font-bold flex items-center justify-center mt-0.5">1</span>
+            <span class="text-sm text-slate-700">Log in to DocFit and go to <strong>Account → My Prescriptions</strong></span>
+          </li>
+          <li class="flex gap-2 items-start">
+            <span class="flex-shrink-0 w-5 h-5 rounded-full bg-teal-100 text-teal-700 text-xs font-bold flex items-center justify-center mt-0.5">2</span>
+            <span class="text-sm text-slate-700">Contact your doctor if you need a reissued copy.</span>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Action row -->
+      <div class="flex gap-3 mt-6 justify-center">
+        <a href="#" class="bg-teal-700 text-white rounded-xl px-5 py-2.5 text-sm font-semibold hover:bg-teal-800 transition-colors">Log in to DocFit →</a>
+        <a href="#" class="border border-slate-300 text-slate-700 rounded-xl px-5 py-2.5 text-sm hover:bg-slate-50 transition-colors">Get help</a>
+      </div>
+
+      <!-- Footer -->
+      <p class="text-xs text-slate-400 text-center mt-5">Prescription: RX-BD-2026-001892 · If you believe this is an error, contact support.</p>
+
+    </div>
+  </div>
+
+</body>
+</html>

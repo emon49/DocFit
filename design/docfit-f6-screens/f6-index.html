@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Screen index — Feature 6 · DocFit</title>
+<style>
+  body { font-family: system-ui, -apple-system, sans-serif; max-width: 48rem; margin: 0 auto; padding: 2rem; color: #1e293b; line-height: 1.6; }
+  h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; }
+  h2 { font-size: 1.125rem; font-weight: 600; color: #475569; margin-top: 0; margin-bottom: 1.5rem; }
+  p.note { font-size: 0.875rem; color: #64748b; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 1.5rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+  thead tr { background: #f1f5f9; }
+  th { text-align: left; padding: 0.5rem 0.75rem; font-weight: 600; color: #475569; border-bottom: 2px solid #e2e8f0; white-space: nowrap; }
+  td { padding: 0.5rem 0.75rem; border-bottom: 1px solid #e2e8f0; color: #334155; vertical-align: top; }
+  tr:hover td { background: #f8fafc; }
+  a { color: #0f766e; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .mono { font-family: ui-monospace, monospace; font-size: 0.75rem; color: #0f766e; }
+  .dim { color: #94a3b8; font-style: italic; }
+  .badge { display: inline-block; background: #f1f5f9; color: #64748b; border-radius: 0.25rem; padding: 0.1rem 0.4rem; font-size: 0.7rem; font-weight: 600; white-space: nowrap; }
+  footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; font-size: 0.8125rem; color: #64748b; }
+</style>
+</head>
+<body>
+
+<h1>Screen index</h1>
+<h2>Feature 6: Consultation Booking, Waiting Room and Live Session</h2>
+
+<p class="note">TC-04 (cross-patient session access) and TC-05 (patient self-admit) are server-side 403 responses with no distinct patient-facing UI state.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Blueprint feature name</th>
+      <th>Page file</th>
+      <th>State</th>
+      <th>Archetype</th>
+      <th>Test cases</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>6</td>
+      <td>Consultation Booking, Waiting Room and Live Session</td>
+      <td><a href="booking-confirm.html" class="mono">booking-confirm.html</a></td>
+      <td>Booking confirmed · payment success</td>
+      <td><span class="badge">SETTINGS_FORM</span></td>
+      <td>TC-01</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Consultation Booking, Waiting Room and Live Session</td>
+      <td><a href="booking-payment-hold.html" class="mono">booking-payment-hold.html</a></td>
+      <td>Slot hold · payment pending (10-min countdown)</td>
+      <td><span class="badge">SETTINGS_FORM</span></td>
+      <td>TC-02</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Consultation Booking, Waiting Room and Live Session</td>
+      <td><a href="booking-payment-failed.html" class="mono">booking-payment-failed.html</a></td>
+      <td>Payment failed · slot released</td>
+      <td><span class="badge">SETTINGS_FORM</span></td>
+      <td>TC-02</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Consultation Booking, Waiting Room and Live Session</td>
+      <td><a href="waiting-room-patient.html" class="mono">waiting-room-patient.html</a></td>
+      <td>Waiting room · patient queued, position #1</td>
+      <td><span class="badge">SETTINGS_FORM</span></td>
+      <td>TC-01</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Consultation Booking, Waiting Room and Live Session</td>
+      <td><a href="waiting-room-timeout.html" class="mono">waiting-room-timeout.html</a></td>
+      <td>Waiting room · doctor no-show after 10 min</td>
+      <td><span class="badge">SETTINGS_FORM</span></td>
+      <td>TC-06</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Consultation Booking, Waiting Room and Live Session</td>
+      <td><a href="waiting-room-doctor-queue.html" class="mono">waiting-room-doctor-queue.html</a></td>
+      <td>Doctor queue panel · patient ready to admit</td>
+      <td><span class="badge">MASTER-DETAIL</span></td>
+      <td>TC-01</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Consultation Booking, Waiting Room and Live Session</td>
+      <td><a href="session-video-patient.html" class="mono">session-video-patient.html</a></td>
+      <td>Live session · patient view, video active</td>
+      <td><span class="badge">MASTER-DETAIL</span></td>
+      <td>TC-01</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Consultation Booking, Waiting Room and Live Session</td>
+      <td><a href="session-video-doctor.html" class="mono">session-video-doctor.html</a></td>
+      <td>Live session · doctor view, patient summary + chat</td>
+      <td><span class="badge">MASTER-DETAIL</span></td>
+      <td>TC-01</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Consultation Booking, Waiting Room and Live Session</td>
+      <td><a href="session-chat-fallback.html" class="mono">session-chat-fallback.html</a></td>
+      <td>Live session · video failed, chat fallback</td>
+      <td><span class="badge">MASTER-DETAIL</span></td>
+      <td>TC-03</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Consultation Booking, Waiting Room and Live Session</td>
+      <td><span class="dim">none</span></td>
+      <td>TC-04: cross-patient session access — server-side 403, no UI</td>
+      <td>—</td>
+      <td>TC-04</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Consultation Booking, Waiting Room and Live Session</td>
+      <td><span class="dim">none</span></td>
+      <td>TC-05: patient self-admit attempt — server-side 403, no UI</td>
+      <td>—</td>
+      <td>TC-05</td>
+    </tr>
+  </tbody>
+</table>
+
+<footer>All Feature 6 blueprint items are mapped. TC-04 and TC-05 are authorization checks enforced server-side; no patient-facing screen exists for these states.</footer>
+
+</body>
+</html>

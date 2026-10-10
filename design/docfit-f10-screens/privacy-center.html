@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DocFit — Privacy Center</title>
+<script>tailwind.config={theme:{extend:{colors:{teal:{700:'#0F766E',800:'#115E59',300:'#5EEAD4',200:'#99F6E4',50:'#F0FDFA'}}}}}</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:'Inter',sans-serif;}</style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+
+  <div class="fixed left-0 top-0 w-56 bg-teal-800 h-screen flex flex-col z-20">
+    <div class="flex items-center p-4">
+      <svg class="w-6 h-6 text-teal-300 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      <span class="text-white text-lg font-bold">DocFit</span>
+    </div>
+    <nav class="flex-1 px-2 py-2 space-y-1">
+      <div class="text-teal-100 hover:bg-teal-700/60 rounded-lg px-3 py-2 text-sm font-medium mx-2 flex items-center gap-2 cursor-pointer">
+        <svg class="w-4 h-4 text-current" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        Home
+      </div>
+      <div class="text-teal-100 hover:bg-teal-700/60 rounded-lg px-3 py-2 text-sm font-medium mx-2 flex items-center gap-2 cursor-pointer">
+        <svg class="w-4 h-4 text-current" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        Find a Doctor
+      </div>
+      <div class="text-teal-100 hover:bg-teal-700/60 rounded-lg px-3 py-2 text-sm font-medium mx-2 flex items-center gap-2 cursor-pointer">
+        <svg class="w-4 h-4 text-current" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        My Appointments
+      </div>
+      <div class="text-teal-100 hover:bg-teal-700/60 rounded-lg px-3 py-2 text-sm font-medium mx-2 flex items-center gap-2 cursor-pointer">
+        <svg class="w-4 h-4 text-current" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+        Messages
+      </div>
+      <div class="bg-teal-700 text-white rounded-lg px-3 py-2 text-sm font-medium mx-2 flex items-center gap-2 cursor-pointer">
+        <svg class="w-4 h-4 text-current" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Account
+      </div>
+    </nav>
+    <div class="mt-auto border-t border-teal-700 p-4 flex items-center">
+      <div class="w-8 h-8 rounded-full bg-teal-600 flex items-center justify-center text-white text-xs font-semibold mr-3">JH</div>
+      <div>
+        <div class="text-teal-100 text-sm font-medium">James Hartwell</div>
+        <div class="text-teal-300 text-xs">Patient</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ml-56 h-14 bg-white border-b border-slate-200 sticky top-0 z-10 flex items-center px-6 justify-between">
+    <span class="text-sm text-slate-500">Account <span class="mx-1.5 text-slate-300">/</span> <span class="text-slate-900 font-medium">Privacy</span></span>
+    <div class="flex items-center">
+      <svg class="w-5 h-5 text-slate-400 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      <span class="text-sm text-slate-700 mr-2">James Hartwell</span>
+      <div class="w-8 h-8 rounded-full bg-teal-600 flex items-center justify-center text-white text-xs font-semibold">JH</div>
+    </div>
+  </div>
+
+  <div class="ml-56 pt-14 min-h-screen bg-slate-50">
+    <div class="p-6 max-w-3xl">
+
+      <div class="border-b border-slate-200 mb-6 flex">
+        <span class="text-sm font-medium text-slate-500 hover:text-slate-700 px-1 py-3 mr-6 cursor-pointer">Profile</span>
+        <span class="text-sm font-medium text-slate-500 hover:text-slate-700 px-1 py-3 mr-6 cursor-pointer">Notifications</span>
+        <span class="text-teal-700 border-b-2 border-teal-700 font-semibold text-sm px-1 py-3 mr-6 cursor-pointer">Privacy</span>
+        <span class="text-sm font-medium text-slate-500 hover:text-slate-700 px-1 py-3 mr-6 cursor-pointer">Security</span>
+      </div>
+
+      <div class="text-xl font-bold text-slate-900 mb-6 tracking-tight">Privacy & Data</div>
+
+      <div class="mb-8">
+        <div class="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">Your consents</div>
+        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+          <table class="w-full">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200">
+                <th class="text-xs font-semibold text-slate-500 uppercase py-2 px-4 text-left">Consent</th>
+                <th class="text-xs font-semibold text-slate-500 uppercase py-2 px-4 text-left">Status</th>
+                <th class="text-xs font-semibold text-slate-500 uppercase py-2 px-4 text-left">Version</th>
+                <th class="text-xs font-semibold text-slate-500 uppercase py-2 px-4 text-left">Date agreed</th>
+                <th class="text-xs font-semibold text-slate-500 uppercase py-2 px-4 text-left">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-slate-100">
+                <td class="py-3 px-4 text-sm text-slate-900">Terms of Service</td>
+                <td class="py-3 px-4">
+                  <span class="flex items-center gap-1.5 text-sm text-green-600">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    Agreed
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-sm text-slate-500">v2.3</td>
+                <td class="py-3 px-4 text-sm text-slate-500">1 Oct 2026</td>
+                <td class="py-3 px-4 text-sm text-slate-400">—</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="py-3 px-4 text-sm text-slate-900">Privacy Policy</td>
+                <td class="py-3 px-4">
+                  <span class="flex items-center gap-1.5 text-sm text-green-600">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    Agreed
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-sm text-slate-500">v2.3</td>
+                <td class="py-3 px-4 text-sm text-slate-500">1 Oct 2026</td>
+                <td class="py-3 px-4 text-sm text-slate-400">—</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="py-3 px-4 text-sm text-slate-900">Health data processing</td>
+                <td class="py-3 px-4">
+                  <span class="flex items-center gap-1.5 text-sm text-green-600">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    Agreed
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-sm text-slate-500">v2.3</td>
+                <td class="py-3 px-4 text-sm text-slate-500">1 Oct 2026</td>
+                <td class="py-3 px-4 text-sm text-slate-400">—</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 text-sm text-slate-900">Voice transcription</td>
+                <td class="py-3 px-4">
+                  <span class="flex items-center gap-1.5 text-sm text-green-600">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    Agreed
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-sm text-slate-500">v2.1</td>
+                <td class="py-3 px-4 text-sm text-slate-500">14 Oct 2026</td>
+                <td class="py-3 px-4">
+                  <button class="text-xs border border-slate-300 rounded px-2 py-1 text-slate-600 hover:bg-slate-50">Withdraw</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="text-xs text-slate-400 px-4 py-3 bg-slate-50 border-t border-slate-100">Withdrawing voice consent will disable voice input for symptom descriptions. Terms of Service and Privacy Policy consents are required to use DocFit.</div>
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <div class="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">Your data</div>
+        <div class="space-y-4">
+
+          <div class="bg-white border border-slate-200 rounded-xl p-5 flex items-start justify-between gap-4">
+            <div>
+              <div class="text-sm font-semibold text-slate-900">Download your data</div>
+              <div class="text-sm text-slate-500 mt-1">Request a complete export of your DocFit records, including profile, consultations, prescriptions, and messages. We'll email you a secure, single-use download link within 24 hours.</div>
+            </div>
+            <button class="bg-teal-700 text-white rounded-lg px-4 py-2 text-sm font-medium whitespace-nowrap hover:bg-teal-800">Request export</button>
+          </div>
+
+          <div class="bg-red-50 border border-red-200 rounded-xl p-5 flex items-start justify-between gap-4">
+            <div>
+              <div class="text-sm font-semibold text-red-900">Delete your account</div>
+              <div class="text-sm text-red-700 mt-1">Permanently delete your account and personal data. Health records may be retained for the period required by law in your country before deletion.</div>
+            </div>
+            <button class="border border-red-500 text-red-600 bg-white rounded-lg px-4 py-2 text-sm font-medium whitespace-nowrap hover:bg-red-50">Request deletion</button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <div class="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">Request history</div>
+        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+          <table class="w-full">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200">
+                <th class="text-xs font-semibold text-slate-500 uppercase py-2 px-4 text-left">Type</th>
+                <th class="text-xs font-semibold text-slate-500 uppercase py-2 px-4 text-left">Requested</th>
+                <th class="text-xs font-semibold text-slate-500 uppercase py-2 px-4 text-left">Status</th>
+                <th class="text-xs font-semibold text-slate-500 uppercase py-2 px-4 text-left"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="4">
+                  <div class="py-10 text-center text-sm text-slate-400">No data requests submitted</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

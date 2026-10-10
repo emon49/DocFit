@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Screen Index — Feature 8: Prescription Signing, Delivery and Records</title>
+<style>
+  body { font-family: system-ui, -apple-system, sans-serif; color: #1e293b; background: #fff; }
+  .wrap { max-width: 48rem; margin: 0 auto; padding: 2rem; }
+  h1 { font-size: 1.5rem; font-weight: 700; margin: 0 0 0.25rem; }
+  h2 { font-size: 1.1rem; font-weight: 600; color: #475569; margin: 0 0 1.5rem; }
+  p.note { font-size: 0.8rem; color: #64748b; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 1.5rem; line-height: 1.6; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  th { background: #f1f5f9; text-align: left; padding: 0.6rem 0.75rem; font-weight: 600; color: #475569; border-bottom: 2px solid #e2e8f0; }
+  td { padding: 0.6rem 0.75rem; border-bottom: 1px solid #f1f5f9; vertical-align: top; color: #334155; }
+  tr:last-child td { border-bottom: none; }
+  a { color: #0F766E; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .mono { font-family: ui-monospace, monospace; font-size: 0.75rem; }
+  .muted { color: #94a3b8; }
+  .footer { margin-top: 2rem; font-size: 0.75rem; color: #94a3b8; border-top: 1px solid #e2e8f0; padding-top: 1rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Screen index</h1>
+  <h2>Feature 8: Prescription Signing, Delivery and Records</h2>
+
+  <p class="note">TC-05 (email body must not contain clinical details) is a backend/email template constraint with no patient-facing UI state. TC-06 (patient B accesses patient A's prescription) is a server-side 403 with no UI state.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:2.5rem">Feature</th>
+        <th style="width:13rem">Blueprint feature name</th>
+        <th style="width:10rem">Page file</th>
+        <th style="width:12rem">State</th>
+        <th style="width:6rem">Archetype</th>
+        <th style="width:6rem">Test cases</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>8</td>
+        <td>Prescription Signing, Delivery and Records</td>
+        <td><a href="rx-sign-mfa.html" class="mono">rx-sign-mfa.html</a></td>
+        <td>Sign · MFA re-authentication modal (partial OTP entry)</td>
+        <td>SETTINGS_FORM</td>
+        <td>TC-01, TC-02</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Prescription Signing, Delivery and Records</td>
+        <td><a href="rx-sign-mfa-error.html" class="mono">rx-sign-mfa-error.html</a></td>
+        <td>Sign · MFA code incorrect, signing blocked</td>
+        <td>SETTINGS_FORM</td>
+        <td>TC-02</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Prescription Signing, Delivery and Records</td>
+        <td><a href="rx-signed-confirmation.html" class="mono">rx-signed-confirmation.html</a></td>
+        <td>Signed · confirmation with delivery timeline</td>
+        <td>SETTINGS_FORM</td>
+        <td>TC-01</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Prescription Signing, Delivery and Records</td>
+        <td><a href="rx-missing-email.html" class="mono">rx-missing-email.html</a></td>
+        <td>Signed · delivery blocked, no patient email</td>
+        <td>SETTINGS_FORM</td>
+        <td>TC-03</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Prescription Signing, Delivery and Records</td>
+        <td><a href="rx-patient-list.html" class="mono">rx-patient-list.html</a></td>
+        <td>Patient · prescription list with download actions</td>
+        <td>DATA_TABLE</td>
+        <td>TC-01</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Prescription Signing, Delivery and Records</td>
+        <td><a href="rx-patient-download.html" class="mono">rx-patient-download.html</a></td>
+        <td>Patient · secure download page from email link</td>
+        <td>SETTINGS_FORM</td>
+        <td>TC-01</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Prescription Signing, Delivery and Records</td>
+        <td><a href="rx-link-expired.html" class="mono">rx-link-expired.html</a></td>
+        <td>Patient · expired or already-used download link</td>
+        <td>SETTINGS_FORM</td>
+        <td>TC-04</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Prescription Signing, Delivery and Records</td>
+        <td><span class="muted">none</span></td>
+        <td>TC-05: email body content check — backend constraint, no UI state</td>
+        <td><span class="muted">—</span></td>
+        <td>TC-05</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Prescription Signing, Delivery and Records</td>
+        <td><span class="muted">none</span></td>
+        <td>TC-06: patient B downloads patient A's prescription — server-side 403, no UI state</td>
+        <td><span class="muted">—</span></td>
+        <td>TC-06</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="footer">All Feature 8 blueprint items are mapped. TC-05 and TC-06 have no patient-facing screens.</p>
+
+</div>
+</body>
+</html>

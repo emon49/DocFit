@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Screen Index — Feature 7: Structured Prescription Builder · DocFit</title>
+<style>
+  body { font-family: system-ui, -apple-system, sans-serif; max-width: 960px; margin: 0 auto; padding: 2rem; color: #1e293b; background: #fff; }
+  h1 { font-size: 1.5rem; font-weight: 700; margin: 0 0 0.25rem; }
+  h2 { font-size: 1.1rem; font-weight: 600; color: #475569; margin: 0 0 1.5rem; }
+  .note { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #94a3b8; border-radius: 6px; padding: 0.75rem 1rem; font-size: 0.875rem; color: #475569; margin-bottom: 1.75rem; line-height: 1.6; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.875rem; }
+  th { background: #f1f5f9; text-align: left; padding: 0.6rem 0.875rem; font-weight: 600; color: #334155; border: 1px solid #cbd5e1; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  td { padding: 0.6rem 0.875rem; border: 1px solid #e2e8f0; vertical-align: top; color: #334155; }
+  tr:nth-child(even) td { background: #f8fafc; }
+  a { color: #0f766e; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .mono { font-family: ui-monospace, monospace; font-size: 0.8rem; color: #475569; }
+  .none { color: #94a3b8; font-style: italic; }
+  .footer { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid #e2e8f0; font-size: 0.8125rem; color: #64748b; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<h1>Screen index</h1>
+<h2>Feature 7: Structured Prescription Builder</h2>
+
+<p class="note">TC-04 (editing a signed prescription via API) and TC-05 (doctor A accessing doctor B's draft) are server-side 409/403 responses with no distinct product UI state.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Blueprint feature name</th>
+      <th>Page file</th>
+      <th>State</th>
+      <th>Archetype</th>
+      <th>Test cases</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>7</td>
+      <td>Structured Prescription Builder</td>
+      <td><a href="rx-draft.html">rx-draft.html</a></td>
+      <td>Draft · two medicines, diagnosis, advice filled (primary state)</td>
+      <td>MASTER-DETAIL</td>
+      <td class="mono">TC-01</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Structured Prescription Builder</td>
+      <td><a href="rx-empty.html">rx-empty.html</a></td>
+      <td>Empty / first-run · no diagnosis or medicines added</td>
+      <td>MASTER-DETAIL</td>
+      <td class="mono">—</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Structured Prescription Builder</td>
+      <td><a href="rx-preview.html">rx-preview.html</a></td>
+      <td>Preview · rendered document, awaiting signature</td>
+      <td>MASTER-DETAIL</td>
+      <td class="mono">TC-01</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Structured Prescription Builder</td>
+      <td><a href="rx-duplicate-warning.html">rx-duplicate-warning.html</a></td>
+      <td>Duplicate medicine warning · acknowledgement required</td>
+      <td>MASTER-DETAIL</td>
+      <td class="mono">TC-02</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Structured Prescription Builder</td>
+      <td><a href="rx-dose-warning.html">rx-dose-warning.html</a></td>
+      <td>Dose outside range · reason field required</td>
+      <td>MASTER-DETAIL</td>
+      <td class="mono">TC-03</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Structured Prescription Builder</td>
+      <td><a href="rx-required-field-error.html">rx-required-field-error.html</a></td>
+      <td>Required field missing · Frequency empty on sign attempt</td>
+      <td>MASTER-DETAIL</td>
+      <td class="mono">—</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Structured Prescription Builder</td>
+      <td class="none">none</td>
+      <td>TC-04: edit signed prescription via API — server-side 409/403, no UI</td>
+      <td class="none">—</td>
+      <td class="mono">TC-04</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Structured Prescription Builder</td>
+      <td class="none">none</td>
+      <td>TC-05: doctor A accesses doctor B's draft — server-side 403, no UI</td>
+      <td class="none">—</td>
+      <td class="mono">TC-05</td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="footer">All Feature 7 blueprint items are mapped. TC-04 and TC-05 are access-control checks enforced at the API layer; no product screen exists for those rejection paths.</p>
+
+</body>
+</html>
